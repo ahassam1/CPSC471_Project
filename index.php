@@ -12,9 +12,9 @@ if ($conn->connect_error) {
 } 
 
 // Create database
-$sql = "CREATE DATABASE myDB";
+$sql = "CREATE DATABASE TutorScheduleDB";
 if ($conn->query($sql) === TRUE) {
-    echo "Database created successfully";
+    echo "TutorScheduleDB created successfully";
 } else {
     echo "Error creating database: " . $conn->error;
 }
