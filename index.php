@@ -23,6 +23,8 @@ if ($conn->query($sql) === TRUE) {
 
 $conn = new mysqli($servername, $username, $password, "TutorScheduleDB");
 
+//how to use foreign keys https://stackoverflow.com/questions/22211452/getting-syntax-error-when-declaring-foreign-keys-in-mysql-using-innodb
+
 $sql = "CREATE TABLE LOGIN (
 		Username VARCHAR(30) PRIMARY KEY,
 		Password VARCHAR(30),
