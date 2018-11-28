@@ -44,12 +44,12 @@ $sql = "CREATE TABLE IF NOT EXISTS EMPLOYEE (
 		Desired_Hours INT NOT NULL,
 		Wage INT NOT NULL,
 		Room_Number INT NOT NULL,
-		Computer_Free BIT, 	
+		Computer_Free BIT
 		)";
 		
 	if ($conn->query($sql) === TRUE) 
 	{
-		echo "Table Client created successfully";
+		echo "Table EMployee created successfully";
 	} 
 	else 
 	{
