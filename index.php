@@ -3,6 +3,9 @@
 	<head>
 		<!-- Add Page Information and CSS Here -->
 		
+		<title>Login</title>
+		<link rel="stylesheet" type= "text/css" href= "bootstrap-lumen-theme.css">
+		
 		<style>
 		
 		div.username {
@@ -42,7 +45,7 @@
 		}
 		
 		body {
-			background: powderblue;
+			background: black;
 		}
 		
 		</style>
@@ -62,7 +65,7 @@
 			</div>
 		<br></br>
 			<div class= "enter">
-				<input type= "submit" value= "Sign In">
+				<input type= "submit" class="btn btn-outline-primary" value= "Sign In">
 			</div>	
 		
 <!-- ----------------------------PHP----------------------------------- -->
