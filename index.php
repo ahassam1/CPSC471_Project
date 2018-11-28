@@ -21,12 +21,22 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating database: " . $conn->error;
 }
 
+$conn = new mysqli($servername, $username, $password, "TutorScheduleDB");
+
 $sql = "CREATE TABLE LOGIN (
 		Username VARCHAR(30) PRIMARY KEY,
 		Password VARCHAR(30),
 		User_SIN int(10) FOREIGN KEY
 		)";
 		
+	if ($conn->query($sql) === TRUE) 
+	{
+		echo "Table MyGuests created successfully";
+	} 
+	else 
+	{
+		echo "Error creating table: " . $conn->error;
+	}
+		
 $conn->close();
-
 ?>
