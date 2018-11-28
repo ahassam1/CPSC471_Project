@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 // Create database
 $sql = "CREATE DATABASE IF NOT EXISTS TutorScheduleDB";
 if ($conn->query($sql) === TRUE) {
-    echo "TutorScheduleDB created successfully";
+    echo nl2br("TutorScheduleDB created successfully\n");
 } else {
     echo "Error creating database: " . $conn->error;
 }
@@ -31,7 +31,7 @@ $sql = "CREATE TABLE IF NOT EXISTS CLIENT (
 		)";
 		
 	if ($conn->query($sql) === TRUE) {
-		echo "Table Client created successfully";
+		echo nl2br("Table Client created successfully\n");
 	} 
 	else {
 		echo "Error creating table: " . $conn->error;
@@ -44,7 +44,7 @@ $sql = "CREATE TABLE IF NOT EXISTS CLIENT (
 		)";
 	if ($conn->query($sql) === TRUE) 
 	{
-		echo "Table Program created successfully";
+		echo nl2br("Table Program created successfully\n\r");
 	} 
 	else 
 	{
@@ -61,7 +61,7 @@ $sql = "CREATE TABLE IF NOT EXISTS EMPLOYEE (
 		
 	if ($conn->query($sql) === TRUE) 
 	{
-		echo "Table Employee created successfully";
+		echo nl2br("Table Employee created successfully\n");
 	} 
 	else 
 	{
