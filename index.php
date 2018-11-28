@@ -25,10 +25,9 @@ $conn = new mysqli($servername, $username, $password, "TutorScheduleDB");
 
 //how to use foreign keys https://stackoverflow.com/questions/22211452/getting-syntax-error-when-declaring-foreign-keys-in-mysql-using-innodb
 
-$sql = "CREATE TABLE LOGIN (
-		Username VARCHAR(30) PRIMARY KEY,
-		Password VARCHAR(30),
-		User_SIN int(10) FOREIGN KEY
+$sql = "CREATE TABLE CLIENT (
+		SIN INT(9) PRIMARY KEY,
+		Name VARCHAR(30)
 		)";
 		
 	if ($conn->query($sql) === TRUE) 
