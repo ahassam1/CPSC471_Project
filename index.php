@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 } 
 
 // Create database
-$sql = "CREATE DATABASE TutorScheduleDB";
+$sql = "CREATE DATABASE IF NOT EXISTS TutorScheduleDB";
 if ($conn->query($sql) === TRUE) {
     echo "TutorScheduleDB created successfully";
 } else {
