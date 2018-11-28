@@ -49,7 +49,7 @@ $sql = "CREATE TABLE IF NOT EXISTS EMPLOYEE (
 		
 	if ($conn->query($sql) === TRUE) 
 	{
-		echo "Table EMployee created successfully";
+		echo "Table Employee created successfully";
 	} 
 	else 
 	{
