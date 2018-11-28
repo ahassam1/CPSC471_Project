@@ -1,5 +1,7 @@
 
 <?php
+//based on https://www.w3schools.com/php/php_mysql_create.asp
+
 $servername = "localhost";
 $username = "admin";
 $password = "password";
