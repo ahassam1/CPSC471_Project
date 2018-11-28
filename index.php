@@ -38,6 +38,21 @@ $sql = "CREATE TABLE IF NOT EXISTS CLIENT (
 	{
 		echo "Error creating table: " . $conn->error;
 	}
+$sql = "CREATE TABLE IF NOT EXISTS EMPLOYEE (
+		SIN INT(9) PRIMARY KEY,
+		Name VARCHAR(30) NOT NULL,
+		Desired_Hours INT(9) NOT NULL,
+		
+		)";
+		
+	if ($conn->query($sql) === TRUE) 
+	{
+		echo "Table Client created successfully";
+	} 
+	else 
+	{
+		echo "Error creating table: " . $conn->error;
+	}
 		
 $conn->close();
 
