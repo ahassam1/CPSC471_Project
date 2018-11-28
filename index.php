@@ -29,7 +29,6 @@ $sql = "CREATE TABLE IF NOT EXISTS CLIENT (
 		SIN INT(9) PRIMARY KEY,
 		Name VARCHAR(30) NOT NULL
 		)";
-		
 	if ($conn->query($sql) === TRUE) 
 	{
 		echo "Table Client created successfully";
@@ -55,6 +54,4 @@ $sql = "CREATE TABLE IF NOT EXISTS EMPLOYEE (
 	}
 		
 $conn->close();
-
-
 ?>
