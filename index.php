@@ -29,9 +29,21 @@ $sql = "CREATE TABLE IF NOT EXISTS CLIENT (
 		SIN INT(9) PRIMARY KEY,
 		Name VARCHAR(30) NOT NULL
 		)";
+	if ($conn->query($sql) === TRUE) {
+		echo "Table Client created successfully";
+	} 
+	else {
+		echo "Error creating table: " . $conn->error;
+	}
+	
+	$sql = "CREATE TABLE IF NOT EXISTS PROGRAM (
+		ID INT PRIMARY KEY,
+		Subject VARCHAR(30),
+		Grade_level INT
+		)";
 	if ($conn->query($sql) === TRUE) 
 	{
-		echo "Table Client created successfully";
+		echo "Table Program created successfully";
 	} 
 	else 
 	{
