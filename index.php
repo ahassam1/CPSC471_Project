@@ -26,9 +26,10 @@ $conn = new mysqli($servername, $username, $password, "TutorScheduleDB");
 //how to use foreign keys https://stackoverflow.com/questions/22211452/getting-syntax-error-when-declaring-foreign-keys-in-mysql-using-innodb
 
 $sql = "CREATE TABLE IF NOT EXISTS CLIENT (
-		SIN INT(9) PRIMARY KEY,
+		SIN INT PRIMARY KEY,
 		Name VARCHAR(30) NOT NULL
 		)";
+		
 	if ($conn->query($sql) === TRUE) {
 		echo "Table Client created successfully";
 	} 
@@ -44,6 +45,23 @@ $sql = "CREATE TABLE IF NOT EXISTS CLIENT (
 	if ($conn->query($sql) === TRUE) 
 	{
 		echo "Table Program created successfully";
+	} 
+	else 
+	{
+		echo "Error creating table: " . $conn->error;
+	}
+$sql = "CREATE TABLE IF NOT EXISTS EMPLOYEE (
+		SIN INT PRIMARY KEY,
+		Name VARCHAR(30) NOT NULL,
+		Desired_Hours INT NOT NULL,
+		Wage INT NOT NULL,
+		Room_Number INT NOT NULL,
+		Computer_Free BIT
+		)";
+		
+	if ($conn->query($sql) === TRUE) 
+	{
+		echo "Table Employee created successfully";
 	} 
 	else 
 	{
