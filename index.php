@@ -27,6 +27,15 @@ $sql = "CREATE TABLE LOGIN (
 		User_SIN int(10) FOREIGN KEY
 		)";
 		
+	if ($conn->query($sql) === TRUE) 
+	{
+		echo "Table MyGuests created successfully";
+	} 
+	else 
+	{
+		echo "Error creating table: " . $conn->error;
+	}
+		
 $conn->close();
 
 
