@@ -27,8 +27,9 @@ $sql = "CREATE TABLE LOGIN (
 		Username VARCHAR(30) PRIMARY KEY,
 		Password VARCHAR(30),
 		User_SIN int(10) FOREIGN KEY
-		);
+		)";
 		
+$conn->close();
 
 
 ?>
