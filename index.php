@@ -31,7 +31,9 @@ $sql = "CREATE TABLE IF NOT EXISTS CLIENT (
 		)";
 	if ($conn->query($sql) === TRUE) 
 	{
-		echo "Table CLIENT created successfully";
+<<<<<<< HEAD
+		echo "Table Client created successfully";
+>>>>>>> b12ed3711a916e734ca6b568d266caf6c516a261
 	} 
 	else 
 	{
