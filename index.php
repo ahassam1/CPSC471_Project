@@ -2,14 +2,13 @@
 	<!-- --------------------------HEAD------------------------- -->
 	<head>
 		<!-- Add Page Information and CSS Here -->
-		
 		<title>Login</title>
 		<link rel="stylesheet" type= "text/css" href= "bootstrap-lumen-theme.css">
 		
 		<style>
 		
-		div.username {
-		width: 800px;
+		.username {
+		width: 275px;
 		border_radius: 5px;
 		padding: 10px;
 		height: 50px;
@@ -17,53 +16,71 @@
 		margin-top: -100px;
 		margin-left: -400px;
 		top: 50%;
-		left: 50%;
+		left: 68%;
 		}
 		
-		div.password {
-		width: 800px;
+		.form-group {
+		width: 275px;
 		border_radius: 5px;
 		padding: 10px;
 		height: 50px;
 		position: absolute;
 		margin-top: -50px;
-		margin-left: -397px;
+		margin-left: -400px;
 		top: 50%;
-		left: 50%;
+		left: 68%;
 		}
 		
-		div.enter{
+		.enter{
 		width: 800px;
 		border_radius: 5px;
 		padding: 10px;
 		height: 50px;
 		position: absolute;
 		margin-top: -0px;
-		margin-left: -275px;
+		margin-left: -300px;
 		top: 50%;
-		left: 50%;
+		left: 68%;
 		}
 		
 		body {
-			background: black;
+		width: 1368px;
+		height: 850px;
+		background-image: url("LoginOverlay.png");
+		background-position: left top;
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-size: 1370px 820px;
+		}
+		
+		h1 {
+		color: #158CBA;
+		font-family: sans-serif;
+		font-size: 100;
+		position: absolute;
+		margin-top: -0px;
+		margin-left: -305px;
+		top: 20%;
+		left: 60%;
 		}
 		
 		</style>
 	</head>
 	
-	<body> <!-- --------------------------BODY------------------------- -->
+	<body scroll="vertical" style="overflow: hidden"> <!-- --------------------------BODY------------------------- -->
+		
+		<h1>LOGIN</h1>
 		
 		<!-- Username & Password Input -->	
 			<div class= "username">
-				<label for= username> Username: </label>
-				<input type= "text" id="username" name="username"> 
+				<input type="text" class="form-control" placeholder="Username" id="username"> 
 			</div>
-		<br></br>
-			<div class= "password">
-				<label for= pass> Password: </label>
-				<input type= "password" id="pass" name="password">
+			<br></br>
+			<div class="form-group">
+				<input type="password" class="form-control" placeholder="Password" id="pass">
+				
 			</div>
-		<br></br>
+			<br></br>
 			<div class= "enter">
 				<input type= "submit" class="btn btn-outline-primary" value= "Sign In">
 			</div>	
@@ -86,9 +103,9 @@
 	// Create database
 	$sql = "CREATE DATABASE IF NOT EXISTS TutorScheduleDB";
 	if ($conn->query($sql) === TRUE) {
-		echo nl2br("TutorScheduleDB created successfully\n");
+		//echo nl2br("TutorScheduleDB created successfully\n");
 	} else {
-		echo "Error creating database: " . $conn->error;
+		//echo "Error creating database: " . $conn->error;
 	}
 
 	$conn = new mysqli($servername, $username, $password, "TutorScheduleDB");
@@ -101,10 +118,10 @@
 			)";
 		
 	if ($conn->query($sql) === TRUE) {
-		echo nl2br("Table Client created successfully\n");
+		//echo nl2br("Table Client created successfully\n");
 	} 
 	else {
-		echo "Error creating table: " . $conn->error;
+		//echo "Error creating table: " . $conn->error;
 	}
 	
 	$sql = "CREATE TABLE IF NOT EXISTS PROGRAM (
@@ -114,11 +131,11 @@
 		)";
 	if ($conn->query($sql) === TRUE) 
 	{
-		echo nl2br("Table Program created successfully\n\r");
+		//echo nl2br("Table Program created successfully\n\r");
 	} 
 	else 
 	{
-		echo "Error creating table: " . $conn->error;
+		//echo "Error creating table: " . $conn->error;
 	}
 	$sql = "CREATE TABLE IF NOT EXISTS EMPLOYEE (
 			SIN INT PRIMARY KEY,
@@ -131,11 +148,11 @@
 		
 	if ($conn->query($sql) === TRUE) 
 	{
-		echo nl2br("Table Employee created successfully\n");
+		//echo nl2br("Table Employee created successfully\n");
 	} 
 	else 
 	{
-		echo "Error creating table: " . $conn->error;
+		//echo "Error creating table: " . $conn->error;
 	}
 		
 $conn->close();
