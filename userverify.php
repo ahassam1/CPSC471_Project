@@ -1,6 +1,9 @@
 
 	<?php
 		
-		echo "Inside Verify";
-		header('location:index.php');
+		$Username = $_POST['username'];
+		$Password = $_POST['pass'];
+		
+		
+		//header('location:index.php');
 	?>
