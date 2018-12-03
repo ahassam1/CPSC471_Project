@@ -150,12 +150,13 @@
 	$conn->query($sql);
 	
 	// Create STUDENT_SESSION table
-	$sql = "CREATE TABLE IF NOT EXISTS STUDENT_SESSION (
+	$sql = "CREATE TABLE IF NOT EXISTS BOOKED_SESSION (
+			Teacher_ID INT,
 			Student_ID INT,
 			Day BIT(3),
 			Hour DOUBLE,
 			Program_ID INT,
-			PRIMARY KEY (Student_ID, Day, Hour),
+			PRIMARY KEY (Teacher_ID, Student_ID, Day, Hour),
 			CHECK (Day > 0 && Day <= 7),
 			CHECK (Hour <= 18.5 && Hour >= 8),
 			FOREIGN KEY (Student_ID) 
@@ -164,7 +165,10 @@
 			FOREIGN KEY (Program_ID) 
 			REFERENCES PROGRAM(ID)
 			ON DELETE CASCADE
-			ON UPDATE CASCADE
+			ON UPDATE CASCADE,
+			FOREIGN KEY (Teacher_ID) 
+			REFERENCES EMPLOYEE(SIN)
+			ON DELETE CASCADE
 			)";
 	$conn->query($sql);
 		
