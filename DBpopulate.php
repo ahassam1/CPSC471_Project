@@ -63,8 +63,8 @@ if(true){
 						200000000, 200000001, 200000002, 200000003, 200000004,
 						200000005, 200000006, 200000007);
 						
-	for($i = 0; $i < 18; $i++){
-		$sql = "INSERT INTO LOGIN (Username, Password, User_SIN) VALUES ('". $usernames[$i]."','". $passwords[$i]. "','". $user_sin."')";
+	for($i = 0; $i < 13; $i++){
+		$sql = "INSERT INTO LOGIN (Username, Password, User_SIN) VALUES ('". $usernames[$i]."','". $passwords[$i]. "','". $user_sin[$i]."')";
 		if (!mysqli_query($conn,$sql))
 		{
 			die('Error: ' . mysqli_error($conn));
