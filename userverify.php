@@ -25,16 +25,15 @@
 		$result = $conn->query($sql);
 		
 		//based on https://www.w3schools.com/php/php_mysql_select.asp
-		
-		session_start(); //Never forget this line when using $_SESSION
-			
+					
 		if ($result->num_rows == 1) 
 		{
 			// output data of each row
 			while($row = $result->fetch_assoc()) 
 			{
 				echo "Username: " . $row["Username"]. "Password: " . $row["Password"]. "User_SIN: " . $row["User_SIN"]. "<br>";
-				$_SESSION["sin"] = $row["User_SIN"];
+				$sin = $row["User_SIN"];
+				return $sin;
 
 			}
 		} 
@@ -43,7 +42,7 @@
 			echo "0 results";
 		}
 		
-		echo $_SESSION("sin");
+		return null;
 	
 				
 		//header('location:index.php');
