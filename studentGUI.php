@@ -1,4 +1,11 @@
 <html lang="en" class="no-js">
+	
+	<?php
+	
+	echo $_SESSION["sin1"];
+
+	?>
+	
 	<head>
 		<title> Student Schedule </title>
 		<!-- CSS Timeline from: https://codepen.io/oltika/pen/GNvdgV  -->
