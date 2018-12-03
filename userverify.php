@@ -1,19 +1,49 @@
 
 	<?php
+			
+		$servername = "localhost";
+		$username = "admin";
+		$password = "password";
+	
+		$dbName = "TutorScheduleDB";
+
+		// Create connection
+		$conn = new mysqli($servername, $username, $password);
+		// Check connection
+		if ($conn->connect_error) 
+		{
+		die("Connection failed: " . $conn->connect_error);
+		} 
 		
-		$Username = $_POST['username'];
-		$Password = $_POST['pass'];
+		$Uname = $_POST['passu'];
+		$Pword = $_POST['passp'];
+		
 		
 		session_start(); //Never forget this line when using $_SESSION
 		
-		$_SESSION['username'] = $Username;
-		$_SESSION['password'] = $Password;
+		$_SESSION['u'] = $Uname;
+		$_SESSION['p'] = $Pword;
 		
 		$sql = "SELECT L.Username, L.Password, L.User_SIN
-			   From Login as L
-			   Where $Username = L.Username and $Password = L.Password";
+			   From login as L
+			   Where $Uname = L.Username and $Pword = L.Password";
 			   
-		$conn->query($sql);
+		$result = $conn->query($sql);
+		
+		//based on https://www.w3schools.com/php/php_mysql_select.asp
+		
+		if ($result->num_rows > 0) 
+		{
+			// output data of each row
+			while($row = $result->fetch_assoc()) 
+			{
+				echo "Username: " . $row["Username"]. "Password: " . $row["Password"]. "User_SIN: " . $row["User_SIN"]. "<br>";
+			}
+		} 
+		else 
+		{
+			echo "0 results";
+		}
 
 		
 
