@@ -1,97 +1,11 @@
-<html>
-	<!-- --------------------------HEAD------------------------- -->
-	<head>
-		<!-- Add Page Information and CSS Here -->
-		<title>Login</title>
-		<link rel="stylesheet" type= "text/css" href= "bootstrap-lumen-theme.css">
-		
-		<style>
-		
-		.username {
-		width: 275px;
-		border_radius: 5px;
-		padding: 10px;
-		height: 50px;
-		position: absolute;
-		margin-top: -100px;
-		margin-left: -400px;
-		top: 50%;
-		left: 68%;
-		}
-		
-		.form-group {
-		width: 275px;
-		border_radius: 5px;
-		padding: 10px;
-		height: 50px;
-		position: absolute;
-		margin-top: -50px;
-		margin-left: -400px;
-		top: 50%;
-		left: 68%;
-		}
-		
-		.enter{
-		width: 800px;
-		border_radius: 5px;
-		padding: 10px;
-		height: 50px;
-		position: absolute;
-		margin-top: -0px;
-		margin-left: -300px;
-		top: 50%;
-		left: 68%;
-		}
-		
-		body {
-		width: 1368px;
-		height: 850px;
-		background-image: url("LoginOverlay.png");
-		background-position: left top;
-		background-attachment: fixed;
-		background-repeat: no-repeat;
-		background-size: 1370px 820px;
-		}
-		
-		h1 {
-		color: #158CBA;
-		font-family: sans-serif;
-		font-size: 100;
-		position: absolute;
-		margin-top: -0px;
-		margin-left: -305px;
-		top: 20%;
-		left: 60%;
-		}
-		
-		</style>
-	</head>
-	
-	<body scroll="vertical" style="overflow: hidden"> <!-- --------------------------BODY------------------------- -->
-		
-		<h1>LOGIN</h1>
-		
-		<!-- Username & Password Input -->	
-			<div class= "username">
-				<input type="text" class="form-control" placeholder="Username" id="username"> 
-			</div>
-			<br></br>
-			<div class="form-group">
-				<input type="password" class="form-control" placeholder="Password" id="pass">
-				
-			</div>
-			<br></br>
-			<div class= "enter">
-				<input type= "submit" class="btn btn-outline-primary" value= "Sign In">
-			</div>	
-		
-<!-- ----------------------------PHP----------------------------------- -->
 <?php
 //based on https://www.w3schools.com/php/php_mysql_create.asp
 
 	$servername = "localhost";
 	$username = "admin";
 	$password = "password";
+	
+	$dbName = "TutorScheduleDB";
 
 	// Create connection
 	$conn = new mysqli($servername, $username, $password);
@@ -100,64 +14,159 @@
 		die("Connection failed: " . $conn->connect_error);
 	} 
 
-	// Create database
+//*************************************************************************
+// Create Databse
+//*************************************************************************
 	$sql = "CREATE DATABASE IF NOT EXISTS TutorScheduleDB";
-	if ($conn->query($sql) === TRUE) {
-		//echo nl2br("TutorScheduleDB created successfully\n");
-	} else {
-		//echo "Error creating database: " . $conn->error;
-	}
+	$conn->query($sql);
 
-	$conn = new mysqli($servername, $username, $password, "TutorScheduleDB");
+	$conn = new mysqli($servername, $username, $password, $dbName);
+	
+	
+//*************************************************************************
+// Create Tables
+//*************************************************************************
 
-	//how to use foreign keys https://stackoverflow.com/questions/22211452/getting-syntax-error-when-declaring-foreign-keys-in-mysql-using-innodb
-
-	$sql = "CREATE TABLE IF NOT EXISTS CLIENT (
+	// Create USER table
+	$sql = "CREATE TABLE IF NOT EXISTS USER (
 			SIN INT PRIMARY KEY,
 			Name VARCHAR(30) NOT NULL
 			)";
-		
-	if ($conn->query($sql) === TRUE) {
-		//echo nl2br("Table Client created successfully\n");
-	} 
-	else {
-		//echo "Error creating table: " . $conn->error;
-	}
+	$conn->query($sql);
 	
+	// Create PROGRAM table
 	$sql = "CREATE TABLE IF NOT EXISTS PROGRAM (
 		ID INT PRIMARY KEY,
-		Subject VARCHAR(30),
+		Subject VARCHAR(4) NOT NULL,
 		Grade_level INT
 		)";
-	if ($conn->query($sql) === TRUE) 
-	{
-		//echo nl2br("Table Program created successfully\n\r");
-	} 
-	else 
-	{
-		//echo "Error creating table: " . $conn->error;
-	}
+	$conn->query($sql);
+
+	// Create EMPLOYEE table
 	$sql = "CREATE TABLE IF NOT EXISTS EMPLOYEE (
 			SIN INT PRIMARY KEY,
-			Name VARCHAR(30) NOT NULL,
 			Desired_Hours INT NOT NULL,
 			Wage INT NOT NULL,
 			Room_Number INT NOT NULL,
-			Computer_Free BIT
+			Computer_Free BIT,
+			FOREIGN KEY (SIN) 
+			REFERENCES USER(SIN)
+			ON DELETE CASCADE
 			)";
-		
-	if ($conn->query($sql) === TRUE) 
-	{
-		//echo nl2br("Table Employee created successfully\n");
-	} 
-	else 
-	{
-		//echo "Error creating table: " . $conn->error;
-	}
+	$conn->query($sql);
+
+	// Create AVAILABILITY table
+	$sql = "CREATE TABLE IF NOT EXISTS AVAILABILITY (
+			Employee_ID INT,
+			Day BIT(3),
+			Hour DOUBLE,
+			PRIMARY KEY (Employee_ID, Day, Hour
+			CHECK (Day > 0 && Day <= 7),
+			CHECK (Hour <= 18.5 && Hour >= 8),
+			FOREIGN KEY (Employee_ID) 
+			REFERENCES EMPLOYEE(SIN)
+			ON DELETE CASCADE
+			)";
+	$conn->query($sql);
+	
+	// Create PARENT table
+	$sql = "CREATE TABLE IF NOT EXISTS PARENT (
+			SIN INT PRIMARY KEY,
+			Phone_Number VARCHAR(10),
+			Email VARCHAR(8),
+			FOREIGN KEY (SIN) 
+			REFERENCES USER(SIN)
+			ON DELETE CASCADE
+			)";
+	$conn->query($sql);
+
+	// Create STUDENT table
+	$sql = "CREATE TABLE IF NOT EXISTS STUDENT (
+			SIN INT PRIMARY KEY,
+			Age INT NOT NULL,
+			Grade INT,
+			Behaviour VARCHAR(1),
+			Parent_SIN INT,
+			FOREIGN KEY (SIN) 
+			REFERENCES USER(SIN)
+			ON DELETE CASCADE,
+			FOREIGN KEY (Parent_SIN) 
+			REFERENCES PARENT(SIN)
+			ON DELETE SET NULL
+			)";
+	$conn->query($sql);
+
+	// Create STUDENT_TAUGHT table
+	$sql = "CREATE TABLE IF NOT EXISTS STUDENT_TAUGHT (
+			Student_ID INT,
+			Program_ID INT,
+			PRIMARY KEY (Student_ID, Program_ID),
+			FOREIGN KEY (Student_ID) 
+			REFERENCES STUDENT(SIN)
+			ON DELETE CASCADE,
+			FOREIGN KEY (Program_ID) 
+			REFERENCES PROGRAM(ID)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE
+			)";
+	$conn->query($sql);	
+	
+	// Create EMPLOYEE_TEACHES table
+	$sql = "CREATE TABLE IF NOT EXISTS EMPLOYEE_TEACHES (
+			Employee_ID INT,
+			Program_ID INT,
+			PRIMARY KEY (Employee_ID, Program_ID),
+			FOREIGN KEY (Employee_ID) 
+			REFERENCES EMPLOYEE(SIN)
+			ON DELETE CASCADE,
+			FOREIGN KEY (Program_ID) 
+			REFERENCES PROGRAM(ID)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE
+			)";
+	$conn->query($sql);	
+	
+	// Create LOGIN table
+	$sql = "CREATE TABLE IF NOT EXISTS LOGIN (
+			Username INT PRIMARY KEY,
+			Password VARCHAR(8) NOT NULL,
+			User_SIN INT NOT NULL,
+			FOREIGN KEY (User_SIN) 
+			REFERENCES USER(SIN)
+			ON DELETE CASCADE
+			)";
+	$conn->query($sql);
+	
+	// Create FEE table
+	$sql = "CREATE TABLE IF NOT EXISTS FEE (
+			Client_ID INT,
+			Date_Due DATE,
+			Balance DOUBLE,
+			PRIMARY KEY (Client_ID, Date_Due),
+			FOREIGN KEY (Client_ID)
+			REFERENCES USER(SIN)
+			ON DELETE NO ACTION
+			)";
+	$conn->query($sql);
+	
+	// Create STUDENT_SESSION table
+	$sql = "CREATE TABLE IF NOT EXISTS STUDENT_SESSION (
+			Student_ID INT,
+			Day BIT(3),
+			Hour DOUBLE,
+			Program_ID INT,
+			PRIMARY KEY (Student_ID, Day, Hour),
+			CHECK (Day > 0 && Day <= 7),
+			CHECK (Hour <= 18.5 && Hour >= 8),
+			FOREIGN KEY (Student_ID) 
+			REFERENCES STUDENT(SIN)
+			ON DELETE CASCADE,
+			FOREIGN KEY (Program_ID) 
+			REFERENCES PROGRAM(ID)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE
+			)";
+	$conn->query($sql);
 		
 $conn->close();
 ?>
-		
-	</body>
-	
-</html>
