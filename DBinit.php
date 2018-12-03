@@ -29,8 +29,10 @@
 
 	// Create USER table
 	$sql = "CREATE TABLE IF NOT EXISTS USER (
-			SIN INT PRIMARY KEY,
-			Name VARCHAR(30) NOT NULL
+			SIN INT,
+			Name VARCHAR(30) NOT NULL,
+			Is_employee BIT,
+			PRIMARY KEY (SIN, Is_employee)
 			)";
 	$conn->query($sql);
 	
@@ -60,7 +62,7 @@
 			Employee_ID INT,
 			Day BIT(3),
 			Hour DOUBLE,
-			PRIMARY KEY (Employee_ID, Day, Hour
+			PRIMARY KEY (Employee_ID, Day, Hour),
 			CHECK (Day > 0 && Day <= 7),
 			CHECK (Hour <= 18.5 && Hour >= 8),
 			FOREIGN KEY (Employee_ID) 
@@ -128,7 +130,7 @@
 	
 	// Create LOGIN table
 	$sql = "CREATE TABLE IF NOT EXISTS LOGIN (
-			Username INT PRIMARY KEY,
+			Username VARCHAR(8) PRIMARY KEY,
 			Password VARCHAR(8) NOT NULL,
 			User_SIN INT NOT NULL,
 			FOREIGN KEY (User_SIN) 
@@ -150,12 +152,13 @@
 	$conn->query($sql);
 	
 	// Create STUDENT_SESSION table
-	$sql = "CREATE TABLE IF NOT EXISTS STUDENT_SESSION (
+	$sql = "CREATE TABLE IF NOT EXISTS BOOKED_SESSION (
+			Teacher_ID INT,
 			Student_ID INT,
 			Day BIT(3),
 			Hour DOUBLE,
 			Program_ID INT,
-			PRIMARY KEY (Student_ID, Day, Hour),
+			PRIMARY KEY (Teacher_ID, Student_ID, Day, Hour),
 			CHECK (Day > 0 && Day <= 7),
 			CHECK (Hour <= 18.5 && Hour >= 8),
 			FOREIGN KEY (Student_ID) 
@@ -164,9 +167,15 @@
 			FOREIGN KEY (Program_ID) 
 			REFERENCES PROGRAM(ID)
 			ON DELETE CASCADE
-			ON UPDATE CASCADE
+			ON UPDATE CASCADE,
+			FOREIGN KEY (Teacher_ID) 
+			REFERENCES EMPLOYEE(SIN)
+			ON DELETE CASCADE
 			)";
 	$conn->query($sql);
 		
 $conn->close();
+
+require ("DBpopulate.php");
+
 ?>

@@ -74,11 +74,11 @@
 		
 		<form action="userverify.php" method="post">
 			<div class= "username">
-				<input type="text" class="form-control" placeholder="Username" id="username"> 
+				<input type="text" class="form-control" placeholder="Username" name="passu"> 
 			</div>
 			<br></br>
 			<div class="form-group">
-				<input type="password" class="form-control" placeholder="Password" id="pass">
+				<input type="password" class="form-control" placeholder="Password" name="passp">
 				
 			</div>
 			<br></br>
