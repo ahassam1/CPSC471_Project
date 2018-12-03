@@ -34,7 +34,7 @@
 			while($row = $result->fetch_assoc()) 
 			{
 				echo "Username: " . $row["Username"]. "Password: " . $row["Password"]. "User_SIN: " . $row["User_SIN"]. "<br>";
-				$_SESSION['sin'] = $row["User_SIN"];
+				$_SESSION["sin"] = $row["User_SIN"];
 
 			}
 		} 
@@ -42,6 +42,8 @@
 		{
 			echo "0 results";
 		}
+		
+		echo $_SESSION("sin");
 	
 				
 		//header('location:index.php');
