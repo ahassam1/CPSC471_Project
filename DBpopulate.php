@@ -1,6 +1,6 @@
 <?php
 
-if(true){
+if(false){
 	$servername = "localhost";
 	$username = "admin";
 	$password = "password";
