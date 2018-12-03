@@ -40,10 +40,35 @@ if(true){
 	}
 	
 	// Populate PROGRAM table
+	$prog_names = array("Reading", "Writing", "Math", "Comprehension");
+							
+	for($i = 0; $i < 4; $i++){ 
+		$sql = "INSERT INTO PROGRAM (ID, Subject, Grade_level) VALUES ('". $i."','". $prog_names[$i]. "', NULL)";
+		if (!mysqli_query($conn,$sql))
+		{
+			die('Error: ' . mysqli_error($conn));
+		}
+		else echo "record added";
+
+	}
 
 	// Populate EMPLOYEE table
+	$user_names = array("Wafo", "Matt", "Al", "Hans", "Eli", "Sam",
+						"Abdo", "Kels");
+	$hours = array(16, 40, 10, 40, 40, 30, 20, 40);
+							
+	for($i = 0; $i < 8; $i++){ 
+	$current_sin = 200000000 + $i;
+		$sql = "INSERT INTO EMPLOYEE (SIN, Desired_Hours, Room_Number) VALUES ('" . $current_sin."','". $hours[$i]. "','". $i."')";
+		if (!mysqli_query($conn,$sql))
+		{
+			die('Error: ' . mysqli_error($conn));
+		}
+		else echo "record added";
+	}
 
 	// Populate AVAILABILITY table
+	
 	
 	// Populate PARENT table
 

@@ -39,7 +39,7 @@
 	// Create PROGRAM table
 	$sql = "CREATE TABLE IF NOT EXISTS PROGRAM (
 		ID INT PRIMARY KEY,
-		Subject VARCHAR(4) NOT NULL,
+		Subject VARCHAR(20) NOT NULL,
 		Grade_level INT
 		)";
 	$conn->query($sql);
@@ -48,9 +48,7 @@
 	$sql = "CREATE TABLE IF NOT EXISTS EMPLOYEE (
 			SIN INT PRIMARY KEY,
 			Desired_Hours INT NOT NULL,
-			Wage INT NOT NULL,
 			Room_Number INT NOT NULL,
-			Computer_Free BIT,
 			FOREIGN KEY (SIN) 
 			REFERENCES USER(SIN)
 			ON DELETE CASCADE
