@@ -1,4 +1,11 @@
 <html>
+	
+	<?php
+	
+	echo $_SESSION["sin1"];
+
+	?>
+	
 	<head>
 		<title> Student Schedule </title>
 		<link rel="stylesheet" type= "text/css" href= "scheduleStyle.css">

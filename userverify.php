@@ -1,6 +1,8 @@
 
 	<?php
-			
+	
+		session_start();
+	
 		$servername = "localhost";
 		$username = "admin";
 		$password = "password";
@@ -25,6 +27,8 @@
 		$result = $conn->query($sql);
 		
 		//based on https://www.w3schools.com/php/php_mysql_select.asp
+		
+		$sin = null;
 					
 		if ($result->num_rows == 1) 
 		{
@@ -33,8 +37,6 @@
 			{
 				echo "Username: " . $row["Username"]. "Password: " . $row["Password"]. "User_SIN: " . $row["User_SIN"]. "<br>";
 				$sin = $row["User_SIN"];
-				return $sin;
-
 			}
 		} 
 		else 
@@ -42,8 +44,10 @@
 			echo "0 results";
 		}
 		
-		return null;
+		$_SESSION["sin1"] = $sin;
+		
+		echo $_SESSION["sin1"];
 	
-				
-		//header('location:index.php');
+		require("studentGUI.php");
+
 	?>
