@@ -42,11 +42,7 @@
 		{
 			echo "0 results";
 		}
-		
-
-		
-
-		
-		
+	
+				
 		//header('location:index.php');
 	?>
