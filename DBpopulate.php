@@ -1,5 +1,6 @@
 <?php
 
+if(true){
 	$servername = "localhost";
 	$username = "admin";
 	$password = "password";
@@ -54,11 +55,22 @@
 	
 	// Populate LOGIN table
 	$usernames = array("Max", "Penelope", "Layla", "Julian", "Maddie",
-						"Grace", "Richard", "Adam", "Alex", "Fatima",
 						"Wafo", "Matt", "Al", "Hans", "Eli", "Sam",
 						"Abdo", "Kels");
 	$passwords = array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
-						"11", "12", "13", "14", "15", "16", "17");
+						"11", "12");
+	$user_sin = array(000000000, 000000001, 000000002, 000000003, 000000004,
+						200000000, 200000001, 200000002, 200000003, 200000004,
+						200000005, 200000006, 200000007);
+						
+	for($i = 0; $i < 18; $i++){
+		$sql = "INSERT INTO LOGIN (Username, Password, User_SIN) VALUES ('". $usernames[$i]."','". $passwords[$i]. "','". $user_sin."')";
+		if (!mysqli_query($conn,$sql))
+		{
+			die('Error: ' . mysqli_error($conn));
+		}
+		else echo "record added";
+	}
 	
 	// Populate FEE table
 	
@@ -75,4 +87,5 @@ $student_grades = array(5, 11, 3, 12, null);
 	$conn->query($sql);
 		
 $conn->close();
+}
 ?>
