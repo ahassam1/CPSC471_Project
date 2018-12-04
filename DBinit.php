@@ -212,6 +212,6 @@
 		
 $conn->close();
 
-require ("DBpopulate.php");
+require("DBpopulate.php");
 
 ?>

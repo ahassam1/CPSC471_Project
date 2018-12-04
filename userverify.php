@@ -35,10 +35,14 @@
 			// output data of each row
 			while($row = $result->fetch_assoc()) 
 			{
-				echo "Username: " . $row["Username"]. "Password: " . $row["Password"]. "User_SIN: " . $row["User_SIN"]. "<br>";
+				echo " Username: " . $row["Username"]; echo "&nbsp;";
+				echo " Password: " . $row["Password"]; echo "&nbsp;";
+				echo " User_SIN: " . $row["User_SIN"]; echo "&nbsp;";
+				
 				$sin = $row["User_SIN"];
 			}
 		} 
+		
 		else 
 		{
 			echo "0 results";
@@ -46,8 +50,35 @@
 		
 		$_SESSION["sin1"] = $sin;
 		
-		echo $_SESSION["sin1"];
+		$sql2 = "SELECT U.Is_employee
+			   From user as U
+			   Where '$sin' = U.SIN";
+			   
+		$result2 = $conn->query($sql2);
+		
+		if ($result2->num_rows == 1) 
+		{
+			// output data of each row
+			while($row2 = $result2->fetch_assoc()) 
+			{
+				$status = $row2["Is_employee"];
+			}
+		} 
+		else 
+		{
+			echo "0 results";
+		}
+		//echo $_SESSION["sin1"];
+		
+		if($status == 1)
+		{
+			require("teacherGUI.php");
+		}
+		if($status == 0)
+		{
+			require("studentGUI.php");
+		}
 	
-		require("studentGUI.php");
+		
 
 	?>
