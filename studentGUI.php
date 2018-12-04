@@ -22,7 +22,7 @@
 				<a class="nav-link" href="#">Session</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Grades</a>
+				<a class="nav-link" href="Grades.php">View Grades</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="#">Fees</a>
