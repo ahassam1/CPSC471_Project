@@ -35,7 +35,10 @@
 			// output data of each row
 			while($row = $result->fetch_assoc()) 
 			{
-				echo "Username: " . $row["Username"]. "Password: " . $row["Password"]. "User_SIN: " . $row["User_SIN"]. "<br>";
+				echo " Username: " . $row["Username"]; echo "&nbsp;";
+				echo " Password: " . $row["Password"]; echo "&nbsp;";
+				echo " User_SIN: " . $row["User_SIN"]; echo "&nbsp;";
+				
 				$sin = $row["User_SIN"];
 			}
 		} 
@@ -58,7 +61,6 @@
 			// output data of each row
 			while($row2 = $result2->fetch_assoc()) 
 			{
-				echo "Status: " . $row2["Is_employee"]. "<br>";
 				$status = $row2["Is_employee"];
 			}
 		} 

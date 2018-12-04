@@ -2,7 +2,7 @@
 <!-- ----------------------------HEAD----------------------------------- -->
 	<head>
 		<title>Login</title>
-		<link rel="stylesheet" type= "text/css" href= "bootstrap-lumen-theme.css">
+		<link rel="stylesheet" type= "text/css" href= "css/bootstrap-lumen-theme.css">
 		<style>
 		
 			.username {
@@ -42,7 +42,7 @@
 			}
 		
 			body {
-				background-image: url("LoginOverlay.png");
+				background-image: url("img/LoginOverlay.png");
 				background-size: cover;
 				background-position: left top;
 				background-attachment: fixed;
