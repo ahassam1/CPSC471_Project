@@ -18,7 +18,10 @@
 // Create Databse
 //*************************************************************************
 	$sql = "CREATE DATABASE IF NOT EXISTS TutorScheduleDB";
-	$conn->query($sql);
+	if (!mysqli_query($conn,$sql))
+	{
+		die('Error: ' . mysqli_error($conn));
+	}
 
 	$conn = new mysqli($servername, $username, $password, $dbName);
 	
@@ -34,7 +37,10 @@
 			Is_employee BIT,
 			PRIMARY KEY (SIN, Is_employee)
 			)";
-	$conn->query($sql);
+	if (!mysqli_query($conn,$sql))
+	{
+		die('Error: ' . mysqli_error($conn));
+	}
 	
 	// Create PROGRAM table
 	$sql = "CREATE TABLE IF NOT EXISTS PROGRAM (
@@ -42,7 +48,10 @@
 		Subject VARCHAR(20) NOT NULL,
 		Grade_level INT
 		)";
-	$conn->query($sql);
+	if (!mysqli_query($conn,$sql))
+	{
+		die('Error: ' . mysqli_error($conn));
+	}
 
 	// Create EMPLOYEE table
 	$sql = "CREATE TABLE IF NOT EXISTS EMPLOYEE (
@@ -53,39 +62,49 @@
 			REFERENCES USER(SIN)
 			ON DELETE CASCADE
 			)";
-	$conn->query($sql);
+	if (!mysqli_query($conn,$sql))
+	{
+		die('Error: ' . mysqli_error($conn));
+	}
 
 	// Create AVAILABILITY table
 	$sql = "CREATE TABLE IF NOT EXISTS AVAILABILITY (
 			Employee_ID INT,
-			Day BIT(3),
+			Day INT(3),
 			Hour DOUBLE,
 			PRIMARY KEY (Employee_ID, Day, Hour),
-			CHECK (Day > 0 && Day <= 7),
-			CHECK (Hour <= 18.5 && Hour >= 8),
+			CHECK (Day > 0 AND Day <= 7),
+			CHECK (Hour <= 18.5 AND Hour >= 8),
+			CHECK (Day > 0 AND Day <= 5),
 			FOREIGN KEY (Employee_ID) 
 			REFERENCES EMPLOYEE(SIN)
 			ON DELETE CASCADE
 			)";
-	$conn->query($sql);
+	if (!mysqli_query($conn,$sql))
+	{
+		die('Error: ' . mysqli_error($conn));
+	}
 	
 	// Create PARENT table
 	$sql = "CREATE TABLE IF NOT EXISTS PARENT (
 			SIN INT PRIMARY KEY,
-			Phone_Number VARCHAR(10),
-			Email VARCHAR(8),
+			Phone_Number VARCHAR(13),
+			Email VARCHAR(25),
 			FOREIGN KEY (SIN) 
 			REFERENCES USER(SIN)
 			ON DELETE CASCADE
 			)";
-	$conn->query($sql);
+	if (!mysqli_query($conn,$sql))
+	{
+		die('Error: ' . mysqli_error($conn));
+	}
 
 	// Create STUDENT table
 	$sql = "CREATE TABLE IF NOT EXISTS STUDENT (
 			SIN INT PRIMARY KEY,
 			Age INT NOT NULL,
 			Grade INT,
-			Behaviour VARCHAR(1),
+			Behaviour VARCHAR(30),
 			Parent_SIN INT,
 			FOREIGN KEY (SIN) 
 			REFERENCES USER(SIN)
@@ -94,7 +113,10 @@
 			REFERENCES PARENT(SIN)
 			ON DELETE SET NULL
 			)";
-	$conn->query($sql);
+	if (!mysqli_query($conn,$sql))
+	{
+		die('Error: ' . mysqli_error($conn));
+	}
 
 	// Create STUDENT_TAUGHT table
 	$sql = "CREATE TABLE IF NOT EXISTS STUDENT_TAUGHT (
@@ -109,7 +131,10 @@
 			ON DELETE CASCADE
 			ON UPDATE CASCADE
 			)";
-	$conn->query($sql);	
+	if (!mysqli_query($conn,$sql))
+	{
+		die('Error: ' . mysqli_error($conn));
+	}
 	
 	// Create EMPLOYEE_TEACHES table
 	$sql = "CREATE TABLE IF NOT EXISTS EMPLOYEE_TEACHES (
@@ -124,7 +149,10 @@
 			ON DELETE CASCADE
 			ON UPDATE CASCADE
 			)";
-	$conn->query($sql);	
+	if (!mysqli_query($conn,$sql))
+	{
+		die('Error: ' . mysqli_error($conn));
+	}	
 	
 	// Create LOGIN table
 	$sql = "CREATE TABLE IF NOT EXISTS LOGIN (
@@ -135,7 +163,10 @@
 			REFERENCES USER(SIN)
 			ON DELETE CASCADE
 			)";
-	$conn->query($sql);
+	if (!mysqli_query($conn,$sql))
+	{
+		die('Error: ' . mysqli_error($conn));
+	}
 	
 	// Create FEE table
 	$sql = "CREATE TABLE IF NOT EXISTS FEE (
@@ -147,18 +178,22 @@
 			REFERENCES USER(SIN)
 			ON DELETE NO ACTION
 			)";
-	$conn->query($sql);
+	if (!mysqli_query($conn,$sql))
+	{
+		die('Error: ' . mysqli_error($conn));
+	}
 	
-	// Create STUDENT_SESSION table
+	// Create BOOKED_SESSION table
 	$sql = "CREATE TABLE IF NOT EXISTS BOOKED_SESSION (
 			Teacher_ID INT,
 			Student_ID INT,
-			Day BIT(3),
+			Day INT,
 			Hour DOUBLE,
 			Program_ID INT,
 			PRIMARY KEY (Teacher_ID, Student_ID, Day, Hour),
-			CHECK (Day > 0 && Day <= 7),
-			CHECK (Hour <= 18.5 && Hour >= 8),
+			CHECK (Day > 0 AND Day <= 7),
+			CHECK (Hour <= 18.5 AND Hour >= 8),
+			CHECK (Day > 0 AND Day <= 5),
 			FOREIGN KEY (Student_ID) 
 			REFERENCES STUDENT(SIN)
 			ON DELETE CASCADE,
@@ -170,7 +205,10 @@
 			REFERENCES EMPLOYEE(SIN)
 			ON DELETE CASCADE
 			)";
-	$conn->query($sql);
+	if (!mysqli_query($conn,$sql))
+	{
+		die('Error: ' . mysqli_error($conn));
+	}
 		
 $conn->close();
 
