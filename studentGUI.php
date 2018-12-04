@@ -1,4 +1,10 @@
 
+<?php
+
+echo "Inside student GUI the SIN is: ", $_SESSION["sin1"];
+
+?>
+
 <html lang="en" class="no-js">
 	<head>
 		<title> Student Schedule </title>
