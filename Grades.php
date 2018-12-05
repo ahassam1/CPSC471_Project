@@ -75,7 +75,7 @@ session_start();
 		while($row = $result->fetch_assoc()) 
 		{
 				   echo '<tr style = "text-align:center;">';
-                   echo '<td align style = "text-align:center;">' . $row['Subject'] . "</td>";
+                   echo '<td align style = "text-align:center;">' . $row['Subject'] . "                                                         ". "</td>";
                    echo "<td align = center>" . $row['Grade'] . "</td>";
                    echo "</tr>" . "<br>";
 		}
