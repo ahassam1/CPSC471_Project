@@ -408,12 +408,12 @@
 	bookSession(000000000, 2, 9, 2);
 	
 	//Populate EVALUATION table
-	$sql = "INSERT IGNORE INTO EVALUATION (Student_ID, Module, Grade) VALUES (0, 'Algebra', 75.3)";
+	$sql = "INSERT IGNORE INTO EVALUATION (Student_ID, Subject, Grade) VALUES (0, 'Algebra', 75.3)";
 	if (!mysqli_query($conn,$sql))
 		{
 			die('Error: ' . mysqli_error($conn));
 		}
-	$sql = "INSERT IGNORE INTO EVALUATION (Student_ID, Module, Grade) VALUES (0, 'Math', 49.5)";
+	$sql = "INSERT IGNORE INTO EVALUATION (Student_ID, Subject, Grade) VALUES (0, 'Math', 49.5)";
 	if (!mysqli_query($conn,$sql))
 		{
 			die('Error: ' . mysqli_error($conn));

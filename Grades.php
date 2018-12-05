@@ -28,7 +28,7 @@ session_start();
 
 		$currentsin = $_SESSION["sin1"];
 
-		$sql = "SELECT E.Module, E.Grade 
+		$sql = "SELECT E.Subject, E.Grade 
 			   From EVALUATION as E
 			   Where '$currentsin' = E.Student_ID";
 			   
@@ -60,7 +60,7 @@ session_start();
   <tbody>
 
     <tr class="table-info">
-      <td align="center">Module</td>
+      <td align="center">Subject</td>
       <td align="center">Grade</td>
     </tr>
 
@@ -75,7 +75,7 @@ session_start();
 		while($row = $result->fetch_assoc()) 
 		{
 				   echo '<tr style = "text-align:center;">';
-                   echo '<td align style = "text-align:center;">' . $row['Module'] . "</td>";
+                   echo '<td align style = "text-align:center;">' . $row['Subject'] . "</td>";
                    echo "<td align = center>" . $row['Grade'] . "</td>";
                    echo "</tr>" . "<br>";
 		}
