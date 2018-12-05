@@ -1,4 +1,9 @@
 <html>
+	<head>
+		<title>Student Grades</title>
+		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
+	</head>
+
 <body>
 <?php
 session_start();
@@ -30,33 +35,36 @@ session_start();
 
 ?>	
 
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
-<h2>Student Grade Table</h2>
+	<div class="collapse navbar-collapse" id="navbarColor01">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="studentGUI.php">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Session</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="Grades.php">View Grades</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Fees</a>
+			</li>
+		</ul>
+	</div>
+	</nav>
 
-<table style="width:100%">
-  <tr>
-    <th>Firstname</th>
-    <th>Lastname</th> 
-    <th>Age</th>
-  </tr>
-  <tr>
-    <td>Jill</td>
-    <td>Smith</td>
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td>
-    <td>94</td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>80</td>
-  </tr>
-</table>
+<table class="table table-hover">
+  <tbody>
 
+    <tr class="table-info">
+      <td align="center">Module</td>
+      <td align="center">Grade</td>
+    </tr>
 
+  </tbody>
+</table> 
 		
 <?php		
 		
