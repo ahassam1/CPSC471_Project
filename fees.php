@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Student Grades</title>
+		<title>Student Fees</title>
 		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
 	</head>
 
@@ -28,9 +28,9 @@ session_start();
 
 		$currentsin = $_SESSION["sin1"];
 
-		$sql = "SELECT E.Subject, E.Grade 
-			   From EVALUATION as E
-			   Where '$currentsin' = E.Student_ID";
+		$sql = "SELECT F.Date_Due, F.Balance 
+			   From Fee as F
+			   Where '$currentsin' = F.Client_ID";
 			   
 		$result = $conn->query($sql);
 
@@ -56,17 +56,6 @@ session_start();
 	</div>
 	</nav>
 
-<table class="table table-hover">
-  <tbody>
-
-    <tr class="table-info">
-      <td align="center">Subject</td>
-      <td align="center">Grade</td>
-    </tr>
-
-  </tbody>
-</table> 
-		
 <?php		
 		
 	if ($result->num_rows > 0) 
@@ -74,10 +63,8 @@ session_start();
     // output data of each row
 		while($row = $result->fetch_assoc()) 
 		{
-				   echo '<tr style = "text-align:center;">';
-                   echo '<td align style = "text-align:center;">' . $row['Subject'] . "                                                         ". "</td>";
-                   echo "<td align = center>" . $row['Grade'] . "</td>";
-                   echo "</tr>" . "<br>";
+			echo " Date_Due: " . $row["Date_Due"]; echo "&nbsp;";
+			echo " Balance: " . $row["Balance"]; echo "&nbsp;";
 		}
 	} 
 	else 
@@ -90,3 +77,4 @@ session_start();
 ?>
 </body>
 </html>
+

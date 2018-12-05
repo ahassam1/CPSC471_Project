@@ -417,7 +417,16 @@
 	if (!mysqli_query($conn,$sql))
 		{
 			die('Error: ' . mysqli_error($conn));
+
 		}
+	//Populate Fees Table
+	$sql = "INSERT IGNORE INTO FEE (Client_ID, Date_Due, Balance) VALUES (0, '2018-12-31', 100.50)";
+	if (!mysqli_query($conn,$sql))
+		{
+			die('Error: ' . mysqli_error($conn));
+		}
+
+	
 	
 $conn->close();
 ?>

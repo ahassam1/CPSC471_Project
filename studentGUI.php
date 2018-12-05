@@ -33,7 +33,7 @@ if(session_id() == '' || !isset($_SESSION)){
 				<a class="nav-link" href="Grades.php">View Grades</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Fees</a>
+				<a class="nav-link" href="fees.php">Fees</a>
 			</li>
 		</ul>
 	</div>
