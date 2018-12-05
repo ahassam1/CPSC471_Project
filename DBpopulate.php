@@ -1,6 +1,5 @@
 <?php
 
-if(true){
 	$servername = "localhost";
 	$username = "admin";
 	$password = "password";
@@ -30,7 +29,8 @@ if(true){
 	for($i = 0; $i < 18; $i++){
 		if($i > 9)$user_type = true;
 		else $user_type = false; 
-		$sql = "INSERT IGNORE INTO USER (SIN, Name, Is_employee) VALUES ('". $user_sin[$i]."','". $user_names[$i]. "','". $user_type."')";
+		$sql = "INSERT IGNORE INTO USER (SIN, Name, Is_employee) 
+				VALUES ('". $user_sin[$i]."','". $user_names[$i]. "','". $user_type."')";
 		if (!mysqli_query($conn,$sql))
 		{
 			die('Error: ' . mysqli_error($conn));
@@ -41,7 +41,8 @@ if(true){
 	$prog_names = array("Reading", "Writing", "Math", "Comprehension");
 							
 	for($i = 0; $i < 4; $i++){ 
-		$sql = "INSERT IGNORE INTO PROGRAM (ID, Subject, Grade_level) VALUES ('". $i."','". $prog_names[$i]. "', NULL)";
+		$sql = "INSERT IGNORE INTO PROGRAM (ID, Subject, Grade_level) 
+				VALUES ('". $i."','". $prog_names[$i]. "', NULL)";
 		if (!mysqli_query($conn,$sql))
 		{
 			die('Error: ' . mysqli_error($conn));
@@ -53,7 +54,8 @@ if(true){
 							
 	for($i = 0; $i < 8; $i++){ 
 	$current_sin = 200000000 + $i;
-		$sql = "INSERT IGNORE INTO EMPLOYEE (SIN, Desired_Hours, Room_Number) VALUES ('" . $current_sin."','". $hours[$i]. "','". $i."')";
+		$sql = "INSERT IGNORE INTO EMPLOYEE (SIN, Desired_Hours, Room_Number) 
+				VALUES ('" . $current_sin."','". $hours[$i]. "','". $i."')";
 		if (!mysqli_query($conn,$sql))
 		{
 			die('Error: ' . mysqli_error($conn));
@@ -65,7 +67,8 @@ if(true){
 		global $conn;
 		$current_hour = $start_time;
 		while($current_hour < 12 && $current_hour < $end_time){
-			$sql = "INSERT IGNORE INTO AVAILABILITY (Employee_ID, Day, Hour) VALUES ('". $emp_id."','". $day. "',". $current_hour.")";
+			$sql = "INSERT IGNORE INTO AVAILABILITY (Employee_ID, Day, Hour) 
+					VALUES ('". $emp_id."','". $day. "',". $current_hour.")";
 			if (!mysqli_query($conn,$sql))
 			{
 				die('Error: ' . mysqli_error($conn));
@@ -75,7 +78,8 @@ if(true){
 		
 		$current_hour += 0.5;
 		while($current_hour < $end_time){
-			$sql = "INSERT IGNORE INTO AVAILABILITY (Employee_ID, Day, Hour) VALUES ('". $emp_id."','". $day. "',". $current_hour.")";
+			$sql = "INSERT IGNORE INTO AVAILABILITY (Employee_ID, Day, Hour) 
+					VALUES ('". $emp_id."','". $day. "',". $current_hour.")";
 			if (!mysqli_query($conn,$sql))
 			{
 				die('Error: ' . mysqli_error($conn));
@@ -118,11 +122,13 @@ if(true){
 	addAvailability(200000005, 5, 8, 12.5);	
 	
 	// Populate PARENT table
-	$email = array("Grace@gmail.com", "Richard_r@yahoo.ca", "adam_ondra_idol@gmail.com", "alex_hon@climber.org", "F.Khan@yahoo.com");						
+	$email = array("Grace@gmail.com", "Richard_r@yahoo.ca", "adam_ondra_idol@gmail.com", 
+					"alex_hon@climber.org", "F.Khan@yahoo.com");						
 	$phone = array("(403)456-6789", null, null, null, "(587)321-0987");
 	for($i = 0; $i < 5; $i++){ 
 	$current_sin = 100000000 + $i;
-		$sql = "INSERT IGNORE INTO PARENT (SIN, Phone_Number, Email) VALUES ('" . $current_sin."','". $phone[$i]. "','". $email[$i]."')";
+		$sql = "INSERT IGNORE INTO PARENT (SIN, Phone_Number, Email) 
+				VALUES ('" . $current_sin."','". $phone[$i]. "','". $email[$i]."')";
 		if (!mysqli_query($conn,$sql))
 		{
 			die('Error: ' . mysqli_error($conn));
@@ -354,7 +360,8 @@ if(true){
 						200000005, 200000006, 200000007);
 						
 	for($i = 0; $i < 13; $i++){
-		$sql = "INSERT IGNORE INTO LOGIN (Username, Password, User_SIN) VALUES ('". $usernames[$i]."','". $passwords[$i]. "','". $user_sin[$i]."')";
+		$sql = "INSERT IGNORE INTO LOGIN (Username, Password, User_SIN) 
+				VALUES ('". $usernames[$i]."','". $passwords[$i]. "','". $user_sin[$i]."')";
 		if (!mysqli_query($conn,$sql))
 		{
 			die('Error: ' . mysqli_error($conn));
@@ -364,7 +371,31 @@ if(true){
 	// Populate FEE table
 	
 	// Populate BOOKED_SESSION table
+	function bookSession($student_id, $day, $hour, $prog_id){
+		global $conn;
 		
+		$sql = "SELECT EMPS.Desired_Hours, EMPS.SIN
+				FROM EMPLOYEE EMPS, 
+					(SELECT *
+					FROM EMPLOYEE E, EMPLOYEE_TEACHES T
+					WHERE E.SIN = T.Employee_ID AND T.Program_ID = '" . $prog_id. "'
+							AND EXISTS (SELECT * 
+										FROM AVAILABILITY A 
+										WHERE E.SIN = A.Employee_ID AND A.Day = '" . $day. "' AND A.hour = '" .$hour ."')
+							AND NOT EXISTS (SELECT * 
+											FROM BOOKED_SESSION B
+											WHERE E.SIN = B.Teacher_ID AND B.Day = '" . $day. "' AND B.hour = '" .$hour ."')
+					) AS AVAIL_EMPS
+				WHERE Emps.SIN = AVAIL_EMPS.Employee_ID";
+		echo " " . $sql. "<br>"; 
+		$result = $conn->query($sql);
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_assoc($result)) {
+				echo "id: " . $row["SIN"]. " avail: " . $row["Desired_Hours"]. "<br>";
+			}
+		}else echo "0 results";
+	}
+	bookSession(000000000, 2, 9, 2);
+	
 $conn->close();
-}
 ?>
