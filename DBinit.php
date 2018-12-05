@@ -209,6 +209,26 @@
 	{
 		die('Error: ' . mysqli_error($conn));
 	}
+	
+	//Create EVALUATION table 
+	$sql = "CREATE TABLE IF NOT EXISTS EVALUATION (
+			Student_ID INT,
+			MODULE VARCHAR(8),
+			GRADE DOUBLE, 
+			PRIMARY KEY(Student_ID, MODULE), 
+			FOREIGN KEY(Student_ID)
+			REFERENCES STUDENT(SIN)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE
+			)";
+			
+	if (!mysqli_query($conn,$sql))
+	{
+		die('Error: ' . mysqli_error($conn));
+	}
+	
+		
+			
 		
 $conn->close();
 
