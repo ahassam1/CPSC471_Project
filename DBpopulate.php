@@ -374,7 +374,7 @@
 	function bookSession($student_id, $day, $hour, $prog_id){
 		global $conn;
 		
-		$sql = "SELECT EMPS.Desired_Hours, EMPS.SIN
+		$sql = "SELECT EMPS.SIN, EMPS.Desired_Hours
 				FROM EMPLOYEE EMPS, 
 					(SELECT *
 					FROM EMPLOYEE E, EMPLOYEE_TEACHES T
@@ -386,14 +386,24 @@
 											FROM BOOKED_SESSION B
 											WHERE E.SIN = B.Teacher_ID AND B.Day = '" . $day. "' AND B.hour = '" .$hour ."')
 					) AS AVAIL_EMPS
-				WHERE Emps.SIN = AVAIL_EMPS.Employee_ID";
-		echo " " . $sql. "<br>"; 
+				WHERE Emps.SIN = AVAIL_EMPS.Employee_ID
+						AND EMPS.Desired_Hours > (	SELECT COUNT(*)
+													FROM BOOKED_SESSION B
+													WHERE Emps.SIN = B.Teacher_ID
+													)
+				ORDER BY EMPS.Desired_Hours DESC";
 		$result = $conn->query($sql);
 		if (mysqli_num_rows($result) > 0) {
-			while($row = mysqli_fetch_assoc($result)) {
-				echo "id: " . $row["SIN"]. " avail: " . $row["Desired_Hours"]. "<br>";
-			}
-		}else echo "0 results";
+			
+			$selected = $result->fetch_assoc();
+			$sql = "INSERT IGNORE INTO BOOKED_SESSION (Teacher_ID, Student_ID, Day, Hour, Program_ID)
+				VALUES ('" . $selected["SIN"]."','". $student_id."','". $day."','". $hour."','". $prog_id."')";
+				if (!mysqli_query($conn,$sql))
+				{
+					die('Error: ' . mysqli_error($conn));
+				}
+				return true;
+		}else return false;
 	}
 	bookSession(000000000, 2, 9, 2);
 	
