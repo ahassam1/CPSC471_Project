@@ -413,6 +413,11 @@
 		{
 			die('Error: ' . mysqli_error($conn));
 		}
+	$sql = "INSERT IGNORE INTO EVALUATION (Student_ID, Module, Grade) VALUES (0, 'Math', 49.5)";
+	if (!mysqli_query($conn,$sql))
+		{
+			die('Error: ' . mysqli_error($conn));
+		}
 	
 $conn->close();
 ?>

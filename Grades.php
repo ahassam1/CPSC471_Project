@@ -5,6 +5,7 @@
 	</head>
 
 <body>
+
 <?php
 session_start();
 
@@ -73,7 +74,10 @@ session_start();
     // output data of each row
 		while($row = $result->fetch_assoc()) 
 		{
-        echo "Module: " . $row["Module"]. " " . "Grade: " . $row["Grade"]. "<br>";
+				   echo '<tr style = "text-align:center;">';
+                   echo '<td align style = "text-align:center;">' . $row['Module'] . "</td>";
+                   echo "<td align = center>" . $row['Grade'] . "</td>";
+                   echo "</tr>" . "<br>";
 		}
 	} 
 	else 
