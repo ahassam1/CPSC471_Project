@@ -15,13 +15,13 @@
 	<div class="collapse navbar-collapse" id="navbarColor01">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
-				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+				<a class="nav-link" href="teacherGUI.php">Home <span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Grading</a>
+				<a class="nav-link" href="TeacherGrading.php">Grading</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Availability</a>
+				<a class="nav-link" href="TeacherAvailability.php">Availability</a>
 			</li>
 		</ul>
 	</div>
