@@ -75,8 +75,8 @@ session_start();
 
 
 <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
-	<label for='dayForm[]'>Select the times you wish to add availiability:</label><br>
-	<select size= 8 multiple="multiple" name="dayForm[]">
+	<label for='timeForm[]'>Select the times you wish to add availiability:</label><br>
+	<select size= 8 multiple="multiple" name="timeForm[]">
 		<option value="8-9">8-9</option>
 		<option value="9-10">9-10</option>
 		<option value="10-11">10-11</option>
@@ -91,6 +91,8 @@ session_start();
 	if(isset($_POST['formSubmit'])) 
 	{
 		$days = $_POST['dayForm'];
+		$times = $_POST['timeForm'];
+
 		
 		if(!isset($days)) 
 		{
@@ -104,6 +106,22 @@ session_start();
 			for($i=0; $i < $daycount; $i++)
 			{
 				echo($days[$i] . " ");
+			}
+			echo("</p>");
+		}
+		
+		if(!isset($times)) 
+		{
+			echo("<p>You didn't select any times!</p>\n");
+		} 
+		else 
+		{
+			$timescount = count($times);
+			
+			echo("<p>You selected $timescount days: ");
+			for($i=0; $i < $timescount; $i++)
+			{
+				echo($times[$i] . " ");
 			}
 			echo("</p>");
 		}
