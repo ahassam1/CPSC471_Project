@@ -66,6 +66,9 @@ session_start();
 			<li class="nav-item">
 				<a class="nav-link" href="TeacherAvailability.php">Availability</a>
 			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="index.php">Logout</a>
+			</li>
 		</ul>
 	</div>
 	</nav>
