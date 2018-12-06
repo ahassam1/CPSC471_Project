@@ -51,6 +51,11 @@ session_start();
 				<a class="nav-link" href="TeacherAvailability.php">Availability</a>
 			</li>
 		</ul>
+		
+		<form action= "index.php">
+			<button class="btn btn-secondary my-2 my-sm-0" type="submit">Logout</button>
+		</form>
+		
 	</div>
 	</nav>
 

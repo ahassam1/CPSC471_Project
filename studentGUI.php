@@ -35,10 +35,12 @@ if(session_id() == '' || !isset($_SESSION)){
 			<li class="nav-item">
 				<a class="nav-link" href="fees.php">Fees</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="index.php">Logout</a>
-			</li>
 		</ul>
+		
+		<form action= "index.php">
+			<button class="btn btn-secondary my-2 my-sm-0" type="submit">Logout</button>
+		</form>
+		
 	</div>
 	</nav>
 	
