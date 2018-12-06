@@ -24,7 +24,7 @@ session_start();
 		die("Connection failed: " . $conn->connect_error);
 		} 
 
-
+/*
 //echo "Hope that we find the SIN here: ", $_SESSION["sin1"];
 
 		$currentsin = $_SESSION["sin1"];
@@ -34,8 +34,9 @@ session_start();
 			   Where '$currentsin' = E.Student_ID";
 			   
 		$result = $conn->query($sql);
+*/
 
-?>	
+?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
@@ -58,6 +59,56 @@ session_start();
 		
 	</div>
 	</nav>
+	
+	<!--selection box based on http://form.guide/php-form/php-form-select.html -->
+	
+
+<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
+	<label for='dayForm[]'>Select the days you wish to add availiability:</label><br>
+	<select size= 7 multiple="multiple" name="dayForm[]">
+		<option value="Monday">Monday</option>
+		<option value="Tuesday">Tuesday</option>
+		<option value="Wednesday">Wednesday</option>
+		<option value="Thursday">Thursday</option>
+		<option value="Friday">Friday</option>
+	</select><br>
+
+
+<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
+	<label for='dayForm[]'>Select the times you wish to add availiability:</label><br>
+	<select size= 8 multiple="multiple" name="dayForm[]">
+		<option value="8-9">8-9</option>
+		<option value="9-10">9-10</option>
+		<option value="10-11">10-11</option>
+		<option value="12-13">12-13</option>
+		<option value="13-14">13-14</option>
+		<option value="14-15">14-15</option>
+
+	</select><br>
+	<input type="submit" name="formSubmit" value="Submit" >
+</form>
+<?php
+	if(isset($_POST['formSubmit'])) 
+	{
+		$days = $_POST['dayForm'];
+		
+		if(!isset($days)) 
+		{
+			echo("<p>You didn't select any days!</p>\n");
+		} 
+		else 
+		{
+			$daycount = count($days);
+			
+			echo("<p>You selected $daycount days: ");
+			for($i=0; $i < $daycount; $i++)
+			{
+				echo($days[$i] . " ");
+			}
+			echo("</p>");
+		}
+	}
+?>
 
 		</body>
 </html>

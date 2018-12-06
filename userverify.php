@@ -29,6 +29,7 @@
 		//based on https://www.w3schools.com/php/php_mysql_select.asp
 		
 		$sin = null;
+		$success = 1;
 					
 		if ($result->num_rows == 1) 
 		{
@@ -46,16 +47,20 @@
 		else 
 		{
 			echo "0 results";
+			$success = 0;
+			require("index.php");	
 		}
 		
-		$_SESSION["sin1"] = $sin;
+		if($success == 1)
+		{
+					$_SESSION["sin1"] = $sin;
 		
 		$sql2 = "SELECT U.Is_employee
 			   From user as U
 			   Where '$sin' = U.SIN";
 			   
 		$result2 = $conn->query($sql2);
-		
+		$status = -1;
 		if ($result2->num_rows == 1) 
 		{
 			// output data of each row
@@ -78,7 +83,6 @@
 		{
 			require("studentGUI.php");
 		}
-	
-		
+		}	
 
 	?>
