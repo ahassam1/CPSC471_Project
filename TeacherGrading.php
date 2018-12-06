@@ -22,7 +22,8 @@ session_start();
 		<title>Teacher Grading</title>
 		
 		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
-		<script type="text/javascript" src="js/bootstrap.js"></script>
+		<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+		<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
 		
 		<style>
 			
@@ -36,18 +37,31 @@ session_start();
 				text-align:center;
 			}
 			
+			.jumbotron .ButtonGroup {
+				margin: 20px;
+			}
+			
+			.jumbotron .InputBox {
+				margin: 20px;
+			}
+			
+			.jumbotron .InputBox .studentSelectBar{
+				margin: 20px;
+			}
+			
+			.jumbotron .InputBox .inputGrade{
+				margin: 20px;
+			}
+			
 			.form-group {
+				resize:none;
 				width:40%;
 				position: absolute;
 				top: 11%;
 				left: 5%;
 				font-size: 150%;
 			}
-			
-			.inputGrade {
-				margin:10px;
 
-			}
 			
 		</style>
 	</head>
@@ -76,14 +90,8 @@ session_start();
 	</nav>
 	
 	<div class="form-group">
-	  <label for="studentList">Student List</label>
-      <select multiple="none" class="form-control" id="studentList" size="32">
-        <option>Insert</option>
-        <option>Some</option>
-        <option>Students</option>
-        <option>In</option>
-        <option>Here</option>
-      </select>
+      <label for="studentInfo">Student Information</label>
+      <textarea readonly class="form-control" id="studentInfo" rows="45" style="resize:none"></textarea>
     </div>
 	
 	<div class="jumbotron">
@@ -101,15 +109,17 @@ session_start();
 			</label>
 		</div>
 		<br></br>
-		<div class="Input Box">
+		<div class="InputBox">
 		<div class="studentSelectBar">
 			<label for="studentSelect">Student Name</label>
 			<select class="form-control" id="studentSelect">
+			<optgroup>	
 				<option>1</option>
 				<option>2</option>
 				<option>3</option>
 				<option>4</option>
 				<option>5</option>
+			</optgroup>
 			</select>
 		</div>
 		

@@ -23,9 +23,6 @@
 			<li class="nav-item">
 				<a class="nav-link" href="TeacherAvailability.php">Availability</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="index.php">Logout</a>
-			</li>
 		</ul>
 		
 		<form action= "index.php">
@@ -34,6 +31,8 @@
 		
 	</div>
 	</nav>
+	
+	
 	
 	<div class="cd-schedule loading">
 	<div class="timeline">

@@ -27,7 +27,7 @@ if(session_id() == '' || !isset($_SESSION)){
 				<a class="nav-link" href="studentGUI.php">Home <span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Session</a>
+				<a class="nav-link" href="studentSession.php">Session</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="Grades.php">View Grades</a>

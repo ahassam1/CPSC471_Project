@@ -1,13 +1,12 @@
 <html>
 	<head>
-		<title>Student Fees</title>
+		<title>Student Sessions</title>
 		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
 		<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
 		<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
 	</head>
 
 <body>
-
 <?php
 session_start();
 
@@ -30,9 +29,9 @@ session_start();
 
 		$currentsin = $_SESSION["sin1"];
 
-		$sql = "SELECT F.Date_Due, F.Balance 
-			   From Fee as F
-			   Where '$currentsin' = F.Client_ID";
+		$sql = "SELECT E.Module, E.Grade 
+			   From EVALUATION as E
+			   Where '$currentsin' = E.Student_ID";
 			   
 		$result = $conn->query($sql);
 
@@ -63,25 +62,5 @@ session_start();
 	</div>
 	</nav>
 
-<?php		
-		
-	if ($result->num_rows > 0) 
-	{
-    // output data of each row
-		while($row = $result->fetch_assoc()) 
-		{
-			echo " Date_Due: " . $row["Date_Due"]; echo "&nbsp;";
-			echo " Balance: " . $row["Balance"]; echo "&nbsp;";
-		}
-	} 
-	else 
-	{
-		echo "0 results";
-	}
-
-			   
-
-?>
-</body>
+		</body>
 </html>
-
