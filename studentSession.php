@@ -89,36 +89,17 @@ Select Session Time: <br>
 Select Subject: <br>	  
 <select name="formSubject">
 
-<?
-$sql = "SELECT P.Subject, P.Program_ID
+<?php
+$sql = "SELECT P.Subject, P.ID
 		FROM STUDENT_TAUGHT ST, PROGRAM P
 		WHERE ST.Student_ID = '" . $currentsin. "' AND
-				P.Program_ID = P.Program_ID";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        //echo "id: " . $row["Subject"]. "<br>";
-	?>
-	<option value = <?php echo $row["Program_ID"]; ?>><?php echo $row[Subject]; ?></option>
-	<?
-    }
-} else {
-    //echo '0 results';
-}
-//for($i = 0; 
+				ST.Program_ID = P.ID";
+	$result = $conn->query($sql);
+	for($count = 0; $count < $result->num_rows; $count++){
+		$row = $result->fetch_assoc();
+		echo '<option value="'.$row['ID'].'">'.$row['Subject'].'</option>';
+	}
 ?>
-  <option value="8">8:00AM-9:00AM</option>
-  <option value="9">9:00AM-10:00AM</option>
-  <option value="10">10:00AM-11:00AM</option>
-  <option value="11">11:00AM-12:00PM</option>
-  <option value="12.5">12:30PM-1:30PM</option>
-  <option value="13.5">1:30PM-2:30PM</option>
-  <option value="14.5">2:30PM-3:30PM</option>
-  <option value="15.5">3:30PM-4:30PM</option>
-</select><br><br><br>  
-  
-  
   
 </select><br><br><br>
 	<input type="submit" name="formSubmit" value="Request" >
@@ -128,9 +109,9 @@ if ($result->num_rows > 0) {
 
 if(isset($_POST['formSubmit']) )
 {
-  $day = $_POST['formMovie'];
-  $varName = $_POST['formName'];
-  $varGender = $_POST['formGender'];
+  $day = $_POST['formDay'];
+  $hour = $_POST['formHour'];
+  $subject = $_POST['formSubject'];
   $errorMessage = "";
 }
 ?>

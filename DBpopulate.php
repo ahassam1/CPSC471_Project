@@ -428,8 +428,21 @@
 		{
 			die('Error: ' . mysqli_error($conn));
 		}
+// $currentsin = 4;
+		// $sql = "SELECT P.Subject, P.ID
+				// FROM STUDENT_TAUGHT ST, PROGRAM P
+				// WHERE ST.Student_ID = '" . $currentsin. "' AND
+						// ST.Program_ID = P.ID";
+// $result = $conn->query($sql);
 
-	
+// if ($result->num_rows > 0) {
+    // // output data of each row
+    // while($row = $result->fetch_assoc()) {
+        // echo "id: " . $row["Subject"]. " - Name: " . $row["ID"]. "<br>";
+    // }
+// } else {
+    // echo "0 results";
+// }
 	
 $conn->close();
 ?>
