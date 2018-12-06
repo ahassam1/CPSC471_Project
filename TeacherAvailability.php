@@ -126,7 +126,7 @@ session_start();
 		{
 			for($j = 0; $j < $timescount; $j++)
 			{
-				addAvailability($currentsin, $days[$i], $times[$j], $times[$j] + 1);
+				addAvailability($currentsin, $days[$i], $times[$j], ($times[$j] + 1));
 			}
 		}
 	}

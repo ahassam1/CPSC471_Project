@@ -29,11 +29,11 @@ session_start();
 
 		$currentsin = $_SESSION["sin1"];
 
-		$sql = "SELECT E.Module, E.Grade 
-			   From EVALUATION as E
-			   Where '$currentsin' = E.Student_ID";
+		// $sql = "SELECT E.Module, E.Grade 
+			   // From EVALUATION as E
+			   // Where '$currentsin' = E.Student_ID";
 			   
-		$result = $conn->query($sql);
+		// $result = $conn->query($sql);
 
 ?>	
 
@@ -61,6 +61,79 @@ session_start();
 		
 	</div>
 	</nav>
+	
+<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
+Select Session Day: <br>	  
+<select name="formDay">
+  <option value="1">Monday</option>
+  <option value="2">Tuesday</option>
+  <option value="3">Wednesday</option>
+  <option value="4">Thursday</option>
+  <option value="5">Friday</option>
+</select><br><br><br>
 
+<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
+Select Session Time: <br>	  
+<select name="formHour">
+  <option value="8">8:00AM-9:00AM</option>
+  <option value="9">9:00AM-10:00AM</option>
+  <option value="10">10:00AM-11:00AM</option>
+  <option value="11">11:00AM-12:00PM</option>
+  <option value="12.5">12:30PM-1:30PM</option>
+  <option value="13.5">1:30PM-2:30PM</option>
+  <option value="14.5">2:30PM-3:30PM</option>
+  <option value="15.5">3:30PM-4:30PM</option>
+</select><br><br><br>
+
+<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
+Select Subject: <br>	  
+<select name="formSubject">
+
+<?
+$sql = "SELECT P.Subject, P.Program_ID
+		FROM STUDENT_TAUGHT ST, PROGRAM P
+		WHERE ST.Student_ID = '" . $currentsin. "' AND
+				P.Program_ID = P.Program_ID";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        //echo "id: " . $row["Subject"]. "<br>";
+	?>
+	<option value = <?php echo $row["Program_ID"]; ?>><?php echo $row[Subject]; ?></option>
+	<?
+    }
+} else {
+    //echo '0 results';
+}
+//for($i = 0; 
+?>
+  <option value="8">8:00AM-9:00AM</option>
+  <option value="9">9:00AM-10:00AM</option>
+  <option value="10">10:00AM-11:00AM</option>
+  <option value="11">11:00AM-12:00PM</option>
+  <option value="12.5">12:30PM-1:30PM</option>
+  <option value="13.5">1:30PM-2:30PM</option>
+  <option value="14.5">2:30PM-3:30PM</option>
+  <option value="15.5">3:30PM-4:30PM</option>
+</select><br><br><br>  
+  
+  
+  
+</select><br><br><br>
+	<input type="submit" name="formSubmit" value="Request" >
+</form>
+
+<?php
+
+if(isset($_POST['formSubmit']) )
+{
+  $day = $_POST['formMovie'];
+  $varName = $_POST['formName'];
+  $varGender = $_POST['formGender'];
+  $errorMessage = "";
+}
+?>
+	
 		</body>
 </html>
