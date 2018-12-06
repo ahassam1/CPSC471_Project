@@ -109,10 +109,54 @@ $sql = "SELECT P.Subject, P.ID
 
 if(isset($_POST['formSubmit']) )
 {
-  $day = $_POST['formDay'];
-  $hour = $_POST['formHour'];
-  $subject = $_POST['formSubject'];
-  $errorMessage = "";
+	$day = $_POST['formDay'];
+	$hour = $_POST['formHour'];
+	$subject = $_POST['formSubject'];
+	$errorMessage = "";
+	
+	
+	$sql = "	SELECT * 
+				FROM BOOKED_SESSION B
+				WHERE '" . $currentsin. "' = B.Student_ID AND B.Day = '" . $day. "' AND B.hour = '" .$hour ."'";
+			
+	$result = $conn->query($sql);
+	if (mysqli_num_rows($result) > 0)echo("<p>Unable to book session, scheduling conflict!");
+	else{	
+		
+		$sql = "SELECT EMPS.SIN, EMPS.Desired_Hours
+				FROM EMPLOYEE EMPS, 
+					(SELECT *
+					FROM EMPLOYEE E, EMPLOYEE_TEACHES T
+					WHERE E.SIN = T.Employee_ID AND T.Program_ID = '" . $subject. "'
+							AND EXISTS (SELECT * 
+										FROM AVAILABILITY A 
+										WHERE E.SIN = A.Employee_ID AND A.Day = '" . $day. "' AND A.hour = '" .$hour ."')
+							AND NOT EXISTS (SELECT * 
+											FROM BOOKED_SESSION B
+											WHERE E.SIN = B.Teacher_ID AND B.Day = '" . $day. "' AND B.hour = '" .$hour ."')
+							AND NOT EXISTS (SELECT * 
+											FROM BOOKED_SESSION B
+											WHERE '" . $currentsin. "' = B.Student_ID AND B.Day = '" . $day. "' AND B.hour = '" .$hour ."')
+					) AS AVAIL_EMPS
+				WHERE Emps.SIN = AVAIL_EMPS.Employee_ID
+						AND EMPS.Desired_Hours > (	SELECT COUNT(*)
+													FROM BOOKED_SESSION B
+													WHERE Emps.SIN = B.Teacher_ID
+													)
+				ORDER BY EMPS.Desired_Hours DESC";
+				
+		$result = $conn->query($sql);
+		if (mysqli_num_rows($result) > 0) {
+			$selected = $result->fetch_assoc();
+			$sql = "INSERT IGNORE INTO BOOKED_SESSION (Teacher_ID, Student_ID, Day, Hour, Program_ID)
+				VALUES ('" . $selected["SIN"]."','". $currentsin."','". $day."','". $hour."','". $subject."')";
+				if (!mysqli_query($conn,$sql))
+				{
+					die('Error: ' . mysqli_error($conn));
+				}
+		}
+		else echo("<p>Unable to book session, no available teachers!");
+	}
 }
 ?>
 	
