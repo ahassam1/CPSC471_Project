@@ -100,19 +100,21 @@ function createTableElement($day){
 	$sql = "SELECT *
 			FROM booked_session B, program P, Employee T
 			WHERE '$userSin' = B.Student_ID AND '$day' = B.Day
+			AND B.Program_ID = P.ID
 			ORDER BY B.Hour";
 	
 	$result = $conn->query($sql);
 	
 	if($result->num_rows != 0){
 		
-		$i = 0;
+
 		
-		while($row = $result->fetch_array()){
-			$i++;
+		//while($row = $result->fetch_array()){
+		for($count = 2; $count < $result->num_rows; $count++){
+			$row = $result->fetch_assoc();
 			convertTime($row["Hour"]);
 			
-			echo '<li class="single-event" data-start="'.$_SESSION['start'].'" data-end="'.$_SESSION['end'].'" data-content="event-abs-circuit" data-event="event-'.($i%3).'">
+			echo '<li class="single-event" data-start="'.$_SESSION['start'].'" data-end="'.$_SESSION['end'].'" data-event="event-'.($count%3).'">
 				  <a href="#0">
 				  <em class="event-name">'.$row['Subject'].'</em>
 				  </a>
