@@ -73,6 +73,7 @@ session_start();
 		<option value="8">8:00-9:00</option>
 		<option value="9">9:00-10:00</option>
 		<option value="10">10:00-11:00</option>
+		<option value="11">11:00-12:00</option>
 		<option value="12.5">12:30-1:30</option>
 		<option value="13.5">1:30-2:30</option>
 		<option value="14.5">2:30-3:30</option>
@@ -121,7 +122,7 @@ session_start();
 			echo("</p>");
 		}
 		echo "Ready to insert into SQL table <br>";
-		
+
 		for($i = 0; $i < $daycount; $i++)
 		{
 			for($j = 0; $j < $timescount; $j++)
