@@ -46,7 +46,9 @@
 		
 		else 
 		{
-			echo "0 results";
+			echo '<div class="alert alert-dismissible alert-danger">
+				  <strong>Username and Password Incorrect!</strong> Change a few things up and try submitting again.
+				  </div>';
 			$success = 0;
 			require("index.php");	
 		}
