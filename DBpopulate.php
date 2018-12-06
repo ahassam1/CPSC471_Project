@@ -406,6 +406,7 @@
 		}else return false;
 	}
 	bookSession(000000000, 2, 9, 2);
+	bookSession(000000000, 2, 13.5, 1);
 	
 	//Populate EVALUATION table
 	$sql = "INSERT IGNORE INTO EVALUATION (Student_ID, Subject, Grade) VALUES (0, 'Algebra', 75.3)";

@@ -5,7 +5,127 @@ if(session_id() == '' || !isset($_SESSION)){
 	session_start();
 }
 
+function convertTime($time){
+	
+	switch($time){
+	case "9":
+		$_SESSION['start'] = "09:00";
+		$_SESSION['end']   = "10:00";
+		break;
+	case "9.5":
+		$_SESSION['start'] = "09:30";
+		$_SESSION['end']   = "10:30";
+		break;
+	case "10":
+		$_SESSION['start'] = "10:00";
+		$_SESSION['end']   = "11:00";
+		break;
+	case "10.5":
+		$_SESSION['start'] = "10:30";
+		$_SESSION['end']   = "11:30";
+		break;
+	case "11":
+		$_SESSION['start'] = "11:00";
+		$_SESSION['end']   = "12:00";
+		break;
+	case "11.5":
+		$_SESSION['start'] = "11:30";
+		$_SESSION['end']   = "12:30";
+		break;
+	case "12":
+		$_SESSION['start'] = "12:00";
+		$_SESSION['end']   = "13:00";
+		break;
+	case "12.5":
+		$_SESSION['start'] = "12:30";
+		$_SESSION['end']   = "13:30";
+		break;
+	case "13":
+		$_SESSION['start'] = "13:00";
+		$_SESSION['end']   = "14:00";
+		break;
+	case "13.5":
+		$_SESSION['start'] = "13:30";
+		$_SESSION['end']   = "14:30";
+		break;
+	case "14":
+		$_SESSION['start'] = "14:00";
+		$_SESSION['end']   = "15:00";
+		break;
+	case "14.5":
+		$_SESSION['start'] = "14:30";
+		$_SESSION['end']   = "15:30";
+		break;
+	case "15":
+		$_SESSION['start'] = "15:00";
+		$_SESSION['end']   = "16:00";
+		break;
+	case "15.5":
+		$_SESSION['start'] = "15:30";
+		$_SESSION['end']   = "16:30";
+		break;
+	case "16":
+		$_SESSION['start'] = "16:00";
+		$_SESSION['end']   = "17:00";
+		break;
+	case "16.5":
+		$_SESSION['start'] = "16:30";
+		$_SESSION['end']   = "17:30";
+		break;
+	default:
+		break;
+	}
+	
+	return;
+}
+
+function createTableElement($day){
+	
+	$servername = "localhost";
+	$username = "admin";
+	$password = "password";
+	
+	$dbName = "TutorScheduleDB";
+
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbName);
+	// Check connection
+	if ($conn->connect_error) 
+	{
+		die("Connection failed: " . $conn->connect_error);
+	} 
+	
+	$userSin = $_SESSION['sin1'];
+	
+	$sql = "SELECT *
+			FROM booked_session B, program P, Employee T
+			WHERE '$userSin' = B.Student_ID AND '$day' = B.Day
+			ORDER BY B.Hour";
+	
+	$result = $conn->query($sql);
+	
+	if($result->num_rows != 0){
+		
+		$i = 0;
+		
+		while($row = $result->fetch_array()){
+			$i++;
+			convertTime($row["Hour"]);
+			
+			echo '<li class="single-event" data-start="'.$_SESSION['start'].'" data-end="'.$_SESSION['end'].'" data-content="event-abs-circuit" data-event="event-'.($i%3).'">
+				  <a href="#0">
+				  <em class="event-name">'.$row['Subject'].'</em>
+				  </a>
+				  </li>';
+		}
+	}
+	
+	return;
+
+}
+
 ?>
+
 
 <html lang="en" class="no-js">
 	<head>
@@ -71,25 +191,8 @@ if(session_id() == '' || !isset($_SESSION)){
 		<ul>
 			<li class="events-group">
 				<div class="top-info"><span>Monday</span></div>
-
 				<ul>
-					<li class="single-event" data-start="9 AM" data-end="10:30 AM" data-content="event-abs-circuit" data-event="event-1">
-						<a href="#0">
-							<em class="event-name">Math</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="11 AM" data-end="12:30 PM" data-content="event-rowing-workout" data-event="event-2">
-						<a href="#0">
-							<em class="event-name">Science</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="14:00" data-end="15:15"  data-content="event-yoga-1" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Chemistry</em>
-						</a>
-					</li>
+					<?php createTableElement(1); ?>
 				</ul>
 			</li>
 
@@ -97,29 +200,7 @@ if(session_id() == '' || !isset($_SESSION)){
 				<div class="top-info"><span>Tuesday</span></div>
 
 				<ul>
-					<li class="single-event" data-start="10:00" data-end="11:00"  data-content="event-rowing-workout" data-event="event-2">
-						<a href="#0">
-							<em class="event-name">Science</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="11:30" data-end="13:00"  data-content="event-restorative-yoga" data-event="event-4">
-						<a href="#0">
-							<em class="event-name">Physics</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="13:30" data-end="15:00" data-content="event-abs-circuit" data-event="event-1">
-						<a href="#0">
-							<em class="event-name">Math</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="15:45" data-end="16:45"  data-content="event-yoga-1" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Biology</em>
-						</a>
-					</li>
+					<?php createTableElement(2); ?>
 				</ul>
 			</li>
 
@@ -127,29 +208,7 @@ if(session_id() == '' || !isset($_SESSION)){
 				<div class="top-info"><span>Wednesday</span></div>
 
 				<ul>
-					<li class="single-event" data-start="09:00" data-end="10:15" data-content="event-restorative-yoga" data-event="event-4">
-						<a href="#0">
-							<em class="event-name">Math</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="10:45" data-end="11:45" data-content="event-yoga-1" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Chemistry</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="12:00" data-end="13:45"  data-content="event-rowing-workout" data-event="event-2">
-						<a href="#0">
-							<em class="event-name">Science</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="13:45" data-end="15:00" data-content="event-yoga-1" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Physics</em>
-						</a>
-					</li>
+					
 				</ul>
 			</li>
 
@@ -157,21 +216,9 @@ if(session_id() == '' || !isset($_SESSION)){
 				<div class="top-info"><span>Thursday</span></div>
 
 				<ul>
-					<li class="single-event" data-start="09:30" data-end="10:30" data-content="event-abs-circuit" data-event="event-1">
-						<a href="#0">
-							<em class="event-name">Social</em>
-						</a>
-					</li>
-
 					<li class="single-event" data-start="12:00" data-end="13:45" data-content="event-restorative-yoga" data-event="event-4">
 						<a href="#0">
 							<em class="event-name">Math</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="15:30" data-end="16:30" data-content="event-abs-circuit" data-event="event-1">
-						<a href="#0">
-							<em class="event-name">Biology</em>
 						</a>
 					</li>
 				</ul>
@@ -181,23 +228,7 @@ if(session_id() == '' || !isset($_SESSION)){
 				<div class="top-info"><span>Friday</span></div>
 
 				<ul>
-					<li class="single-event" data-start="10:00" data-end="11:00"  data-content="event-rowing-workout" data-event="event-2">
-						<a href="#0">
-							<em class="event-name">Social</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="12:30" data-end="14:00" data-content="event-abs-circuit" data-event="event-1">
-						<a href="#0">
-							<em class="event-name">Physics</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="15:45" data-end="16:45"  data-content="event-yoga-1" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Chemistry</em>
-						</a>
-					</li>
+					
 				</ul>
 			</li>
 		</ul>

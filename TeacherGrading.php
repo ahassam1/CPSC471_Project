@@ -28,11 +28,11 @@ session_start();
 		<style>
 			
 			.jumbotron {
-				width:40%;
+				width:35%;
 				height:60%;
 				position: absolute;
 				top: 16%;
-				left: 50%;
+				left: 55%;
 				font-size: 150%;
 				text-align:center;
 			}
@@ -42,7 +42,7 @@ session_start();
 			}
 			
 			.jumbotron .InputBox {
-				margin: 20px;
+				//margin: 20px;
 			}
 			
 			.jumbotron .InputBox .studentSelectBar{
@@ -96,10 +96,10 @@ session_start();
 	
 	<div class="jumbotron">
 		
-		<h1 align="center">Manage Grades</h1>
+		<h1 align="center" style="padding:10px">Manage Grades</h1>
 		<div class="btn-group btn-group-toggle" id="ButtonGroup" data-toggle="buttons">
 			<label class="btn btn-primary active">
-				<input type="radio" name="options" id="option1" autocomplete="off" checked=""> Add
+				<input type="radio" name="options" id="option1" autocomplete="off" checked="" style="width:100px"> Add
 			</label>
 			<label class="btn btn-primary">
 				<input type="radio" name="options" id="option2" autocomplete="off"> Remove
@@ -111,8 +111,8 @@ session_start();
 		<br></br>
 		<div class="InputBox">
 		<div class="studentSelectBar">
-			<label for="studentSelect">Student Name</label>
-			<select class="form-control" id="studentSelect">
+			<label for="studentSelect" style="padding:10px">Student Name</label>
+			<select class="form-control" id="studentSelect" style="height:30px;font-size:70%">
 			<optgroup>	
 				<option>1</option>
 				<option>2</option>
@@ -124,10 +124,10 @@ session_start();
 		</div>
 		
 		<div class="inputGrade">
-			<label class="control-label">Student Grade</label>
+			<label class="control-label" style="padding:10px;">Student Grade</label>
 			<div class="inputgroup">
 				<div class="input-group mb-3">
-					<input type="text" class="form-control" id="gradeValue" aria-label="Grade Value">
+					<input type="text" class="form-control" id="gradeValue" aria-label="Grade Value" style="height:30px;font-size:70%">
 				<div class="input-group-append">
 				<span class="input-group-text">%</span>
 				</div>
@@ -135,7 +135,7 @@ session_start();
 			</div>
 		</div>
 		<br></br>
-		<button type="button" class="btn btn-primary">Submit</button>
+		<button type="button" class="btn btn-primary" style="width:100px;height:40px;">Submit</button>
 		</div>
 			
 	</div>
