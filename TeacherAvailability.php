@@ -24,17 +24,10 @@ session_start();
 		die("Connection failed: " . $conn->connect_error);
 		} 
 
-/*
-//echo "Hope that we find the SIN here: ", $_SESSION["sin1"];
+
+		echo "Hope that we find the SIN here: ", $_SESSION["sin1"];
 
 		$currentsin = $_SESSION["sin1"];
-
-		$sql = "SELECT E.Module, E.Grade 
-			   From EVALUATION as E
-			   Where '$currentsin' = E.Student_ID";
-			   
-		$result = $conn->query($sql);
-*/
 
 ?>
 
@@ -63,26 +56,29 @@ session_start();
 	<!--selection box based on http://form.guide/php-form/php-form-select.html -->
 	
 
-<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
+    <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
 	<label for='dayForm[]'>Select the days you wish to add availiability:</label><br>
 	<select size= 7 multiple="multiple" name="dayForm[]">
-		<option value="Monday">Monday</option>
-		<option value="Tuesday">Tuesday</option>
-		<option value="Wednesday">Wednesday</option>
-		<option value="Thursday">Thursday</option>
-		<option value="Friday">Friday</option>
+		<option value="1">Monday</option>
+		<option value="2">Tuesday</option>
+		<option value="3">Wednesday</option>
+		<option value="4">Thursday</option>
+		<option value="5">Friday</option>
 	</select><br>
 
 
-<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
-	<label for='dayForm[]'>Select the times you wish to add availiability:</label><br>
-	<select size= 8 multiple="multiple" name="dayForm[]">
-		<option value="8-9">8-9</option>
-		<option value="9-10">9-10</option>
-		<option value="10-11">10-11</option>
-		<option value="12-13">12-13</option>
-		<option value="13-14">13-14</option>
-		<option value="14-15">14-15</option>
+    <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
+	<label for='timeForm[]'>Select the times you wish to add availiability:</label><br>
+	<select size= 9 multiple="multiple" name="timeForm[]">
+		<option value="8">8:00-9:00</option>
+		<option value="9">9:00-10:00</option>
+		<option value="10">10:00-11:00</option>
+		<option value="11">11:00-12:00</option>
+		<option value="12.5">12:30-1:30</option>
+		<option value="13.5">1:30-2:30</option>
+		<option value="14.5">2:30-3:30</option>
+		<option value="15.5">3:30-4:30</option>
+
 
 	</select><br>
 	<input type="submit" name="formSubmit" value="Submit" >
@@ -91,6 +87,8 @@ session_start();
 	if(isset($_POST['formSubmit'])) 
 	{
 		$days = $_POST['dayForm'];
+		$times = $_POST['timeForm'];
+
 		
 		if(!isset($days)) 
 		{
@@ -107,7 +105,60 @@ session_start();
 			}
 			echo("</p>");
 		}
+		
+		if(!isset($times)) 
+		{
+			echo("<p>You didn't select any times!</p>\n");
+		} 
+		else 
+		{
+			$timescount = count($times);
+			
+			echo("<p>You selected $timescount times: ");
+			for($i=0; $i < $timescount; $i++)
+			{
+				echo($times[$i] . " ");
+			}
+			echo("</p>");
+		}
+		echo "Ready to insert into SQL table <br>";
+
+		for($i = 0; $i < $daycount; $i++)
+		{
+			for($j = 0; $j < $timescount; $j++)
+			{
+				addAvailability($currentsin, $days[$i], $times[$j], ($times[$j] + 1));
+			}
+		}
 	}
+	
+	// Populate AVAILABILITY table
+	function addAvailability($emp_id, $day, $start_time, $end_time)
+	{
+		global $conn;
+		$current_hour = $start_time;
+		while($current_hour < 12 && $current_hour < $end_time){
+			$sql = "INSERT IGNORE INTO AVAILABILITY (Employee_ID, Day, Hour) 
+					VALUES ('". $emp_id."','". $day. "',". $current_hour.")";
+			if (!mysqli_query($conn,$sql))
+			{
+				die('Error: ' . mysqli_error($conn));
+			}
+			$current_hour++;
+		}
+		
+		$current_hour += 0.5;
+		while($current_hour < $end_time){
+			$sql = "INSERT IGNORE INTO AVAILABILITY (Employee_ID, Day, Hour) 
+					VALUES ('". $emp_id."','". $day. "',". $current_hour.")";
+			if (!mysqli_query($conn,$sql))
+			{
+				die('Error: ' . mysqli_error($conn));
+			}
+			$current_hour++;
+		}
+	}
+	
 ?>
 
 		</body>

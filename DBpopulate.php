@@ -385,6 +385,9 @@
 							AND NOT EXISTS (SELECT * 
 											FROM BOOKED_SESSION B
 											WHERE E.SIN = B.Teacher_ID AND B.Day = '" . $day. "' AND B.hour = '" .$hour ."')
+							AND NOT EXISTS (SELECT * 
+											FROM BOOKED_SESSION B
+											WHERE '" . $student_id. "' = B.Student_ID AND B.Day = '" . $day. "' AND B.hour = '" .$hour ."')
 					) AS AVAIL_EMPS
 				WHERE Emps.SIN = AVAIL_EMPS.Employee_ID
 						AND EMPS.Desired_Hours > (	SELECT COUNT(*)

@@ -53,9 +53,10 @@
 			require("index.php");	
 		}
 		
-		if($success == 1)
-		{
-					$_SESSION["sin1"] = $sin;
+	if($success == 1)
+	{
+		
+		$_SESSION["sin1"] = $sin;
 		
 		$sql2 = "SELECT U.Is_employee
 			   From user as U
@@ -63,6 +64,7 @@
 			   
 		$result2 = $conn->query($sql2);
 		$status = -1;
+		
 		if ($result2->num_rows == 1) 
 		{
 			// output data of each row
@@ -85,6 +87,6 @@
 		{
 			require("studentGUI.php");
 		}
-		}	
+	}	
 
 	?>
