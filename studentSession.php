@@ -102,7 +102,8 @@ $sql = "SELECT P.Subject, P.ID
 ?>
   
 </select><br><br><br>
-	<input type="submit" name="formSubmit" value="Request" >
+	<input type="submit" name="formSubmit" value="Add" >
+	<input type="submit" name="formRemove" value="Remove" >
 </form>
 
 <?php
@@ -154,8 +155,33 @@ if(isset($_POST['formSubmit']) )
 				{
 					die('Error: ' . mysqli_error($conn));
 				}
+				else echo("<p>Session booked!");
 		}
 		else echo("<p>Unable to book session, no available teachers!");
+	}
+}
+
+else if(isset($_POST['formRemove']) )
+{
+	$day = $_POST['formDay'];
+	$hour = $_POST['formHour'];	
+	
+	$sql = "	SELECT * 
+				FROM BOOKED_SESSION
+				WHERE '" . $currentsin. "' = Student_ID AND Day = '" . $day. "' AND hour = '" .$hour ."'";	
+	$result = $conn->query($sql);
+	if (mysqli_num_rows($result) <= 0) echo("<p>No session to drop at specified time!");
+	
+	else{	
+		
+		$sql = "DELETE FROM BOOKED_SESSION
+				WHERE '" . $currentsin. "' = Student_ID AND Day = '" . $day. "' AND hour = '" .$hour ."'";
+				
+		if ($conn->query($sql) === TRUE) {
+			echo "Session deleted successfully";
+		} else {
+					echo "Error deleting record: " . $conn->error;
+				}
 	}
 }
 ?>
