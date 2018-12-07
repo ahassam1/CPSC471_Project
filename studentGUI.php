@@ -241,9 +241,9 @@ function createTableElement($day){
 
 			<li class="events-group">
 				<div class="top-info"><span style="font-weight:700">Friday</span></div>
-						<?php createTableElement(5); ?>
+
 				<ul>
-					
+					<?php createTableElement(5); ?>
 				</ul>
 			</li>
 		</ul>

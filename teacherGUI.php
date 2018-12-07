@@ -237,9 +237,8 @@ function createTableElement($day){
 
 			<li class="events-group">
 				<div class="top-info"><span style="font-weight:700">Friday</span></div>
+				<ul>		
 						<?php createTableElement(5); ?>
-				<ul>
-					
 				</ul>
 			</li>
 		</ul>
