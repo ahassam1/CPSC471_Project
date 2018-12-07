@@ -145,18 +145,21 @@ session_start();
 	
 	
 	<?php
+	
 	if(isset($_POST['submit'])){
-	$indexofinfo = $_POST['form-control'];  // get the index that was selected
-	$grade = $_POST['gradeValue']; // get the grade entered 
-	//echo $indexofinfo;
-	echo $grade;
-	for($count = 0; $count < $result->num_rows; $count++)
-	{
+		
+		
 		$sql = "SELECT B.Student_ID, B.Program_ID, U.Name, P.Subject
 			   From booked_session as B, user as U, program as P
 			   Where '$currentsin' = B.Teacher_ID and B.Student_ID = U.SIN and P.ID = B.Program_ID";
 			   
 		$result = $conn->query($sql);
+		
+	$indexofinfo = $_POST['form-control'];  // get the index that was selected
+	$grade = $_POST['gradeValue']; // get the grade entered 
+	//echo $indexofinfo;
+	for($count = 0; $count < $result->num_rows; $count++)
+	{
 		$row = $result->fetch_assoc();
 
 		if($count == $indexofinfo)
@@ -164,8 +167,11 @@ session_start();
 			//echo "Made it in there";
 			$ID = $row['Student_ID'];
 			$Subject = $row['Subject'];
+			
 			echo $ID;
 			echo $Subject;
+			echo $grade;
+
 			
 			$sql = "INSERT IGNORE INTO EVALUATION (Student_ID, Subject, Grade) VALUES ('$ID', '$Subject', '$grade')";
 			if (!mysqli_query($conn,$sql))
