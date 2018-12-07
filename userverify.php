@@ -36,9 +36,9 @@
 			// output data of each row
 			while($row = $result->fetch_assoc()) 
 			{
-				echo " Username: " . $row["Username"]; echo "&nbsp;";
-				echo " Password: " . $row["Password"]; echo "&nbsp;";
-				echo " User_SIN: " . $row["User_SIN"]; echo "&nbsp;";
+				//echo " Username: " . $row["Username"]; echo "&nbsp;";
+				//echo " Password: " . $row["Password"]; echo "&nbsp;";
+				//echo " User_SIN: " . $row["User_SIN"]; echo "&nbsp;";
 				
 				$sin = $row["User_SIN"];
 			}

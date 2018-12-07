@@ -10,12 +10,16 @@
 			body {
 				font-size:150%;
 			}
+			
+			tr:nth-child(even) {background-color: #f2f2f2;}
 		
+			
 		</style>
+		
 		
 	</head>
 
-<body>
+		<body>
 
 <?php
 session_start();
@@ -75,34 +79,34 @@ session_start();
 <table class="table table-hover">
   <tbody>
 
-    <tr class="table-info">
+    <tr class="table-info" style="tr:nth-child(even) {background-color: #f2f2f2;}">
       <td align="center">Subject</td>
       <td align="center">Grade</td>
     </tr>
-
+	
+	<?php		
+		
+		if ($result->num_rows > 0) 
+		{
+		// output data of each row
+			while($row = $result->fetch_assoc()) 
+			{
+				   echo '<tr>';
+                   echo '<td align style = "text-align:center">' . $row['Subject'] .'</td>';
+                   echo "<td align = center>" . $row['Grade'] . "</td>";
+                   echo "</tr>" . "<br></br>";
+			}
+		} 
+		else 
+		{
+			echo "0 results";
+		}
+?>
+	
+	
   </tbody>
 </table> 
 		
-<?php		
-		
-	if ($result->num_rows > 0) 
-	{
-    // output data of each row
-		while($row = $result->fetch_assoc()) 
-		{
-				   echo '<tr style = "text-align:center;">';
-                   echo '<td align style = "text-align:center;">' . $row['Subject'] . "                                                         ". "</td>";
-                   echo "<td align = center>" . $row['Grade'] . "</td>";
-                   echo "</tr>" . "<br>";
-		}
-	} 
-	else 
-	{
-		echo "0 results";
-	}
 
-			   
-
-?>
 </body>
 </html>

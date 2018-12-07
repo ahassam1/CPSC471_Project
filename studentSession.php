@@ -66,13 +66,13 @@ session_start();
 		</ul>
 		
 		<form action= "index.php">
-			<button class="btn btn-secondary my-2 my-sm-0" type="submit" style="font-size:100%">Logout</button>
+			<button class="btn btn-secondary my-2 my-sm-0" type="submit" style="font-size:90%">Logout</button>
 		</form>
 		
 	</div>
 	</nav>
-	
-<form name = "test" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
+
+<!--	
 
 <section>
     <div>
@@ -110,6 +110,7 @@ session_start();
 		<select name="formSubject">
 
 		<?php
+		/*
 		$sql = "SELECT P.Subject, P.ID
 				FROM STUDENT_TAUGHT ST, PROGRAM P
 				WHERE ST.Student_ID = '" . $currentsin. "' AND
@@ -119,6 +120,7 @@ session_start();
 				$row = $result->fetch_assoc();
 				echo '<option value="'.$row['ID'].'">'.$row['Subject'].'</option>';
 			}
+		*/
 		?>
 	</div>
 	</center>
@@ -128,7 +130,128 @@ session_start();
 	<input type="submit" name="formRemove" value="Remove" >
 	</center>
 	<br>
-</form>
+	</form>
+	
+	-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div class="card text-white bg-info mb-3" style="max-width:30rem;left:40%;top:20%;text-align:center">
+			<div class="card-header">Select Session</div>
+			<div class="card-body">
+			
+			<form action="#" method="post">
+				  <div class="form-group">
+					<label for="formDay">Day</label>
+					<select class="form-control" name="formDay">
+						<option value="1">Monday</option>
+						<option value="2">Tuesday</option>
+						<option value="3">Wednesday</option>
+						<option value="4">Thursday</option>
+						<option value="5">Friday</option>
+					</select>
+					
+					<label for="formHour">Session Time</label>
+					<select class="form-control" name="formHour">
+						<option value="8">8:00AM-9:00AM</option>
+						<option value="9">9:00AM-10:00AM</option>
+						<option value="10">10:00AM-11:00AM</option>
+						<option value="11">11:00AM-12:00PM</option>
+						<option value="12.5">12:30PM-1:30PM</option>
+						<option value="13.5">1:30PM-2:30PM</option>
+						<option value="14.5">2:30PM-3:30PM</option>
+						<option value="15.5">3:30PM-4:30PM</option>
+					</select>
+					
+					<label for="formSubject">Day</label>
+					<select class="form-control" name="formSubject">
+						<?php
+							$sql = "SELECT P.Subject, P.ID
+									FROM STUDENT_TAUGHT ST, PROGRAM P
+									WHERE ST.Student_ID = '" . $currentsin. "' AND
+									ST.Program_ID = P.ID";
+							$result = $conn->query($sql);
+							for($count = 0; $count < $result->num_rows; $count++){
+								$row = $result->fetch_assoc();
+								echo '<option value="'.$row['ID'].'">'.$row['Subject'].'</option>';
+							}
+						?>
+					</select>
+					<br></br>
+					<button type="button" class="btn btn-primary" onclick="addSession()">Add Session</button>
+					<button type="button" class="btn btn-danger" onclick="removeSession()">Remove Session</button>
+					
+					<?php
+						
+						function addSession(){
+							//Not sure what to put in here,
+							//Variable Names for drop downs are:
+							//			$_POST['formDay']     -> Day
+							//			$_POST['formHour'] 	  -> Hour
+							//          $_POST['formSubject'] -> Subject
+							
+							
+						}
+						
+						function removeSession(){
+							
+							
+							
+							
+							
+							
+						}
+					
+					?>
+					
+				</div>
+			</form>
+			
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <?php
 

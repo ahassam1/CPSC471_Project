@@ -65,31 +65,39 @@ session_start();
 		</ul>
 		
 		<form action= "index.php">
-			<button class="btn btn-secondary my-2 my-sm-0" type="submit" style="font-size:100%">Logout</button>
-		</form>
-		
+			<button class="btn btn-secondary my-2 my-sm-0" type="submit" style="font-size:90%">Logout</button>
+		</form>	
 	</div>
 	</nav>
-
-<?php		
+	
+	<div class="card border-primary mb-3" style="left:40%;top:25%;max-width:25rem;">
+		<div class="card-body">
+			<h2 class="card-title" align="center" style= "font-weight:bold;font-size:130%">Current Fees:</h2>
+			<?php		
 		
-	if ($result->num_rows > 0) 
-	{
-    // output data of each row
-		while($row = $result->fetch_assoc()) 
-		{
-			echo " Date_Due: " . $row["Date_Due"]; echo "&nbsp;";
-			echo " Balance: " . $row["Balance"]; echo "&nbsp;";
-		}
-	} 
-	else 
-	{
-		echo "0 results";
-	}
+			if ($result->num_rows > 0) 
+			{
+			// output data of each row
+			while($row = $result->fetch_assoc()) 
+			{
+				echo "Date_Due:&nbsp;&nbsp;&nbsp;&nbsp; " . $row["Date_Due"]; echo "&nbsp;";
+				echo "<br></br><font type=>Balance:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$" . $row["Balance"].".00";
+			}
+			} 
+			else 
+			{
+				echo "0 results";
+			}
 
 			   
 
-?>
+			?>
+	
+  </div>
+</div>
+			
+
+
 </body>
 </html>
 
