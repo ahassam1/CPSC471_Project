@@ -214,15 +214,7 @@ session_start();
 						function removeSession(){
 						}
 					
-					?>
-					
-				</div>
-			</form>
-			
-			</div>
-		</div>
-		
-		
+					?>	
 <?php
 
 if(isset($_POST['formSubmit']) )
