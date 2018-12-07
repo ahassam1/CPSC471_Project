@@ -2,9 +2,11 @@
 	<head>
 		<title> Teacher Schedule </title>
 		<!-- CSS Timeline from: https://codepen.io/oltika/pen/GNvdgV  -->
-		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
+		
+		<link rel="stylesheet" href="css/style.css"> <!-- Schedule style -->
 		<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
-		<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
+		
 		
 	</head>
 	
