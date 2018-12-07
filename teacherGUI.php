@@ -7,6 +7,14 @@
 		<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
 		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
 		
+		<style>
+			
+			body {
+				font-size:150%;
+			}
+			
+		</style>
+		
 		
 	</head>
 	
@@ -17,24 +25,22 @@
 	<div class="collapse navbar-collapse" id="navbarColor01">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
-				<a class="nav-link" href="teacherGUI.php">Home <span class="sr-only">(current)</span></a>
+				<a class="nav-link" href="teacherGUI.php" style="font-size:125%">Home <span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="TeacherGrading.php">Grading</a>
+				<a class="nav-link" href="TeacherGrading.php" style="font-size:125%">Grading</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="TeacherAvailability.php">Availability</a>
+				<a class="nav-link" href="TeacherAvailability.php" style="font-size:125%">Availability</a>
 			</li>
 		</ul>
 		
 		<form action= "index.php">
-			<button class="btn btn-secondary my-2 my-sm-0" type="submit">Logout</button>
+			<button class="btn btn-secondary my-2 my-sm-0" type="submit" style="font-size:90%">Logout</button>
 		</form>
 		
 	</div>
 	</nav>
-	
-	
 	
 	<div class="cd-schedule loading">
 	<div class="timeline">
@@ -217,11 +223,11 @@
 
 	<div class="cover-layer"></div>
 </div> <!-- .cd-schedule -->
-		<script src="js/modernizr.js"></script>
+		<script src="js/scheduler/modernizr.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script>
 	if( !window.jQuery ) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
 </script>
-<script src="js/main.js"></script> <!-- Resource jQuery -->
+<script src="js/scheduler/main.js"></script> <!-- Resource jQuery -->
 	</body>
 </html>

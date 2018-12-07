@@ -6,6 +6,14 @@
 		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
 	</head>
 
+	<style>
+		
+		body {
+			font-size:150%;
+		}
+		
+	</style>
+	
 <body>
 
 <?php
@@ -43,21 +51,21 @@ session_start();
 	<div class="collapse navbar-collapse" id="navbarColor01">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
-				<a class="nav-link" href="studentGUI.php">Home <span class="sr-only">(current)</span></a>
+				<a class="nav-link" href="studentGUI.php" style="font-size:125%">Home <span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="studentSession.php">Session</a>
+				<a class="nav-link" href="studentSession.php" style="font-size:125%">Session</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="Grades.php">View Grades</a>
+				<a class="nav-link" href="Grades.php" style="font-size:125%">View Grades</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="fees.php">Fees</a>
+				<a class="nav-link" href="fees.php" style="font-size:125%">Fees</a>
 			</li>
 		</ul>
 		
 		<form action= "index.php">
-			<button class="btn btn-secondary my-2 my-sm-0" type="submit">Logout</button>
+			<button class="btn btn-secondary my-2 my-sm-0" type="submit" style="font-size:100%">Logout</button>
 		</form>
 		
 	</div>

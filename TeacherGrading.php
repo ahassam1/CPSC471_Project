@@ -24,6 +24,8 @@ session_start();
 		<link rel="stylesheet" href="css/style.css"> <!-- Schedule style -->
 		<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
 		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
+		<script src="js/Bootswatch/jquery-3.0.0.min.js"></script>
+		<script src="js/Bootswatch/bootstrap.js" type="text/javascript"></script>
 		
 		<style>
 			
@@ -37,31 +39,19 @@ session_start();
 				text-align:center;
 			}
 			
-			.jumbotron .ButtonGroup {
-				margin: 20px;
-			}
-			
-			.jumbotron .InputBox {
-				//margin: 20px;
-			}
-			
-			.jumbotron .InputBox .studentSelectBar{
-				margin: 20px;
-			}
-			
-			.jumbotron .InputBox .inputGrade{
-				margin: 20px;
-			}
-			
 			.form-group {
 				resize:none;
 				width:40%;
 				position: absolute;
 				top: 11%;
 				left: 5%;
-				font-size: 150%;
+				font-size:150%;
 			}
-
+			
+			body{
+				font-size:150%;
+			}
+	
 			
 		</style>
 	</head>
@@ -72,18 +62,18 @@ session_start();
 	<div class="collapse navbar-collapse" id="navbarColor01">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
-				<a class="nav-link" href="teacherGUI.php">Home <span class="sr-only">(current)</span></a>
+				<a class="nav-link" href="teacherGUI.php" style="font-size:125%">Home <span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="TeacherGrading.php">Grading</a>
+				<a class="nav-link" href="TeacherGrading.php" style="font-size:125%">Grading</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="TeacherAvailability.php">Availability</a>
+				<a class="nav-link" href="TeacherAvailability.php" style="font-size:125%">Availability</a>
 			</li>
 		</ul>
 		
 		<form action= "index.php">
-			<button class="btn btn-secondary my-2 my-sm-0" type="submit">Logout</button>
+			<button class="btn btn-secondary my-2 my-sm-0" type="submit" style="font-size:90%">Logout</button>
 		</form>
 		
 	</div>
@@ -96,10 +86,10 @@ session_start();
 	
 	<div class="jumbotron">
 		
-		<h1 align="center" style="padding:10px">Manage Grades</h1>
-		<div class="btn-group btn-group-toggle" id="ButtonGroup" data-toggle="buttons">
+		<h1 align="center" style="padding:8px;font-size:125%;font-weight:550">Manage Grades</h1>
+		<div class="btn-group btn-group-toggle" data-toggle="buttons">
 			<label class="btn btn-primary active">
-				<input type="radio" name="options" id="option1" autocomplete="off" checked="" style="width:100px"> Add
+				<input type="radio" name="options" id="option1" autocomplete="off" checked=""> Add
 			</label>
 			<label class="btn btn-primary">
 				<input type="radio" name="options" id="option2" autocomplete="off"> Remove
@@ -112,7 +102,7 @@ session_start();
 		<div class="InputBox">
 		<div class="studentSelectBar">
 			<label for="studentSelect" style="padding:10px">Student Name</label>
-			<select class="form-control" id="studentSelect" style="height:30px;font-size:70%">
+			<select class="form-control" id="studentSelect" style="height:45px;font-size:70%">
 			<optgroup>	
 				<option>1</option>
 				<option>2</option>
@@ -127,7 +117,7 @@ session_start();
 			<label class="control-label" style="padding:10px;">Student Grade</label>
 			<div class="inputgroup">
 				<div class="input-group mb-3">
-					<input type="text" class="form-control" id="gradeValue" aria-label="Grade Value" style="height:30px;font-size:70%">
+					<input type="text" class="form-control" id="gradeValue"  style="height:45px;width:50%;font-size:70%">
 				<div class="input-group-append">
 				<span class="input-group-text">%</span>
 				</div>
@@ -135,7 +125,7 @@ session_start();
 			</div>
 		</div>
 		<br></br>
-		<button type="button" class="btn btn-primary" style="width:100px;height:40px;">Submit</button>
+		<button type="button" class="btn btn-primary" style="width:125px;height:50px;font-size:50%;margin:auto">Submit</button>
 		</div>
 			
 	</div>

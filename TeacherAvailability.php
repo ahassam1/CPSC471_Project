@@ -4,6 +4,15 @@
 		<link rel="stylesheet" href="css/style.css"> <!-- Schedule style -->
 		<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
 		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
+		
+		<style>
+			
+			body{
+				font-size:150%;
+			}
+			
+		</style>
+		
 	</head>
 
 <body>
@@ -24,9 +33,6 @@ session_start();
 		die("Connection failed: " . $conn->connect_error);
 		} 
 
-
-		echo "Hope that we find the SIN here: ", $_SESSION["sin1"];
-
 		$currentsin = $_SESSION["sin1"];
 
 ?>
@@ -36,18 +42,18 @@ session_start();
 	<div class="collapse navbar-collapse" id="navbarColor01">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
-				<a class="nav-link" href="teacherGUI.php">Home <span class="sr-only">(current)</span></a>
+				<a class="nav-link" href="teacherGUI.php" style="font-size:125%">Home <span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="TeacherGrading.php">Grading</a>
+				<a class="nav-link" href="TeacherGrading.php" style="font-size:125%">Grading</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="TeacherAvailability.php">Availability</a>
+				<a class="nav-link" href="TeacherAvailability.php" style="font-size:125%">Availability</a>
 			</li>
 		</ul>
 		
 		<form action= "index.php">
-			<button class="btn btn-secondary my-2 my-sm-0" type="submit">Logout</button>
+			<button class="btn btn-secondary my-2 my-sm-0" type="submit" style="font-size:90%">Logout</button>
 		</form>
 		
 	</div>
