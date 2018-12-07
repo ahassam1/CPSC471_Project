@@ -14,6 +14,8 @@ session_start();
 		{
 		die("Connection failed: " . $conn->connect_error);
 		} 
+		
+		$currentsin = $_SESSION["sin1"];
 
 ?>	
 
@@ -101,23 +103,33 @@ session_start();
 		<br></br>
 		<div class="InputBox">
 		<div class="studentSelectBar">
-			<label for="studentSelect" style="padding:10px">Student Name</label>
-			<select class="form-control" id="studentSelect" style="height:45px;font-size:70%">
-			<optgroup>	
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
+			<label for="studentSelect" style="padding:10px">Student Name</label>			
+			<form action="TeacherGrading.php" method="post" id = "form1">
+			<select name="form-control" id="studentSelect" style="height:45px;font-size:70%">
+			<?php
+			   
+			   $sql = "SELECT B.Student_ID, B.Program_ID, U.Name, P.Subject
+			   From booked_session as B, user as U, program as P
+			   Where '$currentsin' = B.Teacher_ID and B.Student_ID = U.SIN and P.ID = B.Program_ID";
+			   
+			   $result = $conn->query($sql);
+
+			 
+				for($count = 0; $count < $result->num_rows; $count++){
+					$row = $result->fetch_assoc();
+					echo '<option value="'.$count.'">' . "Student Name: " .$row['Name']. " /Student ID: " . $row['Student_ID'] . " /Subject: " . $row['Subject'] .'</option>';
+				}
+			?>
 			</optgroup>
 			</select>
+
 		</div>
 		
 		<div class="inputGrade">
 			<label class="control-label" style="padding:10px;">Student Grade</label>
 			<div class="inputgroup">
 				<div class="input-group mb-3">
-					<input type="text" class="form-control" id="gradeValue"  style="height:45px;width:50%;font-size:70%">
+					<input type="text" class="form-control" name ="gradeValue" id="gradeValue"  style="height:45px;width:50%;font-size:70%">
 				<div class="input-group-append">
 				<span class="input-group-text">%</span>
 				</div>
@@ -125,9 +137,46 @@ session_start();
 			</div>
 		</div>
 		<br></br>
-		<button type="button" class="btn btn-primary" style="width:125px;height:50px;font-size:50%;margin:auto">Submit</button>
 		</div>
-			
+		<input type="submit" name="submit" value="Get Selected Values">
+			</form>
+
 	</div>
+	
+	
+	<?php
+	if(isset($_POST['submit'])){
+	$indexofinfo = $_POST['form-control'];  // get the index that was selected
+	$grade = $_POST['gradeValue']; // get the grade entered 
+	//echo $indexofinfo;
+	echo $grade;
+	for($count = 0; $count < $result->num_rows; $count++)
+	{
+		$sql = "SELECT B.Student_ID, B.Program_ID, U.Name, P.Subject
+			   From booked_session as B, user as U, program as P
+			   Where '$currentsin' = B.Teacher_ID and B.Student_ID = U.SIN and P.ID = B.Program_ID";
+			   
+		$result = $conn->query($sql);
+		$row = $result->fetch_assoc();
+
+		if($count == $indexofinfo)
+		{
+			//echo "Made it in there";
+			$ID = $row['Student_ID'];
+			$Subject = $row['Subject'];
+			echo $ID;
+			echo $Subject;
+			
+			$sql = "INSERT IGNORE INTO EVALUATION (Student_ID, Subject, Grade) VALUES ('$ID', '$Subject', '$grade')";
+			if (!mysqli_query($conn,$sql))
+			{
+				die('Error: ' . mysqli_error($conn));
+			}
+		}		
+		
+	}
+
+	}
+	?>
 	</body>
 </html>
