@@ -61,7 +61,7 @@ session_start();
 	
 	<!--selection box based on http://form.guide/php-form/php-form-select.html -->
 	
-
+<!--
     <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
 	<label for='dayForm[]'>Select the days you wish to add availiability:</label><br>
 	<select size= 7 multiple="multiple" name="dayForm[]">
@@ -89,59 +89,121 @@ session_start();
 	</select><br>
 	<input type="submit" name="formSubmit" value="Submit" >
 </form>
+-->
+
+<div class="card text-white bg-info mb-3" style="max-width:30rem;left:40%;top:20%;text-align:center">
+			<div class="card-header">Set Availability</div>
+			<div class="card-body">
+			
+			<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
+				  <div class="form-group">
+					<label for='formDay'>Day</label><br>
+					<!--<select size= 7 multiple="multiple" name="dayForm[]">-->
+					<select class="form-control" name="formDay">
+						<option value="1">Monday</option>
+						<option value="2">Tuesday</option>
+						<option value="3">Wednesday</option>
+						<option value="4">Thursday</option>
+						<option value="5">Friday</option>
+					</select>
+					
+					<label for='formStart'>Start Time</label><br>
+					<select class="form-control" name="formStart">
+						<!--<select size= 9 multiple="multiple" name="timeForm[]">-->
+						<option value="8">8:00AM</option>
+						<option value="9">9:00AM</option>
+						<option value="10">10:00AM</option>
+						<option value="11">11:00AM</option>
+						<option value="12.5">12:30PM</option>
+						<option value="13.5">1:30PM</option>
+						<option value="14.5">2:30PM</option>
+						<option value="15.5">3:30PM</option>
+					</select>
+					
+					<label for='formEnd'>End Time</label><br>
+					<select class="form-control" name="formEnd">
+						<!--<select size= 9 multiple="multiple" name="timeForm[]">-->
+						<option value="9">9:00AM</option>
+						<option value="10">10:00AM</option>
+						<option value="11">11:00AM</option>
+						<option value="12.5">12:30PM</option>
+						<option value="13.5">1:30PM</option>
+						<option value="14.5">2:30PM</option>
+						<option value="15.5">3:30PM</option>
+						<option value="15.5">4:30PM</option>
+					</select>
+					<center>
+					<br>
+					<input type="submit" name="formSubmit" value="Set" >
+					</center>
+					</form>
+
+
+
+
+
+
 <?php
 	if(isset($_POST['formSubmit'])) 
 	{
-		$days = $_POST['dayForm'];
-		$times = $_POST['timeForm'];
+		$day = $_POST['formDay'];
+		$start = $_POST['formStart'];
+		$end = $_POST['formEnd'];
 
 		
-		if(!isset($days)) 
-		{
-			echo("<p>You didn't select any days!</p>\n");
-		} 
-		else 
-		{
-			$daycount = count($days);
-			
-			echo("<p>You selected $daycount days: ");
-			for($i=0; $i < $daycount; $i++)
-			{
-				echo($days[$i] . " ");
-			}
-			echo("</p>");
+		if($start > $end){
+			echo("<p>Start time must occur before end time!</p>\n");
 		}
+		else{
+			addAvailability($currentsin, $day, $start, $end);
+			echo("<p>Availability set!</p>\n");
+		}
+		// else 
+		// {
+			// $daycount = count($days);
+			
+			// echo("<p>You selected $daycount days: ");
+			// for($i=0; $i < $daycount; $i++)
+			// {
+				// echo($days[$i] . " ");
+			// }
+			// echo("</p>");
+		// }
 		
-		if(!isset($times)) 
-		{
-			echo("<p>You didn't select any times!</p>\n");
-		} 
-		else 
-		{
-			$timescount = count($times);
+		// if(!isset($times)) 
+		// {
+			// echo("<p>You didn't select any times!</p>\n");
+		// } 
+		// else 
+		// {
+			// $timescount = count($times);
 			
-			echo("<p>You selected $timescount times: ");
-			for($i=0; $i < $timescount; $i++)
-			{
-				echo($times[$i] . " ");
-			}
-			echo("</p>");
-		}
-		echo "Ready to insert into SQL table <br>";
+			// echo("<p>You selected $timescount times: ");
+			// for($i=0; $i < $timescount; $i++)
+			// {
+				// echo($times[$i] . " ");
+			// }
+			// echo("</p>");
+		// }
+		// echo "Ready to insert into SQL table <br>";
 
-		for($i = 0; $i < $daycount; $i++)
-		{
-			for($j = 0; $j < $timescount; $j++)
-			{
-				addAvailability($currentsin, $days[$i], $times[$j], ($times[$j] + 1));
-			}
-		}
+		// for($i = 0; $i < $daycount; $i++)
+		// {
+			// for($j = 0; $j < $timescount; $j++)
+			// {
+				// addAvailability($currentsin, $days[$i], $times[$j], ($times[$j] + 1));
+			// }
+		// }
 	}
 	
-	// Populate AVAILABILITY table
 	function addAvailability($emp_id, $day, $start_time, $end_time)
 	{
 		global $conn;
+		
+		$sql = "DELETE FROM AVAILABILITY
+				WHERE Employee_ID = '" .  $emp_id. "' AND Day = '" . $day. "'";
+		$conn->query($sql);
+		
 		$current_hour = $start_time;
 		while($current_hour < 12 && $current_hour < $end_time){
 			$sql = "INSERT IGNORE INTO AVAILABILITY (Employee_ID, Day, Hour) 

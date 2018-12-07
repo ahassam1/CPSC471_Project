@@ -65,6 +65,12 @@
 	// Populate AVAILABILITY table
 	function addAvailability($emp_id, $day, $start_time, $end_time){
 		global $conn;
+		
+		
+		$sql = "DELETE FROM AVAILABILITY
+				WHERE Employee_ID = '" .  $emp_id. "' AND Day = '" . $day. "'";
+		$conn->query($sql);
+		
 		$current_hour = $start_time;
 		while($current_hour < 12 && $current_hour < $end_time){
 			$sql = "INSERT IGNORE INTO AVAILABILITY (Employee_ID, Day, Hour) 
@@ -89,6 +95,7 @@
 	}
 	addAvailability(200000000, 1, 8, 12);
 	addAvailability(200000000, 5, 8, 16.5);
+	addAvailability(200000000, 1, 8, 9);
 	
 	addAvailability(200000001, 1, 10, 16.5);
 	addAvailability(200000001, 2, 10, 16.5);
@@ -428,12 +435,12 @@
 		}
 		}
 	}
-	bookSession(000000000, 1, 9, 2);
-	bookSession(000000000, 2, 9, 2);
-	bookSession(000000000, 2, 14.5, 1);
-	bookSession(000000000, 3, 8, 1);
-	bookSession(000000000, 3, 12, 1);
-	bookSession(000000000, 5, 10, 1);
+	bookSession(000000000, 1, 9, 0);
+	bookSession(000000000, 2, 9, 0);
+	bookSession(000000000, 2, 14.5, 0);
+	bookSession(000000000, 3, 8, 0);
+	bookSession(000000000, 3, 12, 0);
+	bookSession(000000000, 5, 10, 0);
 	
 	//Populate EVALUATION table
 	$sql = "INSERT IGNORE INTO EVALUATION (Student_ID, Subject, Grade) VALUES (0, 'Algebra', 75.3)";

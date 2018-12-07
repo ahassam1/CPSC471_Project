@@ -158,7 +158,7 @@ session_start();
 			<div class="card-header">Select Session</div>
 			<div class="card-body">
 			
-			<form action="#" method="post">
+			<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
 				  <div class="form-group">
 					<label for="formDay">Day</label>
 					<select class="form-control" name="formDay">
@@ -181,7 +181,7 @@ session_start();
 						<option value="15.5">3:30PM-4:30PM</option>
 					</select>
 					
-					<label for="formSubject">Day</label>
+					<label for="formSubject">Subject</label>
 					<select class="form-control" name="formSubject">
 						<?php
 							$sql = "SELECT P.Subject, P.ID
@@ -195,9 +195,12 @@ session_start();
 							}
 						?>
 					</select>
-					<br></br>
-					<button type="button" class="btn btn-primary" onclick="addSession()">Add Session</button>
-					<button type="button" class="btn btn-danger" onclick="removeSession()">Remove Session</button>
+					<br>
+					<center>
+					<input type="submit" name="formSubmit" value="Add" >
+					<input type="submit" name="formRemove" value="Remove" >
+					</center>
+					</form>
 					
 					<?php
 						
@@ -206,18 +209,9 @@ session_start();
 							//Variable Names for drop downs are:
 							//			$_POST['formDay']     -> Day
 							//			$_POST['formHour'] 	  -> Hour
-							//          $_POST['formSubject'] -> Subject
-							
-							
+							//          $_POST['formSubject'] -> Subject						
 						}
-						
 						function removeSession(){
-							
-							
-							
-							
-							
-							
 						}
 					
 					?>
@@ -227,32 +221,8 @@ session_start();
 			
 			</div>
 		</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		
+		
 <?php
 
 if(isset($_POST['formSubmit']) )
@@ -268,7 +238,7 @@ if(isset($_POST['formSubmit']) )
 				WHERE '" . $currentsin. "' = B.Student_ID AND B.Day = '" . $day. "' AND B.hour = '" .$hour ."'";
 			
 	$result = $conn->query($sql);
-	if (mysqli_num_rows($result) > 0)echo("<p>Unable to book session, scheduling conflict!");
+	if (mysqli_num_rows($result) > 0)echo("<p>Unable to book session, scheduling conflict!</p>\n");
 	else{	
 		
 		$sql = "SELECT EMPS.SIN, EMPS.Desired_Hours
