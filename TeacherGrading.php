@@ -86,7 +86,7 @@ session_start();
 	<div class="jumbotron">
 		
 		<h1 align="center" style="padding:8px;font-size:125%;font-weight:550">Manage Grades</h1>
-		<div class="btn-group btn-group-toggle" data-toggle="buttons">
+		<!--<div class="btn-group btn-group-toggle" data-toggle="buttons">
 			<label class="btn btn-primary active">
 				<input type="radio" name="options" id="option1" autocomplete="off" checked=""> Add
 			</label>
@@ -96,7 +96,7 @@ session_start();
 			<label class="btn btn-primary">
 				<input type="radio" name="options" id="option3" autocomplete="off"> Modify
 			</label>
-		</div>
+		</div>-->
 		<br></br>
 		<div class="InputBox">
 		<div class="studentSelectBar">
@@ -105,7 +105,7 @@ session_start();
 			<select name="form-control" id="studentSelect" style="height:45px;width:100%;font-size:70%">
 			<?php
 			   
-			   $sql = "SELECT B.Student_ID, B.Program_ID, U.Name, P.Subject
+			   $sql = "SELECT DISTINCT B.Student_ID, B.Program_ID, U.Name, P.Subject
 			   From booked_session as B, user as U, program as P
 			   Where '$currentsin' = B.Teacher_ID and B.Student_ID = U.SIN and P.ID = B.Program_ID";
 			   
@@ -144,7 +144,7 @@ session_start();
 	if(isset($_POST['submit'])){
 		
 		
-		$sql = "SELECT B.Student_ID, B.Program_ID, U.Name, P.Subject
+		$sql = "SELECT DISTINCT B.Student_ID, B.Program_ID, U.Name, P.Subject
 			   From booked_session as B, user as U, program as P
 			   Where '$currentsin' = B.Teacher_ID and B.Student_ID = U.SIN and P.ID = B.Program_ID";
 			   
@@ -161,10 +161,6 @@ session_start();
 			//echo "Made it in there";
 			$ID = $row['Student_ID'];
 			$Subject = $row['Subject'];
-			
-			echo $ID;
-			echo $Subject;
-			echo $grade;
 			
 			$sql = "DELETE FROM EVALUATION WHERE Student_ID = '" . $ID. "' 
 					AND Subject = '" . $Subject. "'";
