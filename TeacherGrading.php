@@ -1,12 +1,10 @@
 <?php
 session_start();
-
 		$servername = "localhost";
 		$username = "admin";
 		$password = "password";
 	
 		$dbName = "TutorScheduleDB";
-
 		// Create connection
 		$conn = new mysqli($servername, $username, $password, $dbName);
 		// Check connection
@@ -16,7 +14,6 @@ session_start();
 		} 
 		
 		$currentsin = $_SESSION["sin1"];
-
 ?>	
 
 <html>
@@ -33,11 +30,11 @@ session_start();
 			
 			.jumbotron {
 				width:35%;
-				height:67%;
+				height:60%;
 				position: absolute;
-				top: 23%;
+				top: 16%;
 				left: 55%;
-				font-size: 100%;
+				font-size: 150%;
 				text-align:center;
 			}
 			
@@ -45,7 +42,7 @@ session_start();
 				resize:none;
 				width:40%;
 				position: absolute;
-				top: 15%;
+				top: 11%;
 				left: 5%;
 				font-size:150%;
 			}
@@ -83,30 +80,28 @@ session_start();
 	
 	<div class="form-group">
       <label for="studentInfo">Student Information</label>
-      <textarea readonly class="form-control" id="studentInfo" rows="25" style="resize:none"></textarea>
+      <textarea readonly class="form-control" id="studentInfo" rows="45" style="resize:none"></textarea>
     </div>
 	
 	<div class="jumbotron">
 		
-		<form action="" method="post">
-		<h1 align="center" style="font-size:125%;font-weight:550">Manage Grades</h1>
+		<h1 align="center" style="padding:8px;font-size:125%;font-weight:550">Manage Grades</h1>
 		<div class="btn-group btn-group-toggle" data-toggle="buttons">
 			<label class="btn btn-primary active">
-				<input type="radio" name="options" id="Addd" autocomplete="off" checked=""> Add
+				<input type="radio" name="options" id="option1" autocomplete="off" checked=""> Add
 			</label>
 			<label class="btn btn-primary">
-				<input type="radio" name="options" id="Remove" autocomplete="off"> Remove
+				<input type="radio" name="options" id="option2" autocomplete="off"> Remove
 			</label>
 			<label class="btn btn-primary">
-				<input type="radio" name="options" id="Modify" autocomplete="off"> Modify
+				<input type="radio" name="options" id="option3" autocomplete="off"> Modify
 			</label>
 		</div>
-		</form>
-		
-		<form action="TeacherGrading.php" method="post" id = "form1">
+		<br></br>
 		<div class="InputBox">
 		<div class="studentSelectBar">
-			<label for="studentSelect" style="margin-top:50px">Student Name</label>			
+			<label for="studentSelect" style="padding:10px">Student Name</label>			
+			<form action="TeacherGrading.php" method="post" id = "form1">
 			<select name="form-control" id="studentSelect" style="height:45px;font-size:70%">
 			<?php
 			   
@@ -115,7 +110,6 @@ session_start();
 			   Where '$currentsin' = B.Teacher_ID and B.Student_ID = U.SIN and P.ID = B.Program_ID";
 			   
 			   $result = $conn->query($sql);
-
 			 
 				for($count = 0; $count < $result->num_rows; $count++){
 					$row = $result->fetch_assoc();
@@ -138,9 +132,10 @@ session_start();
 				</div>
 			</div>
 		</div>
+		<br></br>
 		</div>
-		<input type="submit" name="submit" class="btn btn-info" value="Submit Grade" style="margin-top:25px">
-		</form>
+		<input type="submit" name="submit" value="Get Selected Values">
+			</form>
 
 	</div>
 	
@@ -156,15 +151,12 @@ session_start();
 			   
 		$result = $conn->query($sql);
 		
-		$Val = $_POST['options'];
-		
 	$indexofinfo = $_POST['form-control'];  // get the index that was selected
 	$grade = $_POST['gradeValue']; // get the grade entered 
 	//echo $indexofinfo;
 	for($count = 0; $count < $result->num_rows; $count++)
 	{
 		$row = $result->fetch_assoc();
-
 		if($count == $indexofinfo)
 		{
 			//echo "Made it in there";
@@ -174,7 +166,13 @@ session_start();
 			echo $ID;
 			echo $Subject;
 			echo $grade;
-
+			
+			$sql = "DELETE FROM EVALUATION WHERE Student_ID = '" . $ID. "' 
+					AND Subject = '" . $Subject. "'";
+			if (!mysqli_query($conn,$sql))
+			{
+				die('Error: ' . mysqli_error($conn));
+			}
 			
 			$sql = "INSERT IGNORE INTO EVALUATION (Student_ID, Subject, Grade) VALUES ('$ID', '$Subject', '$grade')";
 			if (!mysqli_query($conn,$sql))
@@ -184,7 +182,6 @@ session_start();
 		}		
 		
 	}
-
 	}
 	?>
 	</body>
