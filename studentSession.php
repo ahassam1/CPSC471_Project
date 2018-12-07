@@ -62,48 +62,62 @@ session_start();
 	</div>
 	</nav>
 	
-<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
-Select Session Day: <br>	  
-<select name="formDay">
-  <option value="1">Monday</option>
-  <option value="2">Tuesday</option>
-  <option value="3">Wednesday</option>
-  <option value="4">Thursday</option>
-  <option value="5">Friday</option>
-</select><br><br><br>
+<form name = "test" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
 
-<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
-Select Session Time: <br>	  
-<select name="formHour">
-  <option value="8">8:00AM-9:00AM</option>
-  <option value="9">9:00AM-10:00AM</option>
-  <option value="10">10:00AM-11:00AM</option>
-  <option value="11">11:00AM-12:00PM</option>
-  <option value="12.5">12:30PM-1:30PM</option>
-  <option value="13.5">1:30PM-2:30PM</option>
-  <option value="14.5">2:30PM-3:30PM</option>
-  <option value="15.5">3:30PM-4:30PM</option>
-</select><br><br><br>
+<section>
+    <div>
+		<br><br><br><br><br><br><br>
+		<center>
+		<label for = "formDay">Select Session Day:</label>
+		<select name="formDay">
+		<option value="1">Monday</option>
+		<option value="2">Tuesday</option>
+		<option value="3">Wednesday</option>
+		<option value="4">Thursday</option>
+		<option value="5">Friday</option>
+		</select><br><br><br>
+	</div>		
 
-<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
-Select Subject: <br>	  
-<select name="formSubject">
+	<div>
+		<center>
+		<label for = "formHour">Select Session Time:</label>
+		<select name="formHour">
+		<option value="8">8:00AM-9:00AM</option>
+		<option value="9">9:00AM-10:00AM</option>
+		<option value="10">10:00AM-11:00AM</option>
+		<option value="11">11:00AM-12:00PM</option>
+		<option value="12.5">12:30PM-1:30PM</option>
+		<option value="13.5">1:30PM-2:30PM</option>
+		<option value="14.5">2:30PM-3:30PM</option>
+		<option value="15.5">3:30PM-4:30PM</option>
+		</center>
+		</select><br><br><br>
+	</div>
+	
+	<div>
+		<center>
+		<label for = "formSubject">Select Subject:</label>	  
+		<select name="formSubject">
 
-<?php
-$sql = "SELECT P.Subject, P.ID
-		FROM STUDENT_TAUGHT ST, PROGRAM P
-		WHERE ST.Student_ID = '" . $currentsin. "' AND
-				ST.Program_ID = P.ID";
-	$result = $conn->query($sql);
-	for($count = 0; $count < $result->num_rows; $count++){
-		$row = $result->fetch_assoc();
-		echo '<option value="'.$row['ID'].'">'.$row['Subject'].'</option>';
-	}
-?>
-  
-</select><br><br><br>
+		<?php
+		$sql = "SELECT P.Subject, P.ID
+				FROM STUDENT_TAUGHT ST, PROGRAM P
+				WHERE ST.Student_ID = '" . $currentsin. "' AND
+						ST.Program_ID = P.ID";
+			$result = $conn->query($sql);
+			for($count = 0; $count < $result->num_rows; $count++){
+				$row = $result->fetch_assoc();
+				echo '<option value="'.$row['ID'].'">'.$row['Subject'].'</option>';
+			}
+		?>
+	</div>
+	</center>
+	</select><br><br><br>
+	<center>
 	<input type="submit" name="formSubmit" value="Add" >
 	<input type="submit" name="formRemove" value="Remove" >
+	</center>
+	<br>
 </form>
 
 <?php
