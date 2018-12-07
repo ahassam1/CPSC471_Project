@@ -10,75 +10,43 @@ function convertTime($time){
 	switch($time){
 	case "8":
 		$_SESSION['start'] = "08:00";
-		$_SESSION['end']   = "09:30";
-		break;
-	case "8.5":
-		$_SESSION['start'] = "08:30";
-		$_SESSION['end']   = "10:00";
+		$_SESSION['end']   = "09:00";
 		break;
 	case "9":
 		$_SESSION['start'] = "09:00";
-		$_SESSION['end']   = "10:30";
-		break;
-	case "9.5":
-		$_SESSION['start'] = "09:30";
-		$_SESSION['end']   = "11:00";
+		$_SESSION['end']   = "10:00";
 		break;
 	case "10":
 		$_SESSION['start'] = "10:00";
-		$_SESSION['end']   = "11:30";
-		break;
-	case "10.5":
-		$_SESSION['start'] = "10:30";
-		$_SESSION['end']   = "12:00";
+		$_SESSION['end']   = "11:00";
 		break;
 	case "11":
 		$_SESSION['start'] = "11:00";
-		$_SESSION['end']   = "12:30";
-		break;
-	case "11.5":
-		$_SESSION['start'] = "11:30";
-		$_SESSION['end']   = "13:00";
-		break;
-	case "12":
-		$_SESSION['start'] = "12:00";
-		$_SESSION['end']   = "13:30";
+		$_SESSION['end']   = "12:00";
 		break;
 	case "12.5":
 		$_SESSION['start'] = "12:30";
-		$_SESSION['end']   = "14:00";
-		break;
-	case "13":
-		$_SESSION['start'] = "13:00";
-		$_SESSION['end']   = "14:30";
+		$_SESSION['end']   = "13:30";
 		break;
 	case "13.5":
 		$_SESSION['start'] = "13:30";
-		$_SESSION['end']   = "15:00";
-		break;
-	case "14":
-		$_SESSION['start'] = "14:00";
-		$_SESSION['end']   = "15:30";
+		$_SESSION['end']   = "14:30";
 		break;
 	case "14.5":
 		$_SESSION['start'] = "14:30";
-		$_SESSION['end']   = "16:00";
+		$_SESSION['end']   = "15:30";
 		break;
 	case "15":
-		$_SESSION['start'] = "15:00";
+		$_SESSION['start'] = "15:30";
 		$_SESSION['end']   = "16:30";
 		break;
 	case "15.5":
-		$_SESSION['start'] = "15:30";
-		$_SESSION['end']   = "17:00";
-		break;
-	case "16":
-		$_SESSION['start'] = "16:00";
+		$_SESSION['start'] = "16:30";
 		$_SESSION['end']   = "17:30";
 		break;
 	case "16.5":
-		$_SESSION['start'] = "16:30";
-		$_SESSION['end']   = "18:00";
+		$_SESSION['start'] = "17:30";
+		$_SESSION['end']   = "18:30";
 		break;
 	default:
 		break;
@@ -241,9 +209,8 @@ function createTableElement($day){
 
 			<li class="events-group">
 				<div class="top-info"><span style="font-weight:700">Friday</span></div>
-						<?php createTableElement(5); ?>
 				<ul>
-					
+						<?php createTableElement(5); ?>
 				</ul>
 			</li>
 		</ul>
