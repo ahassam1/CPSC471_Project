@@ -151,7 +151,7 @@ session_start();
 		$end = $_POST['formEnd'];
 
 		
-		if($start > $end){
+		if($start >= $end){
 			echo("<p>Start time must occur before end time!</p>\n");
 		}
 		else{
