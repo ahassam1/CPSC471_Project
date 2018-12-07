@@ -91,7 +91,7 @@ session_start();
 </form>
 -->
 
-<div class="card text-white bg-info mb-3" style="max-width:30rem;left:40%;top:20%;text-align:center">
+<div class="card text-white bg-info mb-3" style="max-width:30rem;left:32%;top:10%;text-align:center">
 			<div class="card-header">Set Availability</div>
 			<div class="card-body">
 			
@@ -134,7 +134,7 @@ session_start();
 					</select>
 					<center>
 					<br>
-					<input type="submit" name="formSubmit" value="Set" >
+					<input type="submit" class="btn btn-primary" name="formSubmit" value="Set Availability" >
 					</center>
 					</form>
 
@@ -152,11 +152,15 @@ session_start();
 
 		
 		if($start >= $end){
-			echo("<p>Start time must occur before end time!</p>\n");
+			echo  '<div class="card text-white bg-danger mb-3" style="margin-top:15px">
+				   <strong>Start Time Must Be Before Closing</strong>
+				   </div>';
 		}
 		else{
 			addAvailability($currentsin, $day, $start, $end);
-			echo("<p>Availability set!</p>\n");
+			echo  '<div class="card text-white bg-success mb-3" style="margin-top:15px">
+				   <strong>Availability Submitted</strong>
+				   </div>';
 		}
 		// else 
 		// {

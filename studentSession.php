@@ -154,7 +154,7 @@ session_start();
 
 
 
-		<div class="card text-white bg-info mb-3" style="max-width:30rem;left:40%;top:20%;text-align:center">
+		<div class="card text-white bg-info mb-3" style="max-width:30rem;left:32%;top:10%;text-align:center">
 			<div class="card-header">Select Session</div>
 			<div class="card-body">
 			
@@ -197,8 +197,11 @@ session_start();
 					</select>
 					<br>
 					<center>
-					<input type="submit" name="formSubmit" value="Add" >
-					<input type="submit" name="formRemove" value="Remove" >
+						<input type="submit" class="btn btn-primary" name="formSubmit" value="Add Session">
+						<input type="submit" class="btn btn-danger" name="formRemove" value="Remove Session">
+					
+					<!--<input type="submit" name="formSubmit" value="Add" >-->
+					<!--<input type="submit" name="formRemove" value="Remove" >-->
 					</center>
 					</form>
 					
@@ -230,7 +233,9 @@ if(isset($_POST['formSubmit']) )
 				WHERE '" . $currentsin. "' = B.Student_ID AND B.Day = '" . $day. "' AND B.hour = '" .$hour ."'";
 			
 	$result = $conn->query($sql);
-	if (mysqli_num_rows($result) > 0)echo("<p>Unable to book session, scheduling conflict!</p>\n");
+	if (mysqli_num_rows($result) > 0)echo  '<div class="card text-white bg-success mb-3" style="margin-top:15px">
+											<strong>Unable To Book Session!</strong>
+											</div>';
 	else{	
 		
 		$sql = "SELECT EMPS.SIN, EMPS.Desired_Hours
@@ -264,7 +269,9 @@ if(isset($_POST['formSubmit']) )
 				{
 					die('Error: ' . mysqli_error($conn));
 				}
-				else echo("<p>Session booked!");
+				else echo'<div class="card text-white bg-success mb-3" style="margin-top:15px">
+						  <strong>Session Time Booked!</strong>
+						  </div>';
 				
 		$sql = "SELECT *
 				FROM FEE F 
@@ -288,7 +295,9 @@ if(isset($_POST['formSubmit']) )
 		}
 				
 		}
-		else echo("<p>Unable to book session, no available teachers!");
+		else echo	'<div class="card text-white bg-danger mb-3" style="margin-top:15px"">
+					<strong>Session Time Unavailable!</strong>
+					</div>';
 	}
 }
 
@@ -301,7 +310,9 @@ else if(isset($_POST['formRemove']) )
 				FROM BOOKED_SESSION
 				WHERE '" . $currentsin. "' = Student_ID AND Day = '" . $day. "' AND hour = '" .$hour ."'";	
 	$result = $conn->query($sql);
-	if (mysqli_num_rows($result) <= 0) echo("<p>No session to drop at specified time!");
+	if (mysqli_num_rows($result) <= 0) echo'<div class="card text-white bg-warning mb-3" style="margin-top:15px">
+											<strong>No Scheduled Session Time!</strong>
+											</div>';
 	
 	else{	
 		
@@ -309,9 +320,13 @@ else if(isset($_POST['formRemove']) )
 				WHERE '" . $currentsin. "' = Student_ID AND Day = '" . $day. "' AND hour = '" .$hour ."'";
 				
 		if ($conn->query($sql) === TRUE) {
-			echo "Session deleted successfully";
+			echo'<div class="card text-white bg-success mb-3" style="margin-top:15px">
+				 <strong>Session Time Removed!</strong>
+				 </div>';
 		} else {
-					echo "Error deleting record: " . $conn->error;
+					echo'<div class="card text-white bg-success mb-3" style="margin-top:15px">
+						 <strong>Session Error!</strong>
+						 </div>';
 				}
 	}
 }

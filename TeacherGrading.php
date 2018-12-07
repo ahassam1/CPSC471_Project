@@ -31,11 +31,11 @@ session_start();
 			
 			.jumbotron {
 				width:35%;
-				height:60%;
+				height:67%;
 				position: absolute;
-				top: 16%;
+				top: 23%;
 				left: 55%;
-				font-size: 150%;
+				font-size: 100%;
 				text-align:center;
 			}
 			
@@ -43,7 +43,7 @@ session_start();
 				resize:none;
 				width:40%;
 				position: absolute;
-				top: 11%;
+				top: 15%;
 				left: 5%;
 				font-size:150%;
 			}
@@ -81,12 +81,12 @@ session_start();
 	
 	<div class="form-group">
       <label for="studentInfo">Student Information</label>
-      <textarea readonly class="form-control" id="studentInfo" rows="45" style="resize:none"></textarea>
+      <textarea readonly class="form-control" id="studentInfo" rows="25" style="resize:none"></textarea>
     </div>
 	
 	<div class="jumbotron">
 		
-		<h1 align="center" style="padding:8px;font-size:125%;font-weight:550">Manage Grades</h1>
+		<h1 align="center" style="font-size:125%;font-weight:550">Manage Grades</h1>
 		<div class="btn-group btn-group-toggle" data-toggle="buttons">
 			<label class="btn btn-primary active">
 				<input type="radio" name="options" id="option1" autocomplete="off" checked=""> Add
@@ -98,7 +98,6 @@ session_start();
 				<input type="radio" name="options" id="option3" autocomplete="off"> Modify
 			</label>
 		</div>
-		<br></br>
 		<div class="InputBox">
 		<div class="studentSelectBar">
 			<label for="studentSelect" style="padding:10px">Student Name</label>

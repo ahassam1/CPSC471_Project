@@ -70,7 +70,7 @@ session_start();
 	</div>
 	</nav>
 	
-	<div class="card border-primary mb-3" style="left:40%;top:25%;max-width:25rem;">
+	<div class="card border-primary mb-3" style="left:35%;top:15%;max-width:25rem;">
 		<div class="card-body">
 			<h2 class="card-title" align="center" style= "font-weight:bold;font-size:130%">Current Fees:</h2>
 			<?php		
@@ -81,7 +81,7 @@ session_start();
 			while($row = $result->fetch_assoc()) 
 			{
 				echo "Date_Due:&nbsp;&nbsp;&nbsp;&nbsp; " . $row["Date_Due"]; echo "&nbsp;";
-				echo "<br></br><font type=>Balance:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$" . $row["Balance"].".00";
+				echo "<br></br><font type=>Balance:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$" . $row["Balance"];
 			}
 			} 
 			else 

@@ -8,6 +8,14 @@ if(session_id() == '' || !isset($_SESSION)){
 function convertTime($time){
 	
 	switch($time){
+		case "8":
+		$_SESSION['start'] = "08:00";
+		$_SESSION['end']   = "09:30";
+		break;
+	case "8.5":
+		$_SESSION['start'] = "08:30";
+		$_SESSION['end']   = "10:00";
+		break;
 	case "9":
 		$_SESSION['start'] = "09:00";
 		$_SESSION['end']   = "10:30";
@@ -133,7 +141,7 @@ function createTableElement($day){
 		<!-- CSS Timeline from: https://codepen.io/oltika/pen/GNvdgV  -->
 		<link rel="stylesheet" href="css/style.css"> <!-- Schedule style -->
 		<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
-		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css"> 
+		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
 		
 		<style>
 			

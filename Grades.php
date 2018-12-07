@@ -76,10 +76,10 @@ session_start();
 	</div>
 	</nav>
 
-<table class="table table-hover">
+<table class="table table-hover" style="width:70%;margin-left:15%">
   <tbody>
 
-    <tr class="table-info" style="tr:nth-child(even) {background-color: #f2f2f2;}">
+    <tr class="table-info">
       <td align="center">Subject</td>
       <td align="center">Grade</td>
     </tr>
