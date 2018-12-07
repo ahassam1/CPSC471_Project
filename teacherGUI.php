@@ -39,6 +39,8 @@
 	<div class="cd-schedule loading">
 	<div class="timeline">
 		<ul>
+			<li><span>8:00</span></li>
+			<li><span>8:30</span></li>
 			<li><span>9:00</span></li>
 			<li><span>9:30</span></li>
 			<li><span>10:00</span></li>

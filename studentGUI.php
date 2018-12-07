@@ -135,14 +135,14 @@ function createTableElement($day){
 		<!-- CSS Timeline from: https://codepen.io/oltika/pen/GNvdgV  -->
 		<link rel="stylesheet" href="css/style.css"> <!-- Schedule style -->
 		<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
-		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
+		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css"> 
 		
 	</head>
 	
 	<body>
 	
+	
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-
 	<div class="collapse navbar-collapse" id="navbarColor01">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
@@ -169,6 +169,8 @@ function createTableElement($day){
 	<div class="cd-schedule loading">
 	<div class="timeline">
 		<ul>
+			<li><span>8:00</span></li>
+			<li><span>8:30</span></li>
 			<li><span>9:00</span></li>
 			<li><span>9:30</span></li>
 			<li><span>10:00</span></li>
