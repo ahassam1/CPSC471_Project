@@ -30,9 +30,9 @@ session_start();
 			
 			.jumbotron {
 				width:35%;
-				height:60%;
+				height:80%;
 				position: absolute;
-				top: 16%;
+				top: 19%;
 				left: 55%;
 				font-size: 150%;
 				text-align:center;
@@ -100,9 +100,9 @@ session_start();
 		<br></br>
 		<div class="InputBox">
 		<div class="studentSelectBar">
-			<label for="studentSelect" style="padding:10px">Student Name</label>			
+			<label for="studentSelect" style="padding:10px;font-size:80%">Student Name</label>			
 			<form action="TeacherGrading.php" method="post" id = "form1">
-			<select name="form-control" id="studentSelect" style="height:45px;font-size:70%">
+			<select name="form-control" id="studentSelect" style="height:45px;width:100%;font-size:70%">
 			<?php
 			   
 			   $sql = "SELECT B.Student_ID, B.Program_ID, U.Name, P.Subject
@@ -122,7 +122,7 @@ session_start();
 		</div>
 		
 		<div class="inputGrade">
-			<label class="control-label" style="padding:10px;">Student Grade</label>
+			<label class="control-label" style="padding:10px;font-size:80%">Student Grade</label>
 			<div class="inputgroup">
 				<div class="input-group mb-3">
 					<input type="text" class="form-control" name ="gradeValue" id="gradeValue"  style="height:45px;width:50%;font-size:70%">
@@ -132,10 +132,9 @@ session_start();
 				</div>
 			</div>
 		</div>
-		<br></br>
 		</div>
-		<input type="submit" name="submit" value="Get Selected Values">
-			</form>
+			<input type="submit" class="btn btn-primary" name="submit" value="Submit Grade" style="margin-top:20px">
+		</form>
 
 	</div>
 	
