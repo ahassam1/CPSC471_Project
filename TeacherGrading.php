@@ -88,23 +88,25 @@ session_start();
 	
 	<div class="jumbotron">
 		
+		<form action="" method="post">
 		<h1 align="center" style="font-size:125%;font-weight:550">Manage Grades</h1>
 		<div class="btn-group btn-group-toggle" data-toggle="buttons">
 			<label class="btn btn-primary active">
-				<input type="radio" name="options" id="option1" autocomplete="off" checked=""> Add
+				<input type="radio" name="options" id="Addd" autocomplete="off" checked=""> Add
 			</label>
 			<label class="btn btn-primary">
-				<input type="radio" name="options" id="option2" autocomplete="off"> Remove
+				<input type="radio" name="options" id="Remove" autocomplete="off"> Remove
 			</label>
 			<label class="btn btn-primary">
-				<input type="radio" name="options" id="option3" autocomplete="off"> Modify
+				<input type="radio" name="options" id="Modify" autocomplete="off"> Modify
 			</label>
 		</div>
-		<br></br>
+		</form>
+		
+		<form action="TeacherGrading.php" method="post" id = "form1">
 		<div class="InputBox">
 		<div class="studentSelectBar">
-			<label for="studentSelect" style="padding:10px">Student Name</label>			
-			<form action="TeacherGrading.php" method="post" id = "form1">
+			<label for="studentSelect" style="margin-top:50px">Student Name</label>			
 			<select name="form-control" id="studentSelect" style="height:45px;font-size:70%">
 			<?php
 			   
@@ -137,8 +139,8 @@ session_start();
 			</div>
 		</div>
 		</div>
-		<input type="submit" name="submit" class="btn btn-info value="Submit Grade">
-			</form>
+		<input type="submit" name="submit" class="btn btn-info" value="Submit Grade" style="margin-top:25px">
+		</form>
 
 	</div>
 	
@@ -153,6 +155,8 @@ session_start();
 			   Where '$currentsin' = B.Teacher_ID and B.Student_ID = U.SIN and P.ID = B.Program_ID";
 			   
 		$result = $conn->query($sql);
+		
+		$Val = $_POST['options'];
 		
 	$indexofinfo = $_POST['form-control'];  // get the index that was selected
 	$grade = $_POST['gradeValue']; // get the grade entered 

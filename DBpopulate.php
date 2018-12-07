@@ -435,12 +435,11 @@
 		}
 		}
 	}
-	bookSession(000000000, 1, 9, 0);
-	bookSession(000000000, 2, 9, 0);
-	bookSession(000000000, 2, 14.5, 0);
-	bookSession(000000000, 3, 8, 0);
-	bookSession(000000000, 3, 12, 0);
-	bookSession(000000000, 5, 10, 0);
+	bookSession(0, 1, 11, 0);
+	bookSession(0, 2, 9, 2);
+	bookSession(0, 2, 14.5, 1);
+	bookSession(0, 4, 15, 0);
+	bookSession(0, 4, 9, 2);
 	
 	//Populate EVALUATION table
 	$sql = "INSERT IGNORE INTO EVALUATION (Student_ID, Subject, Grade) VALUES (0, 'Algebra', 75.3)";

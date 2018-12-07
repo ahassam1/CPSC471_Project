@@ -7,6 +7,14 @@ if(session_id() == '' || !isset($_SESSION)){
 function convertTime($time){
 	
 	switch($time){
+	case "8":
+		$_SESSION['start'] = "08:00";
+		$_SESSION['end']   = "09:30";
+		break;
+	case "8.5":
+		$_SESSION['start'] = "08:30";
+		$_SESSION['end']   = "10:00";
+		break;
 	case "9":
 		$_SESSION['start'] = "09:00";
 		$_SESSION['end']   = "10:30";
@@ -197,14 +205,14 @@ function createTableElement($day){
 	<div class="events">
 		<ul>
 			<li class="events-group">
-				<div class="top-info"><span>Monday</span></div>
+				<div class="top-info"><span style="font-weight:700">Monday</span></div>
 				<ul>
 					<?php createTableElement(1); ?>
 				</ul>
 			</li>
 
 			<li class="events-group">
-				<div class="top-info"><span>Tuesday</span></div>
+				<div class="top-info"><span style="font-weight:700">Tuesday</span></div>
 
 				<ul>
 					<?php createTableElement(2); ?>
@@ -212,7 +220,7 @@ function createTableElement($day){
 			</li>
 
 			<li class="events-group">
-				<div class="top-info"><span>Wednesday</span></div>
+				<div class="top-info"><span style="font-weight:700">Wednesday</span></div>
 
 				<ul>
 					<?php createTableElement(3); ?>
@@ -220,7 +228,7 @@ function createTableElement($day){
 			</li>
 
 			<li class="events-group">
-				<div class="top-info"><span>Thursday</span></div>
+				<div class="top-info"><span style="font-weight:700">Thursday</span></div>
 
 				<ul>
 						<?php createTableElement(4); ?>
@@ -228,7 +236,7 @@ function createTableElement($day){
 			</li>
 
 			<li class="events-group">
-				<div class="top-info"><span>Friday</span></div>
+				<div class="top-info"><span style="font-weight:700">Friday</span></div>
 						<?php createTableElement(5); ?>
 				<ul>
 					
