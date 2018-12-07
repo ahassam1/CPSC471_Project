@@ -33,7 +33,7 @@ session_start();
 				height:80%;
 				position: absolute;
 				top: 19%;
-				left: 55%;
+				left: 30%;
 				font-size: 150%;
 				text-align:center;
 			}
@@ -78,10 +78,12 @@ session_start();
 	</div>
 	</nav>
 	
+	<!--
 	<div class="form-group">
       <label for="studentInfo">Student Information</label>
       <textarea readonly class="form-control" id="studentInfo" rows="45" style="resize:none"></textarea>
-    </div>
+    </div> -->
+	
 	
 	<div class="jumbotron">
 		
