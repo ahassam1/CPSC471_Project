@@ -156,6 +156,28 @@ if(isset($_POST['formSubmit']) )
 					die('Error: ' . mysqli_error($conn));
 				}
 				else echo("<p>Session booked!");
+				
+		$sql = "SELECT *
+				FROM FEE F 
+				WHERE F.Client_ID = '" . $currentsin. "'";	
+		$result = $conn->query($sql);
+		if (mysqli_num_rows($result) > 0){
+			$sql = "UPDATE Fee
+					SET Balance = Balance + 80
+					WHERE Client_ID = '" . $currentsin. "'";	
+			if (!mysqli_query($conn,$sql)){
+				die('Error: ' . mysqli_error($conn));
+			}
+		}
+		else{
+			$sql = "INSERT IGNORE INTO FEE (Client_ID, Date_Due, Balance)
+					VALUES ('" . $currentsin."','2018-12-31', '85')";
+			if (!mysqli_query($conn,$sql)){
+				die('Error: ' . mysqli_error($conn));
+			}
+					
+		}
+				
 		}
 		else echo("<p>Unable to book session, no available teachers!");
 	}

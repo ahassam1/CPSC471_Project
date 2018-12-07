@@ -405,8 +405,28 @@
 				{
 					die('Error: ' . mysqli_error($conn));
 				}
-				return true;
-		}else return false;
+			
+		$sql = "SELECT *
+				FROM FEE F 
+				WHERE F.Client_ID = '" . $student_id. "'";	
+		$result = $conn->query($sql);
+		if (mysqli_num_rows($result) > 0){
+			$sql = "UPDATE Fee
+					SET Balance = Balance + 80
+					WHERE Client_ID = '" . $student_id. "'";	
+			if (!mysqli_query($conn,$sql)){
+				die('Error: ' . mysqli_error($conn));
+			}
+		}
+		else{
+			$sql = "INSERT IGNORE INTO FEE (Client_ID, Date_Due, Balance)
+					VALUES ('" . $student_id."','2018-12-31', '85')";
+			if (!mysqli_query($conn,$sql)){
+				die('Error: ' . mysqli_error($conn));
+			}
+					
+		}
+		}
 	}
 	bookSession(000000000, 2, 9, 2);
 	bookSession(000000000, 2, 13.5, 1);
@@ -422,13 +442,8 @@
 		{
 			die('Error: ' . mysqli_error($conn));
 
-		}
-	//Populate Fees Table
-	$sql = "INSERT IGNORE INTO FEE (Client_ID, Date_Due, Balance) VALUES (0, '2018-12-31', 100.50)";
-	if (!mysqli_query($conn,$sql))
-		{
-			die('Error: ' . mysqli_error($conn));
-		}
+		}		
+		
 // $currentsin = 4;
 		// $sql = "SELECT P.Subject, P.ID
 				// FROM STUDENT_TAUGHT ST, PROGRAM P
