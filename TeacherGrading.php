@@ -100,6 +100,7 @@ session_start();
 				<input type="radio" name="options" id="option3" autocomplete="off"> Modify
 			</label>
 		</div>
+		<br></br>
 		<div class="InputBox">
 		<div class="studentSelectBar">
 			<label for="studentSelect" style="padding:10px">Student Name</label>			
@@ -135,9 +136,8 @@ session_start();
 				</div>
 			</div>
 		</div>
-		<br></br>
 		</div>
-		<input type="submit" name="submit" value="Get Selected Values">
+		<input type="submit" name="submit" class="btn btn-info value="Submit Grade">
 			</form>
 
 	</div>
