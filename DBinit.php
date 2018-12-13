@@ -33,7 +33,7 @@
 	// Create USER table
 	$sql = "CREATE TABLE IF NOT EXISTS USER (
 			SIN INT,
-			Name VARCHAR(30) NOT NULL,
+			Name VARCHAR(30),
 			Is_employee BIT,
 			PRIMARY KEY (SIN, Is_employee)
 			)";
@@ -44,9 +44,10 @@
 	
 	// Create PROGRAM table
 	$sql = "CREATE TABLE IF NOT EXISTS PROGRAM (
-		ID INT PRIMARY KEY,
-		Subject VARCHAR(20) NOT NULL,
-		Grade_level INT
+		ID INT,
+		Subject VARCHAR(20),
+		Grade_level INT,
+		PRIMARY KEY(ID, Subject)
 		)";
 	if (!mysqli_query($conn,$sql))
 	{
@@ -175,7 +176,7 @@
 			Balance DOUBLE,
 			PRIMARY KEY (Client_ID, Date_Due),
 			FOREIGN KEY (Client_ID)
-			REFERENCES USER(SIN)
+			REFERENCES STUDENT(SIN)
 			ON DELETE NO ACTION
 			)";
 	if (!mysqli_query($conn,$sql))
@@ -213,13 +214,15 @@
 	//Create EVALUATION table 
 	$sql = "CREATE TABLE IF NOT EXISTS EVALUATION (
 			Student_ID INT,
-			Subject VARCHAR(8),
-			GRADE DOUBLE, 
-			PRIMARY KEY(Student_ID, Subject), 
+			Subject VARCHAR(20),
+			GRADE DOUBLE,  
 			FOREIGN KEY(Student_ID)
 			REFERENCES STUDENT(SIN)
 			ON DELETE CASCADE
-			ON UPDATE CASCADE
+			ON UPDATE CASCADE,
+			FOREIGN KEY (Subject)
+			REFERENCES PROGRAM (Subject)
+			ON DELETE CASCADE
 			)";
 			
 	if (!mysqli_query($conn,$sql))
