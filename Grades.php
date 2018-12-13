@@ -1,59 +1,60 @@
+<?php
+//*************************************************************************
+// Start Session & Connect to MySQL DB
+//*************************************************************************
+session_start();
+
+	$servername = "localhost";
+	$username = "admin";
+	$password = "password";
+	
+	$dbName = "TutorScheduleDB";
+
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbName);
+	// Check connection
+	if ($conn->connect_error) 
+	{
+	die("Connection failed: " . $conn->connect_error);
+	} 
+
+	$currentsin = $_SESSION["sin1"];
+
+	$sql = "SELECT E.Subject, E.Grade 
+		   From EVALUATION as E
+		   Where '$currentsin' = E.Student_ID";
+			   
+	$result = $conn->query($sql);
+?>
+
 <html>
-	<head>
+	<head> <!-- --------------------------------HEAD----------------------------------- -->
 		<title>Student Grades</title>
+		
+		<!-- CSS Schedule Timeline from: https://codepen.io/oltika/pen/GNvdgV  -->
 		<link rel="stylesheet" href="css/style.css"> <!-- Schedule style -->
 		<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+		
+		<!-- CSS Theme from: https://bootswatch.com/  -->
 		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
 		
 		<style>
-		
 			body {
 				font-size:150%;
 			}
 			
-			tr:nth-child(even) {background-color: #f2f2f2;}
-		
-			
+			tr:nth-child(even) {
+				background-color: #f2f2f2;
+			}
 		</style>
-		
-		
 	</head>
 
-		<body>
-
-<?php
-session_start();
-
-		$servername = "localhost";
-		$username = "admin";
-		$password = "password";
+	<body> <!-- --------------------------------BODY----------------------------------- -->
 	
-		$dbName = "TutorScheduleDB";
-
-		// Create connection
-		$conn = new mysqli($servername, $username, $password, $dbName);
-		// Check connection
-		if ($conn->connect_error) 
-		{
-		die("Connection failed: " . $conn->connect_error);
-		} 
-
-
-//echo "Hope that we find the SIN here: ", $_SESSION["sin1"];
-
-		$currentsin = $_SESSION["sin1"];
-
-		$sql = "SELECT E.Subject, E.Grade 
-			   From EVALUATION as E
-			   Where '$currentsin' = E.Student_ID";
-			   
-		$result = $conn->query($sql);
-
-?>	
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-
+	<!-- Navigation Bar -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 	<div class="collapse navbar-collapse" id="navbarColor01">
+		
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
 				<a class="nav-link" href="studentGUI.php" style="font-size:125%">Home <span class="sr-only">(current)</span></a>
@@ -75,20 +76,19 @@ session_start();
 		
 	</div>
 	</nav>
-
-<table class="table table-hover" style="width:70%;margin-left:15%">
-  <tbody>
-
-    <tr class="table-info">
-      <td align="center">Subject</td>
-      <td align="center">Grade</td>
-    </tr>
+	
+	<!-- Grades Table -->
+	<table class="table table-hover" style="width:70%;margin-left:15%">
+	<tbody>
+		<tr class="table-info">
+			<td align="center">Subject</td>
+			<td align="center">Grade</td>
+		</tr>
 	
 	<?php		
-		
 		if ($result->num_rows > 0) 
 		{
-		// output data of each row
+			// output data of each row
 			while($row = $result->fetch_assoc()) 
 			{
 				   echo '<tr>';
@@ -99,14 +99,12 @@ session_start();
 		} 
 		else 
 		{
-			echo "0 results";
+			return;
 		}
-?>
+	?>
 	
-	
-  </tbody>
-</table> 
+	</tbody>
+	</table> 
 		
-
-</body>
+	</body>
 </html>

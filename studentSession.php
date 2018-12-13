@@ -1,55 +1,50 @@
-<html>
-	<head>
-		<title>Student Sessions</title>
-		<link rel="stylesheet" href="css/style.css"> <!-- Schedule style -->
-		<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
-		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
-		
-		
-	</head>
-	
-	<style>
-		
-		body {
-			font-size:150%;
-		}
-		
-	</style
-
-<body>
 <?php
+//*************************************************************************
+// Start Session & Connect to MySQL DB
+//*************************************************************************
 session_start();
 
-		$servername = "localhost";
-		$username = "admin";
-		$password = "password";
+	$servername = "localhost";
+	$username = "admin";
+	$password = "password";
 	
-		$dbName = "TutorScheduleDB";
+	$dbName = "TutorScheduleDB";
 
-		// Create connection
-		$conn = new mysqli($servername, $username, $password, $dbName);
-		// Check connection
-		if ($conn->connect_error) 
-		{
-		die("Connection failed: " . $conn->connect_error);
-		} 
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbName);
+	// Check connection
+	if ($conn->connect_error) 
+	{
+	die("Connection failed: " . $conn->connect_error);
+	} 
 
-
-//echo "Hope that we find the SIN here: ", $_SESSION["sin1"];
-
-		$currentsin = $_SESSION["sin1"];
-
-		// $sql = "SELECT E.Module, E.Grade 
-			   // From EVALUATION as E
-			   // Where '$currentsin' = E.Student_ID";
-			   
-		// $result = $conn->query($sql);
-
+	$currentsin = $_SESSION["sin1"];
 ?>	
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<html>
+	<head> <!-- --------------------------------HEAD----------------------------------- -->
+		<title>Student Sessions</title>
+		
+		<!-- CSS Schedule Timeline from: https://codepen.io/oltika/pen/GNvdgV  -->
+		<link rel="stylesheet" href="css/style.css"> <!-- Schedule style -->
+		<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+		
+		<!-- CSS Theme from: https://bootswatch.com/  -->
+		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
+		
+		<style>
+			body {
+				font-size:150%;
+			}
+		</style>
+	</head>
+	
+	<body> <!-- --------------------------------BODY----------------------------------- -->
 
+	<!-- Navigation Bar -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 	<div class="collapse navbar-collapse" id="navbarColor01">
+		
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
 				<a class="nav-link" href="studentGUI.php" style="font-size:125%">Home <span class="sr-only">(current)</span></a>
@@ -72,154 +67,65 @@ session_start();
 	</div>
 	</nav>
 
-<!--	
-
-<section>
-    <div>
-		<br><br><br><br><br><br><br>
-		<center>
-		<label for = "formDay">Select Session Day:</label>
-		<select name="formDay">
-		<option value="1">Monday</option>
-		<option value="2">Tuesday</option>
-		<option value="3">Wednesday</option>
-		<option value="4">Thursday</option>
-		<option value="5">Friday</option>
-		</select><br><br><br>
-	</div>		
-
-	<div>
-		<center>
-		<label for = "formHour">Select Session Time:</label>
-		<select name="formHour">
-		<option value="8">8:00AM-9:00AM</option>
-		<option value="9">9:00AM-10:00AM</option>
-		<option value="10">10:00AM-11:00AM</option>
-		<option value="11">11:00AM-12:00PM</option>
-		<option value="12.5">12:30PM-1:30PM</option>
-		<option value="13.5">1:30PM-2:30PM</option>
-		<option value="14.5">2:30PM-3:30PM</option>
-		<option value="15.5">3:30PM-4:30PM</option>
-		</center>
-		</select><br><br><br>
-	</div>
-	
-	<div>
-		<center>
-		<label for = "formSubject">Select Subject:</label>	  
-		<select name="formSubject">
-
-		<?php
-		/*
-		$sql = "SELECT P.Subject, P.ID
-				FROM STUDENT_TAUGHT ST, PROGRAM P
-				WHERE ST.Student_ID = '" . $currentsin. "' AND
-						ST.Program_ID = P.ID";
-			$result = $conn->query($sql);
-			for($count = 0; $count < $result->num_rows; $count++){
-				$row = $result->fetch_assoc();
-				echo '<option value="'.$row['ID'].'">'.$row['Subject'].'</option>';
-			}
-		*/
-		?>
-	</div>
-	</center>
-	</select><br><br><br>
-	<center>
-	<input type="submit" name="formSubmit" value="Add" >
-	<input type="submit" name="formRemove" value="Remove" >
-	</center>
-	<br>
-	</form>
-	
-	-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		<div class="card text-white bg-info mb-3" style="max-width:30rem;left:32%;top:10%;text-align:center">
-			<div class="card-header">Select Session</div>
-			<div class="card-body">
+	<div class="card text-white bg-info mb-3" style="max-width:30rem;left:32%;top:10%;text-align:center">
+		<div class="card-header">Select Session</div>
+		<div class="card-body">
 			
-			<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
-				  <div class="form-group">
-					<label for="formDay">Day</label>
-					<select class="form-control" name="formDay">
-						<option value="1">Monday</option>
-						<option value="2">Tuesday</option>
-						<option value="3">Wednesday</option>
-						<option value="4">Thursday</option>
-						<option value="5">Friday</option>
-					</select>
+		<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
+			  <div class="form-group">
+				<label for="formDay">Day</label>
+				<select class="form-control" name="formDay">
+					<option value="1">Monday</option>
+					<option value="2">Tuesday</option>
+					<option value="3">Wednesday</option>
+					<option value="4">Thursday</option>
+					<option value="5">Friday</option>
+				</select>
 					
-					<label for="formHour">Session Time</label>
-					<select class="form-control" name="formHour">
-						<option value="8">8:00AM-9:00AM</option>
-						<option value="9">9:00AM-10:00AM</option>
-						<option value="10">10:00AM-11:00AM</option>
-						<option value="11">11:00AM-12:00PM</option>
-						<option value="12.5">12:30PM-1:30PM</option>
-						<option value="13.5">1:30PM-2:30PM</option>
-						<option value="14.5">2:30PM-3:30PM</option>
-						<option value="15.5">3:30PM-4:30PM</option>
-					</select>
+				<label for="formHour">Session Time</label>
+				<select class="form-control" name="formHour">
+					<option value="8">8:00AM-9:00AM</option>
+					<option value="9">9:00AM-10:00AM</option>
+					<option value="10">10:00AM-11:00AM</option>
+					<option value="11">11:00AM-12:00PM</option>
+					<option value="12.5">12:30PM-1:30PM</option>
+					<option value="13.5">1:30PM-2:30PM</option>
+					<option value="14.5">2:30PM-3:30PM</option>
+					<option value="15.5">3:30PM-4:30PM</option>
+				</select>
 					
-					<label for="formSubject">Subject</label>
-					<select class="form-control" name="formSubject">
-						<?php
-							$sql = "SELECT P.Subject, P.ID
-									FROM STUDENT_TAUGHT ST, PROGRAM P
-									WHERE ST.Student_ID = '" . $currentsin. "' AND
-									ST.Program_ID = P.ID";
-							$result = $conn->query($sql);
-							for($count = 0; $count < $result->num_rows; $count++){
-								$row = $result->fetch_assoc();
-								echo '<option value="'.$row['ID'].'">'.$row['Subject'].'</option>';
-							}
-						?>
-					</select>
-					<br>
-					<center>
-						<input type="submit" class="btn btn-primary" name="formSubmit" value="Add Session">
-						<input type="submit" class="btn btn-danger" name="formRemove" value="Remove Session">
-					
-					<!--<input type="submit" name="formSubmit" value="Add" >-->
-					<!--<input type="submit" name="formRemove" value="Remove" >-->
-					</center>
-					</form>
-					
+				<label for="formSubject">Subject</label>
+				<select class="form-control" name="formSubject">
 					<?php
+						$sql = "SELECT P.Subject, P.ID
+								FROM STUDENT_TAUGHT ST, PROGRAM P
+								WHERE ST.Student_ID = '" . $currentsin. "' AND
+								ST.Program_ID = P.ID";
+								
+						$result = $conn->query($sql);
 						
-						function addSession(){
-							//Not sure what to put in here,
-							//Variable Names for drop downs are:
-							//			$_POST['formDay']     -> Day
-							//			$_POST['formHour'] 	  -> Hour
-							//          $_POST['formSubject'] -> Subject						
+						for($count = 0; $count < $result->num_rows; $count++){
+							$row = $result->fetch_assoc();
+							echo '<option value="'.$row['ID'].'">'.$row['Subject'].'</option>';
 						}
-						function removeSession(){
-						}
+					?>
 					
-					?>	
-<?php
+				</select>
+				<br>
+				<center>
+					<input type="submit" class="btn btn-primary" name="formSubmit" value="Add Session">
+					<input type="submit" class="btn btn-danger" name="formRemove" value="Remove Session">
+				</center>
+		</form>
 
+	</body>
+</html>	
+
+
+<?php
+//*************************************************************************
+// PHP Student Session Scheduling Functions
+//*************************************************************************
 if(isset($_POST['formSubmit']) )
 {
 	$day = $_POST['formDay'];
@@ -332,5 +238,4 @@ else if(isset($_POST['formRemove']) )
 }
 ?>
 	
-		</body>
-</html>
+

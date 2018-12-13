@@ -15,7 +15,7 @@
 	} 
 
 //*************************************************************************
-// Create Databse
+// Create Database
 //*************************************************************************
 	$sql = "CREATE DATABASE IF NOT EXISTS TutorScheduleDB";
 	if (!mysqli_query($conn,$sql))
@@ -39,7 +39,7 @@
 			)";
 	if (!mysqli_query($conn,$sql))
 	{
-		die('Error: ' . mysqli_error($conn));
+		die('Error1: ' . mysqli_error($conn));
 	}
 	
 	// Create PROGRAM table
@@ -51,7 +51,7 @@
 		)";
 	if (!mysqli_query($conn,$sql))
 	{
-		die('Error: ' . mysqli_error($conn));
+		die('Error2: ' . mysqli_error($conn));
 	}
 
 	// Create EMPLOYEE table
@@ -65,7 +65,7 @@
 			)";
 	if (!mysqli_query($conn,$sql))
 	{
-		die('Error: ' . mysqli_error($conn));
+		die('Error3: ' . mysqli_error($conn));
 	}
 
 	// Create AVAILABILITY table
@@ -83,7 +83,7 @@
 			)";
 	if (!mysqli_query($conn,$sql))
 	{
-		die('Error: ' . mysqli_error($conn));
+		die('Error4: ' . mysqli_error($conn));
 	}
 	
 	// Create PARENT table
@@ -97,7 +97,7 @@
 			)";
 	if (!mysqli_query($conn,$sql))
 	{
-		die('Error: ' . mysqli_error($conn));
+		die('Error5: ' . mysqli_error($conn));
 	}
 
 	// Create STUDENT table
@@ -116,7 +116,7 @@
 			)";
 	if (!mysqli_query($conn,$sql))
 	{
-		die('Error: ' . mysqli_error($conn));
+		die('Error6: ' . mysqli_error($conn));
 	}
 
 	// Create STUDENT_TAUGHT table
@@ -134,7 +134,7 @@
 			)";
 	if (!mysqli_query($conn,$sql))
 	{
-		die('Error: ' . mysqli_error($conn));
+		die('Error7: ' . mysqli_error($conn));
 	}
 	
 	// Create EMPLOYEE_TEACHES table
@@ -152,7 +152,7 @@
 			)";
 	if (!mysqli_query($conn,$sql))
 	{
-		die('Error: ' . mysqli_error($conn));
+		die('Error8: ' . mysqli_error($conn));
 	}	
 	
 	// Create LOGIN table
@@ -166,7 +166,7 @@
 			)";
 	if (!mysqli_query($conn,$sql))
 	{
-		die('Error: ' . mysqli_error($conn));
+		die('Error9: ' . mysqli_error($conn));
 	}
 	
 	// Create FEE table
@@ -181,7 +181,7 @@
 			)";
 	if (!mysqli_query($conn,$sql))
 	{
-		die('Error: ' . mysqli_error($conn));
+		die('Error10: ' . mysqli_error($conn));
 	}
 	
 	// Create BOOKED_SESSION table
@@ -208,7 +208,7 @@
 			)";
 	if (!mysqli_query($conn,$sql))
 	{
-		die('Error: ' . mysqli_error($conn));
+		die('Error11: ' . mysqli_error($conn));
 	}
 	
 	//Create EVALUATION table 
@@ -219,15 +219,12 @@
 			FOREIGN KEY(Student_ID)
 			REFERENCES STUDENT(SIN)
 			ON DELETE CASCADE
-			ON UPDATE CASCADE,
-			FOREIGN KEY (Subject)
-			REFERENCES PROGRAM (Subject)
-			ON DELETE CASCADE
+			ON UPDATE CASCADE
 			)";
 			
 	if (!mysqli_query($conn,$sql))
 	{
-		die('Error: ' . mysqli_error($conn));
+		die('Error12: ' . mysqli_error($conn));
 	}
 	
 		

@@ -1,54 +1,55 @@
-<html>
-	<head>
-		<title>Student Fees</title>
-		<link rel="stylesheet" href="css/style.css"> <!-- Schedule style -->
-		<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
-		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
-	</head>
-
-	<style>
-		
-		body {
-			font-size:150%;
-		}
-		
-	</style>
-	
-<body>
-
 <?php
+//*************************************************************************
+// Start Session & Connect to MySQL DB
+//*************************************************************************
 session_start();
 
-		$servername = "localhost";
-		$username = "admin";
-		$password = "password";
-	
-		$dbName = "TutorScheduleDB";
+	$servername = "localhost";
+	$username = "admin";
+	$password = "password";
+	$dbName = "TutorScheduleDB";
 
-		// Create connection
-		$conn = new mysqli($servername, $username, $password, $dbName);
-		// Check connection
-		if ($conn->connect_error) 
-		{
-		die("Connection failed: " . $conn->connect_error);
-		} 
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbName);
+	// Check connection
+	if ($conn->connect_error) 
+	{
+	die("Connection failed: " . $conn->connect_error);
+	} 
 
+	$currentsin = $_SESSION["sin1"];
 
-//echo "Hope that we find the SIN here: ", $_SESSION["sin1"];
-
-		$currentsin = $_SESSION["sin1"];
-
-		$sql = "SELECT F.Date_Due, F.Balance 
-			   From Fee as F
-			   Where '$currentsin' = F.Client_ID";
+	$sql = "SELECT F.Date_Due, F.Balance 
+		   From Fee as F
+		   Where '$currentsin' = F.Client_ID";
 			   
-		$result = $conn->query($sql);
-
+	$result = $conn->query($sql);
 ?>	
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<html>
+	<head> <!-- --------------------------------HEAD----------------------------------- -->
+		<title>Student Fees</title>
+		
+		<!-- CSS Schedule Timeline from: https://codepen.io/oltika/pen/GNvdgV  -->
+		<link rel="stylesheet" href="css/style.css"> <!-- Schedule style -->
+		<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+		
+		<!-- CSS Theme from: https://bootswatch.com/  -->
+		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
+	
+		<style>
+			body {
+				font-size:150%;
+			}
+		</style>
+	</head>
 
+	<body> <!-- --------------------------------BODY----------------------------------- -->
+
+	<!-- Navigation Bar -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 	<div class="collapse navbar-collapse" id="navbarColor01">
+		
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
 				<a class="nav-link" href="studentGUI.php" style="font-size:125%">Home <span class="sr-only">(current)</span></a>
@@ -67,37 +68,33 @@ session_start();
 		<form action= "index.php">
 			<button class="btn btn-secondary my-2 my-sm-0" type="submit" style="font-size:90%">Logout</button>
 		</form>	
+		
 	</div>
 	</nav>
 	
+	<!-- Fee Display Box -->
 	<div class="card border-primary mb-3" style="left:35%;top:15%;max-width:25rem;">
-		<div class="card-body">
-			<h2 class="card-title" align="center" style= "font-weight:bold;font-size:130%">Current Fees:</h2>
-			<?php		
+	<div class="card-body">
+		<h2 class="card-title" align="center" style= "font-weight:bold;font-size:130%">Current Fees:</h2>
+		<?php		
 		
-			if ($result->num_rows > 0) 
-			{
-			// output data of each row
-			while($row = $result->fetch_assoc()) 
-			{
-				echo "Date_Due:&nbsp;&nbsp;&nbsp;&nbsp; " . $row["Date_Due"]; echo "&nbsp;";
-				echo "<br></br><font type=>Balance:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$" . $row["Balance"];
-			}
-			} 
-			else 
-			{
-				echo "0 results";
-			}
-
-			   
-
-			?>
-	
-  </div>
-</div>
+		if ($result->num_rows > 0) 
+		{
+		// output data of each row
+		while($row = $result->fetch_assoc()) 
+		{
+			echo "Date_Due:&nbsp;&nbsp;&nbsp;&nbsp; " . $row["Date_Due"]; echo "&nbsp;";
+			echo "<br></br><font type=>Balance:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$" . $row["Balance"];
+		}
+		} 
+		else 
+		{
+			echo "0 results";
+		}
+		?>
+	</div>
+	</div>
 			
-
-
-</body>
+	</body>
 </html>
 

@@ -218,7 +218,7 @@
 	}
 	
 	// Populate EMPLOYEE_TEACHES table
-		$sql = "INSERT IGNORE INTO EMPLOYEE_TEACHES (Employee_ID, Program_ID) VALUES (200000000, 0)";
+	$sql = "INSERT IGNORE INTO EMPLOYEE_TEACHES (Employee_ID, Program_ID) VALUES (200000000, 0)";
 	if (!mysqli_query($conn,$sql))
 	{
 		die('Error: ' . mysqli_error($conn));
@@ -441,35 +441,30 @@
 	bookSession(4, 4, 9, 2);
 	bookSession(4, 5, 15, 0);
 	
-	
 	//Populate EVALUATION table
-	$sql = "INSERT IGNORE INTO EVALUATION (Student_ID, Subject, Grade) VALUES (0, 'Algebra', 75.3)";
+	$sql = "INSERT IGNORE INTO EVALUATION (Student_ID, Subject, Grade) VALUES (4, 'Algebra', 75.3)";
 	if (!mysqli_query($conn,$sql))
 		{
 			die('Error: ' . mysqli_error($conn));
 		}
-	$sql = "INSERT IGNORE INTO EVALUATION (Student_ID, Subject, Grade) VALUES (0, 'Math', 49.5)";
+	$sql = "INSERT IGNORE INTO EVALUATION (Student_ID, Subject, Grade) VALUES (4, 'Writing', 49.5)";
 	if (!mysqli_query($conn,$sql))
 		{
 			die('Error: ' . mysqli_error($conn));
 
-		}		
-		
-// $currentsin = 4;
-		// $sql = "SELECT P.Subject, P.ID
-				// FROM STUDENT_TAUGHT ST, PROGRAM P
-				// WHERE ST.Student_ID = '" . $currentsin. "' AND
-						// ST.Program_ID = P.ID";
-// $result = $conn->query($sql);
+		}	
+	$sql = "INSERT IGNORE INTO EVALUATION (Student_ID, Subject, Grade) VALUES (4, 'Reading', 71.5)";
+	if (!mysqli_query($conn,$sql))
+		{
+			die('Error: ' . mysqli_error($conn));
 
-// if ($result->num_rows > 0) {
-    // // output data of each row
-    // while($row = $result->fetch_assoc()) {
-        // echo "id: " . $row["Subject"]. " - Name: " . $row["ID"]. "<br>";
-    // }
-// } else {
-    // echo "0 results";
-// }
+		}	
+	$sql = "INSERT IGNORE INTO EVALUATION (Student_ID, Subject, Grade) VALUES (4, 'Comprehension', 80.3)";
+	if (!mysqli_query($conn,$sql))
+		{
+			die('Error: ' . mysqli_error($conn));
+
+		}	
 	
 $conn->close();
 ?>

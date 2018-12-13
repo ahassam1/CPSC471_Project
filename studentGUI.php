@@ -1,10 +1,15 @@
 
 <?php
-
+//*************************************************************************
+// Start Session
+//*************************************************************************
 if(session_id() == '' || !isset($_SESSION)){
 	session_start();
 }
 
+//*************************************************************************
+// PHP Schedule Populate Functions
+//*************************************************************************
 function convertTime($time){
 	
 	switch($time){
@@ -83,7 +88,6 @@ function createTableElement($day){
 	
 	if($result->num_rows != 0){
 		
-		//while($row = $result->fetch_array()){
 		for($count = 0; $count < $result->num_rows; $count++){
 			$row = $result->fetch_assoc();
 			convertTime($row["Hour"]);
@@ -95,38 +99,34 @@ function createTableElement($day){
 				  </li>';
 		}
 	}
-	
 	return;
-
 }
-
 ?>
 
-
-<html lang="en" class="no-js">
-	<head>
+<html>
+	<head> <!-- --------------------------------HEAD----------------------------------- -->
 		<title> Student Schedule </title>
-		<!-- CSS Timeline from: https://codepen.io/oltika/pen/GNvdgV  -->
+		
+		<!-- CSS Schedule Timeline from: https://codepen.io/oltika/pen/GNvdgV  -->
 		<link rel="stylesheet" href="css/style.css"> <!-- Schedule style -->
 		<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+		
+		<!-- CSS Theme from: https://bootswatch.com/  -->
 		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
 		
 		<style>
-			
 			body {
 				font-size:150%;
 			}
-			
 		</style>
-		
-		
 	</head>
 	
-	<body>
+	<body> <!-- --------------------------------BODY----------------------------------- -->
 	
-	
+	<!-- Navigation Bar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 	<div class="collapse navbar-collapse" id="navbarColor01">
+		
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
 				<a class="nav-link" href="studentGUI.php" style="font-size:125%">Home <span class="sr-only">(current)</span></a>
@@ -149,6 +149,7 @@ function createTableElement($day){
 	</div>
 	</nav>
 	
+	<!-- TimeLine -->
 	<div class="cd-schedule loading">
 	<div class="timeline">
 		<ul>
@@ -172,8 +173,9 @@ function createTableElement($day){
 			<li><span>16:30</span></li>
 			<li><span>17:00</span></li>
 		</ul>
-	</div> <!-- .timeline -->
+	</div>
 
+	<!-- Schedule Population -->
 	<div class="events">
 		<ul>
 			<li class="events-group">
@@ -215,7 +217,8 @@ function createTableElement($day){
 			</li>
 		</ul>
 	</div>
-
+	
+	<!-- Pop Up Windows -->
 	<div class="event-modal">
 		<header class="header">
 			<div class="content">
@@ -233,14 +236,16 @@ function createTableElement($day){
 
 		<a href="#0" class="close">Close</a>
 	</div>
-
 	<div class="cover-layer"></div>
-</div> <!-- .cd-schedule -->
-		<script src="js/modernizr.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-<script>
+	</div> 
+	
+	<!-- JavaScript Resources -->
+	<script src="js/modernizr.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	<script>
 	if( !window.jQuery ) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
-</script>
-<script src="js/scheduler/main.js"></script> <!-- Resource jQuery -->
+	</script>
+	<script src="js/scheduler/main.js"></script> <!-- Resource jQuery -->
+
 	</body>
 </html>

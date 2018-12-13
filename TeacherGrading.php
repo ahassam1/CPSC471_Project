@@ -1,33 +1,36 @@
 <?php
+//*************************************************************************
+// Start Session & Connect to MySQL DB
+//*************************************************************************
 session_start();
-		$servername = "localhost";
-		$username = "admin";
-		$password = "password";
+	$servername = "localhost";
+	$username = "admin";
+	$password = "password";
 	
-		$dbName = "TutorScheduleDB";
-		// Create connection
-		$conn = new mysqli($servername, $username, $password, $dbName);
-		// Check connection
-		if ($conn->connect_error) 
-		{
-		die("Connection failed: " . $conn->connect_error);
-		} 
+	$dbName = "TutorScheduleDB";
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbName);
+	// Check connection
+	if ($conn->connect_error) 
+	{
+	die("Connection failed: " . $conn->connect_error);
+	} 
 		
-		$currentsin = $_SESSION["sin1"];
+	$currentsin = $_SESSION["sin1"];
 ?>	
 
 <html>
-	<head>
+	<head> <!-- --------------------------------HEAD----------------------------------- -->
 		<title>Teacher Grading</title>
 		
+		<!-- CSS Schedule Timeline from: https://codepen.io/oltika/pen/GNvdgV  -->
 		<link rel="stylesheet" href="css/style.css"> <!-- Schedule style -->
 		<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+		
+		<!-- CSS Theme from: https://bootswatch.com/  -->
 		<link rel="stylesheet" href="css/bootstrap-lumen-theme.css">
-		<script src="js/Bootswatch/jquery-3.0.0.min.js"></script>
-		<script src="js/Bootswatch/bootstrap.js" type="text/javascript"></script>
 		
 		<style>
-			
 			.jumbotron {
 				width:35%;
 				height:80%;
@@ -37,7 +40,6 @@ session_start();
 				font-size: 150%;
 				text-align:center;
 			}
-			
 			.form-group {
 				resize:none;
 				width:40%;
@@ -46,19 +48,18 @@ session_start();
 				left: 5%;
 				font-size:150%;
 			}
-			
 			body{
 				font-size:150%;
 			}
-	
-			
 		</style>
 	</head>
 	
-<body>
+	<body> <!-- --------------------------------BODY----------------------------------- -->
 
+	<!-- Navigation Bar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 	<div class="collapse navbar-collapse" id="navbarColor01">
+		
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
 				<a class="nav-link" href="teacherGUI.php" style="font-size:125%">Home <span class="sr-only">(current)</span></a>
@@ -78,27 +79,9 @@ session_start();
 	</div>
 	</nav>
 	
-	<!--
-	<div class="form-group">
-      <label for="studentInfo">Student Information</label>
-      <textarea readonly class="form-control" id="studentInfo" rows="45" style="resize:none"></textarea>
-    </div> -->
-	
-	
+	<!-- Right Side Input Area -->
 	<div class="jumbotron">
-		
 		<h1 align="center" style="padding:8px;font-size:125%;font-weight:550">Manage Grades</h1>
-		<!--<div class="btn-group btn-group-toggle" data-toggle="buttons">
-			<label class="btn btn-primary active">
-				<input type="radio" name="options" id="option1" autocomplete="off" checked=""> Add
-			</label>
-			<label class="btn btn-primary">
-				<input type="radio" name="options" id="option2" autocomplete="off"> Remove
-			</label>
-			<label class="btn btn-primary">
-				<input type="radio" name="options" id="option3" autocomplete="off"> Modify
-			</label>
-		</div>-->
 		<br></br>
 		<div class="InputBox">
 		<div class="studentSelectBar">
@@ -123,6 +106,7 @@ session_start();
 
 		</div>
 		
+		<!-- Input Text Area for Grade -->
 		<div class="inputGrade">
 			<label class="control-label" style="padding:10px;font-size:80%">Student Grade</label>
 			<div class="inputgroup">
@@ -181,5 +165,10 @@ session_start();
 	}
 	}
 	?>
+	
+	<!-- JavaScript Resources -->
+	<script src="js/Bootswatch/jquery-3.0.0.min.js"></script>
+	<script src="js/Bootswatch/bootstrap.js" type="text/javascript"></script>
+	
 	</body>
 </html>
