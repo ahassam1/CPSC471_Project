@@ -45,8 +45,7 @@ session_start();
 	<!-- Navigation Bar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 	<div class="collapse navbar-collapse" id="navbarColor01">
-		<
-		ul class="navbar-nav mr-auto">
+		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
 				<a class="nav-link" href="teacherGUI.php" style="font-size:125%">Home <span class="sr-only">(current)</span></a>
 			</li>
