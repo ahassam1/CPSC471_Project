@@ -10,79 +10,77 @@ if(session_id() == '' || !isset($_SESSION)){
 // PHP Schedule Populate Functions
 //*************************************************************************
 function convertTime($time){
-
+	
 	switch($time){
 	case "8":
-		$_SESSION['start'] = "08:00"; 	switch($time){
-		$_SESSION['end']   = "09:30"; 	case "8":
-		break;                        		$_SESSION['start'] = "08:00";
-	case "8.5"=                           		$_SESSION['end']   = "09:00";
-		$_SESSION['start'] = "8:30";  		break;
-		$_SESSION['end']   = "10:00"; 	case "9":
-		break;                        		$_SESSION['start'] = "09:00";
-	case "9":                             		$_SESSION['end']   = "10:00";
-		$_SESSION['start'] = "09:00"; 		break;
-		$_SESSION['end']   = "10:30"; 	case "10":
-		break;                        		$_SESSION['start'] = "10:00";
-	case "9.5"=                           		$_SESSION['end']   = "11:00";
-		$_SESSION['start'] = "9:30";  		break;
-		$_SESSION['end']   = "11:00"; 	case "11":
-		break;	                		$_SESSION['start'] = "11:00";
-	case "10":                            		$_SESSION['end']   = "12:00";
-		$_SESSION['start'] = "10:00"; 		break;
-		$_SESSION['end']   = "11:30"; 	case "12.5":
-		break;                        		$_SESSION['start'] = "12:30";
-	case "10.5"=                          		$_SESSION['end']   = "13:30";
-		$_SESSION['start'] = "10:30"; 		break;
-		$_SESSION['end']   = "12:00"; 	case "13.5":
-		break;                        		$_SESSION['start'] = "13:30";
-	case "11":                            		$_SESSION['end']   = "14:30";
-		$_SESSION['start'] = "11:00"; 		break;
-		$_SESSION['end']   = "12:30"; 	case "14.5":
-		break;                        		$_SESSION['start'] = "14:30";
-	case "11.5":                          		$_SESSION['end']   = "15:30";
-		$_SESSION['start'] = "11:30"; 		break;
-		$_SESSION['end']   = "13:00"; 	case "15.5":
-		break;                        		$_SESSION['start'] = "15:30";
-	case "12":                            		$_SESSION['end']   = "16:30";
-		$_SESSION['start'] = "12:00"; 		break;
-		$_SESSION['end']   = "13:30"; 	case "16.5":
-		break;                        		$_SESSION['start'] = "16:30";
-	case "12.5":                          		$_SESSION['end']   = "17:30";
-		$_SESSION['start'] = "12:30"; 		break;
-		$_SESSION['end']   = "14:00"; 	default:
-		break;                        		break;
-	case "13":                            	}
-		$_SESSION['start'] = "13:00"; 	return;
-		$_SESSION['end']   = "14:30"; }
+		$_SESSION['start'] = "08:00";
+		$_SESSION['end']   = "09:00";
 		break;
-	case "13.5":                          function createTableElement($day){
-		$_SESSION['start'] = "13:30"; 	
-		$_SESSION['end']   = "15:00"; 	$servername = "localhost";
-		break;                        	$username = "admin";
-	case "14":                            	$password = "password";
-		$_SESSION['start'] = "14:00"; 	
-		$_SESSION['end']   = "15:30"; 	$dbName = "TutorScheduleDB";
+	case "9":
+		$_SESSION['start'] = "09:00";
+		$_SESSION['end']   = "10:00";
 		break;
-	case "14.5":                          	// Create connection
-		$_SESSION['start'] = "14:30"; 	$conn = new mysqli($servername, $username, $password, $dbName);
-		$_SESSION['end']   = "16:00"; 	// Check connection
-		break;                        	if ($conn->connect_error) 
-	case "15":                            	{
-		$_SESSION['start'] = "15:00"; 		die("Connection failed: " . $conn->connect_error);
-		$_SESSION['end']   = "16:30"; 	} 
-		break;                        	
-	case "15.5":                          	$userSin = $_SESSION['sin1'];
-		$_SESSION['start'] = "15:30"; 	
-		$_SESSION['end']   = "17:00"; 	$sql = "SELECT *
-		break;                        			FROM booked_session B, program P, Employee T
-	case "16":                            			WHERE '$userSin' = B.Teacher_ID AND '$day' = B.Day
-		$_SESSION['start'] = "16:00"; 			AND B.Program_ID = P.ID
-		$_SESSION['end']   = "17:30"; 			ORDER BY B.Hour";
-                                              	
-	case "16.5":                          	$result = $conn->query($sql);
-		$_SESSION['start'] = "16:30"; 	
-		$_SESSION['end']   = "18:00"; 	if($result->num_rows != 0){
+	case "10":
+		$_SESSION['start'] = "10:00";
+		$_SESSION['end']   = "11:00";
+		break;
+	case "11":
+		$_SESSION['start'] = "11:00";
+		$_SESSION['end']   = "12:00";
+		break;
+	case "12.5":
+		$_SESSION['start'] = "12:30";
+		$_SESSION['end']   = "13:30";
+		break;
+	case "13.5":
+		$_SESSION['start'] = "13:30";
+		$_SESSION['end']   = "14:30";
+		break;
+	case "14.5":
+		$_SESSION['start'] = "14:30";
+		$_SESSION['end']   = "15:30";
+		break;
+	case "15.5":
+		$_SESSION['start'] = "15:30";
+		$_SESSION['end']   = "16:30";
+		break;
+	case "16.5":
+		$_SESSION['start'] = "16:30";
+		$_SESSION['end']   = "17:30";
+		break;
+	default:
+		break;
+	}
+	return;
+}
+
+function createTableElement($day){
+	
+	$servername = "localhost";
+	$username = "admin";
+	$password = "password";
+	
+	$dbName = "TutorScheduleDB";
+
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbName);
+	// Check connection
+	if ($conn->connect_error) 
+	{
+		die("Connection failed: " . $conn->connect_error);
+	} 
+	
+	$userSin = $_SESSION['sin1'];
+	
+	$sql = "SELECT *
+			FROM booked_session B, program P, Employee T
+			WHERE '$userSin' = B.Teacher_ID AND '$day' = B.Day
+			AND B.Program_ID = P.ID
+			ORDER BY B.Hour";
+	
+	$result = $conn->query($sql);
+	
+	if($result->num_rows != 0){
 		
 		//while($row = $result->fetch_array()){
 		for($count = 0; $count < $result->num_rows; $count++){
